@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<!-- 
+	The ";" character MUST NOT be provided if working with Oracle DBs.
+	The ";" character CAN be provided if working with Hypersonic (HSQLDB) DB.
+	
+	@author Alfonsetti
+-->
+<properties>
+	<comment>This file contains sql queries for the management of Gruppo Alessandri workspace</comment>
+
+	<entry key="customers.insert">
+		INSERT INTO relmng_t_cliente
+		(uuid, email, password, nome, cognome, indirizzo_uuid, tipo_uuid, note, pi, cf, num_tel, num_fax, num_cell) 
+		VALUES 
+		(:uuid,:email,:password,:nome,:cognome,:indirizzo_uuid,:tipo_uuid,:note,:pi,:cf, :num_tel, :num_fax, :num_cell)
+	</entry>
+	
+	<entry key="customers.get_all_by_name">
+		SELECT * FROM relmng_t_cliente ORDER BY cognome
+	</entry>
+	
+	<entry key="customer.delete">
+		DELETE * FROM 
+	</entry>
+</properties>

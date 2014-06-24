@@ -1,0 +1,91 @@
+<web-app id="relationship-management" version="2.4"
+   xmlns="http://java.sun.com/xml/ns/j2ee" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+   <display-name>Relationship Management</display-name>
+   
+  <servlet>
+  	<servlet-name>realmng</servlet-name>
+        <servlet-class>
+               org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/home</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/cliente</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/prodotto</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/dettaglio-cliente</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/lista-clienti</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/inserisci-cliente</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/</url-pattern>
+   </servlet-mapping>
+ 
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/realmng-servlet.xml</param-value>
+  </context-param>
+  
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/deployerConfigContext.xml</param-value>
+  </context-param>
+ 
+ <context-param>
+		<param-name>version</param-name>
+		<param-value>1.0 RC 1</param-value>
+	</context-param>	
+ 
+  <listener>
+        <listener-class>
+		org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+  </listener>
+	
+   <!-- filter>
+	  <filter-name>CAS Authentication Filter</filter-name>
+	  <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+	  <init-param>
+	    <param-name>casServerLoginUrl</param-name>
+	    <param-value>http://common-login.it/cas-server-webapp-3.5.2/login</param-value>
+	  </init-param>
+	  <init-param>
+	    <param-name>service</param-name>
+	    <param-value>http://www.adpnet.it</param-value>
+	  </init-param>
+	</filter>
+
+  	<filter-mapping>
+		<filter-name>CAS Authentication Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping-->
+
+</web-app>

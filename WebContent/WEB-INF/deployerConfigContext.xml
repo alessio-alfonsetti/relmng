@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/mvc 
+   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+    <!-- bean id="ServiceHSQLDataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+            <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+            <property name="jdbcUrl" value="jdbc:mysql://46.105.16.13:3306/relmng"/>
+            <property name="user" value="radmin"/>
+            <property name="password" value="Wdjk118*"/>
+            <property name="minPoolSize" value="5"/>
+            <property name="maxPoolSize" value="20"/>
+            <property name="acquireIncrement" value="1"/>
+            <property name="idleConnectionTestPeriod" value="100"/>
+            <property name="maxStatements" value="0"/>
+            <property name="checkoutTimeout" value="60000"/>
+	</bean-->
+	    
+    <!--bean id="transactionManager" 
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ServiceHSQLDataSource" />
+    </bean-->
+    
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+		<property name="url" value="jdbc:mysql://46.105.16.13:3306/relmng?zeroDateTimeBehavior=convertToNull" />  
+		<property name="username" value="radmin" />  
+		<property name="password" value="Wdjk118*" />  
+	</bean>
+    
+    <bean id="jtemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">  
+		<constructor-arg ref="ds"></constructor-arg>  
+	</bean>
+    
+    <!-- application context definition for jdbc  > 
+    <bean id="CustomerDao" name="CustomerDao" class="adp.realmng.dao.CustomerDaoImpl">
+        <property name="dataSource" ref="ServiceHSQLDataSource" />
+    </bean-->
+    <bean id="CustomerDao" class="adp.realmng.dao.CustomerDaoImpl">  
+		<constructor-arg>  
+		<ref bean="jtemplate"/>  
+		</constructor-arg>  
+	</bean>
+    
+</beans>

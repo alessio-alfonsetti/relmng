@@ -1,0 +1,7 @@
+body {font: 14px/1.4 Verdana;}
+#page-wrap {margin: 20px;}
+
+table {width: 100%; border-collapse: collapse;}
+tr:nth-of-type(odd) {background: #EEEEEE;}
+th {background: #FF7000; color: #000000; font-weight: bold;}
+td, th {padding: 6px; border: 1px solid #ccc; text-align: left;}
