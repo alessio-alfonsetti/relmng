@@ -46,7 +46,7 @@ public class CustomerController{
 		
 		//Customer customer = new Customer(0, null, 0);
 
-		//CustomerDaoInterface customerDao = new CustomerDaoImpl(null);
+		//CustomerInterface customerDao = new CustomerDaoImpl(null);
 
 		/*try {
 			dao.insert(new Customer(23,null,35000));

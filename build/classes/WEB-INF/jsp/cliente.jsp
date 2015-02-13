@@ -30,28 +30,31 @@
    
    <div  class="form">
             <form id="contactform" method="POST" action="/inserisci-cliente">
+                <p class="contact"><label for="nome-azienda">Nome Azienda</label></p>
+                <input id="nome-azienda" path="nome-azienda" name="nome-azienda" placeholder="Nome Azienda" required="" tabindex="1" type="text">
+                
                 <p class="contact"><label for="nome">Nome</label></p>
-                <input id="nome" path="nome" name="nome" placeholder="Nome" required="" tabindex="1" type="text">
+                <input id="nome" path="nome" name="nome" placeholder="Nome" required="" tabindex="2" type="text">
  
  				<p class="contact"><label for=""cognome"">Cognome</label></p>
-                <input id="cognome" name=""cognome"" placeholder="Cognome" required="" tabindex="2" type="text">
+                <input id="cognome" name=""cognome"" placeholder="Cognome" required="" tabindex="3" type="text">
  
                 <p class="contact"><label for="email">Email</label></p>
-                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <input id="email" name="email" placeholder="example@domain.com" required="" tabindex="4" type="email">
  
-                <p class="contact"><label for="password">Create a password</label></p>
+                <!-- p class="contact"><label for="password">Create a password</label></p>
                 <input type="password" id="password" name="password" required="" type="text">
                 <p class="contact"><label for="repassword">Confirm your password</label></p>
-                <input type="password" id="password" name="password" required="" type="text">
+                <input type="password" id="password" name="password" required="" type="text"-->
 
                <fieldset>
-                 <label>Giorno<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Giorno" required=""></label>
+                 <label>Giorno<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Giorno" required="" tabindex="5"></label>
                  
                  <label>Mese</label>
-                  <label class="month">
-                  <select class="select-style" name="BirthMonth">
-                  <option value="">Mese</option>
-                  <option  value="01">Gennaio</option>
+                  <label class="mese" tabindex="6">
+                  <select class="select-style" name="mese">
+                  <option value="00">Mese</option>
+                  <option value="01">Gennaio</option>
                   <option value="02">Febbraio</option>
                   <option value="03" >Marzo</option>
                   <option value="04">Aprile</option>
@@ -66,17 +69,17 @@
                   </label>
                  </select>   
                 
-                <label>Anno<input class="birthyear" maxlength="4" name="BirthYear" placeholder="Anno" required=""></label>
+                <label>Anno<input class="anno" maxlength="4" name="anno" placeholder="Anno Nascita" required="" tabindex="7"></label>
               </fieldset>
 
-            <select class="select-style gender" name="gender">
+            <select class="select-style gender" name="genere" tabindex="8">
             <option value="select"></option>
             <option value="m">Maschio</option>
             <option value="f">Femmina</option>
             </select><br><br>
-            <p class="contact"><label for="phone">Cellulare</label></p>
-            <input id="phone" name="phone" placeholder="Cellulare" required="" type="text"> <br>
-            <input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit">   
+            <p class="contact"><label for="cellulare" tabindex="9">Cellulare</label></p>
+            <input id="cellulare" name="cellulare" placeholder="Cellulare" required="" type="text" tabindex="10"> <br>
+            <input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit" tabindex="11">   
    </form>
 </div>
    

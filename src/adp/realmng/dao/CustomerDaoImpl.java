@@ -17,11 +17,11 @@ import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import adp.realmng.constants.CustomerConstants;
-import adp.realmng.dao.CustomerDaoInterface;
+import adp.realmng.dao.CustomerInterface;
 import adp.realmng.model.Customer;
 import adp.realmng.utilities.FileUtilities;
  
-public class CustomerDaoImpl implements CustomerDaoInterface{
+public class CustomerDaoImpl implements CustomerInterface{
 
 	//private DataSource dataSource;
 	SimpleJdbcTemplate template;
