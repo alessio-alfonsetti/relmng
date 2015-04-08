@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Inserisci Cliente</title>
+<title>Inserisci nuovo Cliente</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">

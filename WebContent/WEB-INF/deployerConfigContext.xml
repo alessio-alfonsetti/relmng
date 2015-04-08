@@ -48,5 +48,11 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 		<ref bean="jtemplate"/>  
 		</constructor-arg>  
 	</bean>
+	
+	<bean id="InvoiceDao" class="adp.realmng.dao.InvoiceDaoImpl">  
+		<constructor-arg>  
+		<ref bean="jtemplate"/>  
+		</constructor-arg>  
+	</bean>
     
 </beans>

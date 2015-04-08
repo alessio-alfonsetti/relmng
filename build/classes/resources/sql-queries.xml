@@ -10,6 +10,7 @@
 <properties>
 	<comment>This file contains sql queries for the management of Gruppo Alessandri workspace</comment>
 
+	<!-- CLIENTI -->
 	<entry key="customers.insert">
 		INSERT INTO relmng_t_cliente
 		(uuid, email, password, nome, cognome, indirizzo_uuid, tipo_uuid, note, pi, cf, num_tel, num_fax, num_cell) 
@@ -24,4 +25,17 @@
 	<entry key="customer.delete">
 		DELETE * FROM 
 	</entry>
+	
+	<!-- FATTURE -->
+	<entry key="invoices.insert">
+		INSERT INTO relmng_t_fattura
+		(uuid, partita_iva, id_utente, data_emissione, descrizione, importo_totale, stato_pagamento, nome_cantiere) 
+		VALUES 
+		(:uuid,:partita_iva,:id_utente,:data_emissione,:descrizione,:importo_totale,:stato_pagamento,:nome_cantiere)
+	</entry>
+	
+	<entry key="invoices.get_all_by_data_emissione">
+		SELECT * FROM relmng_t_fattura ORDER BY data_emissione
+	</entry>
+	
 </properties>
