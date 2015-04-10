@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import adp.realmng.model.Invoice;
+import adp.realmng.report.StandardInvoiceReport;
 import adp.realmng.utilities.FileUtilities;
 
 public class InvoiceDaoImpl implements InvoiceInterface{
@@ -21,7 +22,7 @@ public class InvoiceDaoImpl implements InvoiceInterface{
 	 * config file where are stored all sql statements
 	 */
 	private static final FileUtilities CONF = 	
-			FileUtilities.factoryConfigFileFromPackageResource(CustomerDaoImpl.class+"", "/resources/sql-queries.xml");
+			FileUtilities.factoryConfigFileFromPackageResource(InvoiceDaoImpl.class+"", "/resources/sql-queries.xml");
 		
 	 
 	/**
@@ -67,7 +68,7 @@ public class InvoiceDaoImpl implements InvoiceInterface{
 			throws InvalidPropertiesFormatException, FileNotFoundException,
 			IOException {
 
-		String sql = CONF.getPropertyString("invoices.get_all_by_data_emissione");
+		String sql = CONF.getPropertyString("invoices.select_all_by_data_emissione");
 		
 		System.out.println("sql: "+sql);
 		
@@ -88,6 +89,28 @@ public class InvoiceDaoImpl implements InvoiceInterface{
 	public void modify(Invoice invoice) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Map<String, Object>> listInvoicesForReport()
+			throws InvalidPropertiesFormatException, FileNotFoundException,
+			IOException {
+		
+		String sql = CONF.getPropertyString("invoices.select_for_report");
+		
+		System.out.println("sql: "+sql);
+		
+	    List<Map<String,Object>> invoices = template.queryForList(sql);
+		
+		System.out.println("list of invoices found: "+invoices);
+		
+		return invoices;
+	}
+
+	@Override
+	public void generateReport() {
+		StandardInvoiceReport generatoreReport = new StandardInvoiceReport();
+		generatoreReport.createStandardReport();
 	}
 
 }

@@ -33,9 +33,13 @@
 		VALUES 
 		(:uuid,:partita_iva,:id_utente,:data_emissione,:descrizione,:importo_totale,:stato_pagamento,:nome_cantiere)
 	</entry>
-	
-	<entry key="invoices.get_all_by_data_emissione">
+
+	<entry key="invoices.select_all_by_data_emissione">
 		SELECT * FROM relmng_t_fattura ORDER BY data_emissione
+	</entry>
+	
+	<entry key="invoices.select_for_report">
+		SELECT uuid, partita_iva, descrizione, data_emissione, importo_totale FROM relmng_t_fattura ORDER BY data_emissione
 	</entry>
 	
 </properties>

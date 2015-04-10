@@ -16,9 +16,13 @@ public interface InvoiceInterface {
 	public Invoice findByInvoiceUuid(String invoiceUuid);
 		
 	public List<Map<String, Object>> listAllInvoices() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
-		
+	
+	public List<Map<String, Object>> listInvoicesForReport() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+	
 	public void delete (String invoiceUuid);
 		
 	public void modify (Invoice invoice);
+	
+	public void generateReport();
 	
 }

@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -25,11 +27,17 @@
 		</div><!--/ freshdesignweb top bar -->
 		
 		<h1><span></span> ${message}</h1>
+		
+		<div class="form">
+			<form id="contactform" method="POST" action="/genera-fattura">
+				<input class="buttom" name="submit" id="submit" tabindex="1" value="Genera Fattura" type="submit" tabindex="1">   
+		   	</form>
+		</div>	   
 	   
-		<div  class="form">
+		<div class="form">
 			<form id="contactform" method="POST" action="/inserisci-fattura">
-				<p class="contact"><label for="nome-azienda">Partita Iva</label></p>
-				<input id="partita-iva" path="partita-iva" name="partita-iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
+				<p class="contact"><label for="partita_iva">Partita Iva</label></p>
+				<input id="partita_iva" path="partita_iva" name="partita_iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
 	                
 				<p class="contact"><label for="nome">Descrizione</label></p>
 				<input id="descrizione" path="descrizione" name="descrizione" placeholder="Descrizione" required="" tabindex="2" type="text">
@@ -38,9 +46,9 @@
 				<input id="importo_totale" path="importo_totale" name="importo_totale" placeholder="Importo Totale" required="" tabindex="3" type="text">
 	 
 				<p class="contact"><label for="nome_cantiere">Nome Cantiere</label></p>
-				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="4" type="email">
+				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="4" type="text">
 		            
-				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit" tabindex="11">   
+				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit" tabindex="5">   
 		   	</form>
 		</div>
 	   

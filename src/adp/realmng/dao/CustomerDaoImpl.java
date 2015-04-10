@@ -2,22 +2,14 @@ package adp.realmng.dao;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcDaoSupport;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import adp.realmng.constants.CustomerConstants;
-import adp.realmng.dao.CustomerInterface;
 import adp.realmng.model.Customer;
 import adp.realmng.utilities.FileUtilities;
  

@@ -52,7 +52,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 	<bean id="InvoiceDao" class="adp.realmng.dao.InvoiceDaoImpl">  
 		<constructor-arg>  
 		<ref bean="jtemplate"/>  
-		</constructor-arg>  
+		</constructor-arg>
 	</bean>
     
 </beans>

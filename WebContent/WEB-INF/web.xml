@@ -46,6 +46,16 @@
    
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
+      <url-pattern>/fattura</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/inserisci-fattura</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
       <url-pattern>/</url-pattern>
    </servlet-mapping>
  

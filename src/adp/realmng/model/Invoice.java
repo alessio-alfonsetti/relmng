@@ -33,6 +33,7 @@ public class Invoice {
 		this.id_utente = id_utente;
 	}
 	public Date getData_emissione() {
+		data_emissione = new Date();
 		return data_emissione;
 	}
 	public void setData_emissione(Date data_emissione) {
