@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
-import java.util.Iterator;
 import java.util.Properties;
 
 
@@ -14,8 +13,6 @@ import java.util.Properties;
  * 
  * retrieves config file from JVM properties and
  * from resource stored into the classpath as XML properties files
- *  
- * @author Alessandro Mucci
  *  
  */
 public class FileUtilities {

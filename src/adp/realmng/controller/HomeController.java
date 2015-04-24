@@ -13,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import adp.realmng.dao.CustomerDaoImpl;
 
 @Controller
-@RequestMapping("/home")
 public class HomeController {
 	
 	/**
@@ -26,8 +26,15 @@ public class HomeController {
 	 * */
 	private static final BeanFactory factory = new XmlBeanFactory(new ClassPathResource("../deployerConfigContext.xml"));
 	
-   @RequestMapping(method = RequestMethod.GET)
-   public String printHome(ModelMap model) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView getdata() {
+ 
+		ModelAndView model = new ModelAndView("home");
+		return model;
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String printHome(ModelMap model) {
 	   
 	   System.out.println("home page controller");
 

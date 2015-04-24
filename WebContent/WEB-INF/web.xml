@@ -36,17 +36,12 @@
    
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
-      <url-pattern>/lista-clienti</url-pattern>
-   </servlet-mapping>
-   
-   <servlet-mapping>
-      <servlet-name>realmng</servlet-name>
       <url-pattern>/inserisci-cliente</url-pattern>
    </servlet-mapping>
    
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
-      <url-pattern>/fattura</url-pattern>
+      <url-pattern>/fatture</url-pattern>
    </servlet-mapping>
    
    <servlet-mapping>
@@ -54,6 +49,21 @@
       <url-pattern>/inserisci-fattura</url-pattern>
    </servlet-mapping>
    
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/genera-fattura</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/pdfReport</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/report/pdf</url-pattern>
+   </servlet-mapping>
+
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
       <url-pattern>/</url-pattern>
@@ -66,7 +76,11 @@
   
   <context-param>
 	<param-name>contextConfigLocation</param-name>
-	<param-value>/WEB-INF/deployerConfigContext.xml</param-value>
+	<param-value>
+		/WEB-INF/deployerConfigContext.xml
+		/WEB-INF/spring-configuration/*.xml
+      	/WEB-INF/realmng-servlet.xml
+	</param-value>
   </context-param>
  
  <context-param>

@@ -9,6 +9,8 @@ public class Invoice {
 	private int id_utente;
 	private Date data_emissione;
 	private String descrizione;
+	private String importo;
+	private String iva;
 	private String importo_totale;
 	private String stato_pagamento;
 	private String nome_cantiere;
@@ -44,6 +46,18 @@ public class Invoice {
 	}
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	public String getImporto() {
+		return importo;
+	}
+	public void setImporto(String importo) {
+		this.importo = importo;
+	}
+	public String getIva() {
+		return iva;
+	}
+	public void setIva(String iva) {
+		this.iva = iva;
 	}
 	public String getImporto_totale() {
 		return importo_totale;

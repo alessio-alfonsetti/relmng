@@ -22,7 +22,7 @@ public class App
     	//ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"realmng-servlet.xml"});
     	
         CustomerDaoImpl customerDAO = (CustomerDaoImpl) context.getBean("customerDaoImpl");
-        Customer customer = new Customer("alessio.alfonsetti@hotmail.it", "Alessio", 000000000001);
+        Customer customer = new Customer("alessio.alfonsetti@hotmail.it", "Alessio", "000000000001");
         customerDAO.insert(customer);
         System.out.println("customer inserted: ");
         Customer customer1 = customerDAO.findByCustomerId(000000000001);

@@ -11,35 +11,80 @@
 	<comment>This file contains sql queries for the management of Gruppo Alessandri workspace</comment>
 
 	<!-- CLIENTI -->
-	<entry key="customers.insert">
+	<!--entry key="customers.insert">
 		INSERT INTO relmng_t_cliente
 		(uuid, email, password, nome, cognome, indirizzo_uuid, tipo_uuid, note, pi, cf, num_tel, num_fax, num_cell) 
 		VALUES 
 		(:uuid,:email,:password,:nome,:cognome,:indirizzo_uuid,:tipo_uuid,:note,:pi,:cf, :num_tel, :num_fax, :num_cell)
+	</entry-->
+	<entry key="customers.insert">
+		INSERT INTO utente
+		(uuid, username, firstname, lastname, ragione_sociale, email, partita_iva, codice_fiscale, nota, numero_cellulare, data_inserimento, notifica_creazione_incompleta, iban, enabled) 
+		VALUES 
+		(:uuid,:username,:firstname,:lastname,:ragione_sociale,:email,:partita_iva,:codice_fiscale,:nota,:numero_cellulare,:data_inserimento,:notifica_creazione_incompleta,:iban,:enabled)
 	</entry>
 	
-	<entry key="customers.get_all_by_name">
-		SELECT * FROM relmng_t_cliente ORDER BY cognome
+	<entry key="customers.insert_incomplete_user_profile">
+		INSERT INTO utente
+		(uuid, partita_iva) 
+		VALUES 
+		(:uuid,:partita_iva)
 	</entry>
+	
+	<entry key="customers.select_by_uuid">
+		INSERT INTO utente
+		(uuid, partita_iva) 
+		VALUES 
+		(:uuid,:partita_iva)
+	</entry>
+	
+	<!-- entry key="customers.get_all_by_name">
+		SELECT * FROM relmng_t_cliente ORDER BY cognome
+	</entry-->
+	<entry key="customers.get_all_by_name">
+	SELECT * FROM utente ORDER BY data_inserimento DESC
+	</entry>	
 	
 	<entry key="customer.delete">
 		DELETE * FROM 
 	</entry>
 	
+	<entry key="customers.select_by_partita_iva">
+		SELECT * FROM utente WHERE partita_iva = :partita_iva
+	</entry>
+	
+	<entry key="customers.select_by_uuid">
+	SELECT * FROM utente WHERE uuid = :uuid
+	</entry>
+	
 	<!-- FATTURE -->
-	<entry key="invoices.insert">
+	<!--entry key="invoices.insert">
 		INSERT INTO relmng_t_fattura
 		(uuid, partita_iva, id_utente, data_emissione, descrizione, importo_totale, stato_pagamento, nome_cantiere) 
 		VALUES 
 		(:uuid,:partita_iva,:id_utente,:data_emissione,:descrizione,:importo_totale,:stato_pagamento,:nome_cantiere)
+	</entry-->
+	<entry key="invoices.insert">
+		INSERT INTO fattura
+		(uuid, partita_iva, id_utente, data_emissione, descrizione, importo, iva, importo_totale, stato_pagamento, nome_cantiere) 
+		VALUES 
+		(:uuid,:partita_iva,:id_utente,:data_emissione,:descrizione,:importo,:iva,:importo_totale,:stato_pagamento,:nome_cantiere)
 	</entry>
 
 	<entry key="invoices.select_all_by_data_emissione">
-		SELECT * FROM relmng_t_fattura ORDER BY data_emissione
+		SELECT * FROM fattura ORDER BY data_emissione
 	</entry>
 	
-	<entry key="invoices.select_for_report">
-		SELECT uuid, partita_iva, descrizione, data_emissione, importo_totale FROM relmng_t_fattura ORDER BY data_emissione
+	<entry key="invoices.select_for_standard_report">
+		SELECT * FROM fattura WHERE partita_iva = :partita_iva
+	</entry>
+	
+	<entry key="invoices.select_latest_ten">
+		SELECT * FROM (SELECT * FROM fattura ORDER BY data_emissione DESC LIMIT 10 ) sub ORDER BY data_emissione DESC
+	</entry>
+	
+	<entry key="invoices.select_invoice_by_id">
+		SELECT * FROM fattura WHERE id=:id
 	</entry>
 	
 </properties>

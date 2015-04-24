@@ -11,14 +11,18 @@ import adp.realmng.model.Customer;
 public interface CustomerInterface {
 	
 	// TODO Manage exception. They are all related to an internal error  
-	public void insert(Customer customer) throws Exception, FileNotFoundException, IOException;
+	public String insert(Customer customer) throws Exception, FileNotFoundException, IOException;
 	
 	public Customer findByCustomerId(int custId);
+	
+	public Customer findByParatitaIva(String partita_iva) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 	public List<Map<String, Object>> listAllCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 	public void delete (String name);
 	
 	public void modify (Customer customer);
-	
+
+	public Customer findByCustomerUuid(String custUuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
 }

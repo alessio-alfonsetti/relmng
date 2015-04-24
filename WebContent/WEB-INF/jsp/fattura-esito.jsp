@@ -9,6 +9,7 @@
 
 	<p>Risultato ${message}</p>
 	<p>${result}</p>
+	<p>${error}</p>
 	
 </body>
 </html>

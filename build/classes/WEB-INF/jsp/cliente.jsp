@@ -30,24 +30,33 @@
    
    <div  class="form">
             <form id="contactform" method="POST" action="/inserisci-cliente">
-                <p class="contact"><label for="nome-azienda">Nome Azienda</label></p>
-                <input id="nome-azienda" path="nome-azienda" name="nome-azienda" placeholder="Nome Azienda" required="" tabindex="1" type="text">
+                <p class="contact"><label for="ragione_sociale">Ragione Sociale</label></p>
+                <input id="ragione_sociale" name="ragione_sociale" placeholder="Gruppo Alessandri" tabindex="1" type="text">
                 
-                <p class="contact"><label for="nome">Nome</label></p>
-                <input id="nome" path="nome" name="nome" placeholder="Nome" required="" tabindex="2" type="text">
+                <p class="contact"><label for="firstname">Nome</label></p>
+                <input id="firstname" name="firstname" placeholder="Nome" tabindex="2" type="text">
  
- 				<p class="contact"><label for=""cognome"">Cognome</label></p>
-                <input id="cognome" name=""cognome"" placeholder="Cognome" required="" tabindex="3" type="text">
+ 				<p class="contact"><label for="lastname">Cognome</label></p>
+                <input id="lastname" name="lastname" placeholder="Cognome" tabindex="3" type="text">
  
                 <p class="contact"><label for="email">Email</label></p>
-                <input id="email" name="email" placeholder="example@domain.com" required="" tabindex="4" type="email">
+                <input id="email" name="email" placeholder="example@domain.com" tabindex="4" type="email">
+                
+                <p class="contact"><label for="partita_iva">Partita Iva</label></p>
+                <input id="partita_iva" name="partita_iva" placeholder="1234567890" tabindex="5" type="text">
+                
+                <p class="contact"><label for="codice_fiscale">Codice Fiscale</label></p>
+                <input id="codice_fiscale" name="codice_fiscale" placeholder="LFNLSS82D16A345I" tabindex="6" type="text">
+ 
+ 				<p class="contact"><label for="nota">Nota</label></p>
+                <input id="nota" name="nota" placeholder="Inserisci una nota" autocomplete="on" maxlength="250" tabindex="7" type="text">
  
                 <!-- p class="contact"><label for="password">Create a password</label></p>
                 <input type="password" id="password" name="password" required="" type="text">
                 <p class="contact"><label for="repassword">Confirm your password</label></p>
                 <input type="password" id="password" name="password" required="" type="text"-->
 
-               <fieldset>
+               <!--fieldset>
                  <label>Giorno<input class="birthday" maxlength="2" name="BirthDay"  placeholder="Giorno" required="" tabindex="5"></label>
                  
                  <label>Mese</label>
@@ -70,16 +79,22 @@
                  </select>   
                 
                 <label>Anno<input class="anno" maxlength="4" name="anno" placeholder="Anno Nascita" required="" tabindex="7"></label>
-              </fieldset>
+              </fieldset-->
 
-            <select class="select-style gender" name="genere" tabindex="8">
+            <!-- select class="select-style gender" name="genere" tabindex="8">
             <option value="select"></option>
             <option value="m">Maschio</option>
             <option value="f">Femmina</option>
-            </select><br><br>
-            <p class="contact"><label for="cellulare" tabindex="9">Cellulare</label></p>
-            <input id="cellulare" name="cellulare" placeholder="Cellulare" required="" type="text" tabindex="10"> <br>
-            <input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit" tabindex="11">   
+            </select><br><br-->
+            
+            <p class="contact"><label for="numero_cellulare" tabindex="8">Cellulare</label></p>
+            <input id="numero_cellulare" name="numero_cellulare" placeholder="3342691052" type="text" tabindex="9"> <br>
+            
+            <p class="contact"><label for="iban">IBAN</label></p>
+			<input id="iban" name="iban" placeholder="Inserisci IBAN" autocomplete="on" maxlength="250" tabindex="10" type="text">
+ 
+            
+            <input class="buttom" name="submit" id="submit" value="Inserisci Cliente" type="submit" tabindex="11">   
    </form>
 </div>
    

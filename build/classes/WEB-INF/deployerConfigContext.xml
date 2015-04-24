@@ -28,15 +28,22 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         <property name="dataSource" ref="ServiceHSQLDataSource" />
     </bean-->
     
-    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+    <!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
 		<property name="url" value="jdbc:mysql://46.105.16.13:3306/relmng?zeroDateTimeBehavior=convertToNull" />  
 		<property name="username" value="radmin" />  
 		<property name="password" value="Wdjk118*" />  
+	</bean -->
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
+		<property name="url" value="jdbc:mysql://localhost/usersmanagement" />  
+		<property name="username" value="root" />  
+		<property name="password" value="" />  
 	</bean>
     
     <bean id="jtemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">  
-		<constructor-arg ref="ds"></constructor-arg>  
+		<constructor-arg ref="dataSource"></constructor-arg>  
 	</bean>
     
     <!-- application context definition for jdbc  > 

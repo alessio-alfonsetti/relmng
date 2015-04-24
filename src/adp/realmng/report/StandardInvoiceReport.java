@@ -1,34 +1,36 @@
 package adp.realmng.report;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.InvalidPropertiesFormatException;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
+import javax.swing.table.DefaultTableModel;
 
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
+import adp.realmng.model.Invoice;
 import adp.realmng.utilities.FileUtilities;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.report.builder.DynamicReports;
-import net.sf.dynamicreports.report.builder.column.Columns;
-import net.sf.dynamicreports.report.builder.component.Components;
-import net.sf.dynamicreports.report.builder.datatype.DataTypes;
-import net.sf.dynamicreports.report.constant.HorizontalAlignment;
-import net.sf.dynamicreports.report.exception.DRException;
 
 public class StandardInvoiceReport {
 
+	DefaultTableModel tableModel;
+	
 	SimpleJdbcTemplate template;
 
 	DataSource dataSource;
@@ -50,11 +52,54 @@ public class StandardInvoiceReport {
 		this.template = template;
 	}
 
+	
+	private void TableModelData(Invoice invoice) {
+        String[] columnNames = {"Id", "Name", "Department", "Email"};
+        String[][] data = {
+            {"111", "G Conger", " Orthopaedic", "jim@wheremail.com"},
+            {"222", "A Date", "ENT", "adate@somemail.com"},
+            {"333", "R Linz", "Paedriatics", "rlinz@heremail.com"},
+            {"444", "V Sethi", "Nephrology", "vsethi@whomail.com"},
+            {"555", "K Rao", "Orthopaedics", "krao@whatmail.com"},
+            {"666", "V Santana", "Nephrology", "vsan@whenmail.com"},
+            {"777", "J Pollock", "Nephrology", "jpol@domail.com"},
+            {"888", "H David", "Nephrology", "hdavid@donemail.com"},
+            {"999", "P Patel", "Nephrology", "ppatel@gomail.com"},
+            {"101", "C Comer", "Nephrology", "ccomer@whymail.com"}
+        };
+        tableModel = new DefaultTableModel(data, columnNames);
+    }
+	
+	
 	/**
 	 * Function to create a Standard Report 
 	 */
-	public void createStandardReport () {
+	public void createStandardReport (Invoice invoice) {
 
+		System.out.println("Stampo Report");
+		
+		JasperPrint jasperPrint = null;
+        TableModelData(invoice);
+        
+        try {
+            JasperCompileManager.compileReportToFile("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jrxml");
+        	//OutputStream file = new FileOutputStream(new File("/resources/sample-report.jrxml"));
+        	
+            jasperPrint = JasperFillManager.fillReport("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jasper", new HashMap(),
+                    new JRTableModelDataSource(tableModel));
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint);
+            jasperViewer.setVisible(true);
+        } catch (JRException ex) {
+            ex.printStackTrace();
+        }
+//        } catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//        	System.out.println("");
+//			e.printStackTrace();
+//		}
+		
+		
+		/*
 		//a new report
 		JasperReportBuilder report = DynamicReports.report();
 		/*report
@@ -68,14 +113,14 @@ public class StandardInvoiceReport {
 			  .setHorizontalAlignment(HorizontalAlignment.CENTER))
 			  .pageFooter(Components.pageXofY())//show page number on the page footer
 			  .setDataSource("SELECT id, first_name, last_name, date FROM customers", 
-	                                  connection);*/
+	                                  connection);* /
 		
 		String sql = "";
 		try {
 			
 			System.out.println("CONF.getPath(): "+CONF.getPath());
 			
-			sql = CONF.getPropertyString("invoices.select_for_report");
+			sql = CONF.getPropertyString("invoices.select_for_standard_report");
 			
 			System.out.println("sql: "+sql);
 			
@@ -157,5 +202,7 @@ public class StandardInvoiceReport {
 		} catch (DRException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
+	
 }

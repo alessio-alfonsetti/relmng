@@ -37,18 +37,24 @@
 		<div class="form">
 			<form id="contactform" method="POST" action="/inserisci-fattura">
 				<p class="contact"><label for="partita_iva">Partita Iva</label></p>
-				<input id="partita_iva" path="partita_iva" name="partita_iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
+				<input id="partita_iva" name="partita_iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
 	                
-				<p class="contact"><label for="nome">Descrizione</label></p>
-				<input id="descrizione" path="descrizione" name="descrizione" placeholder="Descrizione" required="" tabindex="2" type="text">
+				<p class="contact"><label for="descrizione">Descrizione</label></p>
+				<input id="descrizione" name="descrizione" placeholder="Descrizione" required="" tabindex="2" type="text">
 	 
+				<p class="contact"><label for="importo">Importo</label></p>
+				<input id="importo" name="importo" placeholder="Importo" required="" tabindex="3" type="text">
+				
+				<p class="contact"><label for="iva">Iva</label></p>
+				<input id="iva" name="iva" placeholder="Iva" required="" tabindex="4" type="text">
+				
 				<p class="contact"><label for="importo_totale">Importo Totale</label></p>
-				<input id="importo_totale" path="importo_totale" name="importo_totale" placeholder="Importo Totale" required="" tabindex="3" type="text">
+				<input id="importo_totale" name="importo_totale" placeholder="Importo Totale" required="" tabindex="5" type="text">
 	 
 				<p class="contact"><label for="nome_cantiere">Nome Cantiere</label></p>
-				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="4" type="text">
+				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="6" type="text">
 		            
-				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Cliente" type="submit" tabindex="5">   
+				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Fattura" type="submit" tabindex="7">   
 		   	</form>
 		</div>
 	   

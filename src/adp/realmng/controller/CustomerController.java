@@ -1,9 +1,16 @@
 package adp.realmng.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -25,50 +32,16 @@ import adp.realmng.model.Customer;
 //@RequestMapping("/cliente")
 public class CustomerController{
 
+	/* Logger */
+	Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	
+	/* DAO configuration */
+	Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
+	BeanFactory factory = new XmlBeanFactory(r);
+	CustomerDaoImpl dao = (CustomerDaoImpl)factory.getBean("CustomerDao");
+	
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	public ModelAndView printHome(ModelMap model) {
-
-		System.out.println("Inserisci il cazzo di cliente");
-		//model.addAttribute("message", "Inserisci Nuovo Cliente");
-		
-		Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
-
-		BeanFactory factory=new XmlBeanFactory(r);
-
-		CustomerDaoImpl dao=(CustomerDaoImpl)factory.getBean("CustomerDao");
-
-//		Collection coll = model.values();
-//		System.out.println("values? "+coll.size());		
-//		Iterator it = coll.iterator();
-//		
-//		while(it.hasNext())
-//			System.out.println("value: "+it.next());
-		
-		//Customer customer = new Customer(0, null, 0);
-
-		//CustomerInterface customerDao = new CustomerDaoImpl(null);
-
-		/*try {
-			dao.insert(new Customer(23,null,35000));
-		} catch (FileNotFoundException e) {
-
-			System.out.println("1");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-
-			System.out.println("2");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-
-			System.out.println("3");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-
-
-		//return "cliente";
 		return new ModelAndView("cliente", "command", new Customer());
 	}
 
@@ -76,19 +49,72 @@ public class CustomerController{
 	public String addCustomer(@ModelAttribute("relationship-management")Customer customer, 
 			ModelMap model) {
 		System.out.println("Spring Inserisco Utente");
-		
-		
-		System.out.println("nome: "+customer.getNome());
-		System.out.println("cognome: "+customer.getCognome());
+		System.out.println("ragione_sociale: "+customer.getRagione_sociale());
+		System.out.println("nome: "+customer.getFirstname());
+		System.out.println("cognome: "+customer.getLastname());
 		System.out.println("email: "+customer.getEmail());
+		System.out.println("partita_iva: "+customer.getPartita_iva());
 		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
+		System.out.println("nota: "+customer.getNota());
+		System.out.println("numero_cellulare: "+customer.getNumero_cellulare());
 		
-		model.addAttribute("nome", customer.getNome());
-		model.addAttribute("surname", customer.getCognome());
+		model.addAttribute("ragione_sociale", customer.getRagione_sociale());
+		model.addAttribute("nome", customer.getFirstname());
+		model.addAttribute("cognome", customer.getLastname());
 		model.addAttribute("email", customer.getEmail());
 		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
-
+		model.addAttribute("partita_iva", customer.getPartita_iva());
+		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
+		model.addAttribute("nota", customer.getNota());
+		model.addAttribute("numero_cellulare", customer.getNumero_cellulare());
+		model.addAttribute("iban", customer.getIban());
+	    
+		try {
+			
+			String uuid = dao.insert(customer);
+			
+			System.out.println("New Customer created with UUID");
+			logger.info("New Customer created with UUID: "+uuid);
+			
+		} catch (FileNotFoundException e) {
+			logger.error("File not found.", e);
+		} catch (IOException e) {
+			logger.error("IOException found", e);
+		} catch (Exception e) {
+			logger.error("Generic Exception found", e);
+		}
+		
 		return "result";
+	}
+	
+	@RequestMapping(value = "/clienti", method = RequestMethod.GET)
+	public String listCustomers(ModelMap model) {
+		
+		System.out.println("Lista Clienti");
+		
+		 List<Map<String, Object>> customers = new ArrayList<Map<String, Object>>();
+		
+		try {
+			
+			customers = dao.listAllCustomers();
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("list_customers_by_date_creation", customers);
+		
+		model.addAttribute("result", "OK");
+		model.addAttribute("error", "Clienti trovati con successo");
+		
+		return "cliente/lista-clienti";		
 	}
 	
 	//TODO Cancellazione Cliente
@@ -97,8 +123,8 @@ public class CustomerController{
 			ModelMap model) {
 		System.out.println("Cancello Cliente");
 		
-		System.out.println("nome: "+customer.getNome());
-		System.out.println("cognome: "+customer.getCognome());
+		System.out.println("nome: "+customer.getFirstname());
+		System.out.println("cognome: "+customer.getLastname());
 		System.out.println("email: "+customer.getEmail());
 		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
 		
@@ -111,8 +137,8 @@ public class CustomerController{
 			ModelMap model) {
 		System.out.println("Modifico Cliente");
 		
-		System.out.println("nome: "+customer.getNome());
-		System.out.println("cognome: "+customer.getCognome());
+		System.out.println("nome: "+customer.getFirstname());
+		System.out.println("cognome: "+customer.getLastname());
 		System.out.println("email: "+customer.getEmail());
 		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
 		
