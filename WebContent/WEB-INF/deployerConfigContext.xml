@@ -12,9 +12,9 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
    
     <!-- bean id="ServiceHSQLDataSource" destroy-method="close" class="com.mchange.v2.c3p0.ComboPooledDataSource">
             <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-            <property name="jdbcUrl" value="jdbc:mysql://46.105.16.13:3306/relmng"/>
-            <property name="user" value="radmin"/>
-            <property name="password" value="Wdjk118*"/>
+            <property name="jdbcUrl" value="XXXXXX"/>
+            <property name="user" value="XXXXX"/>
+            <property name="password" value="XXXXXX"/>
             <property name="minPoolSize" value="5"/>
             <property name="maxPoolSize" value="20"/>
             <property name="acquireIncrement" value="1"/>
@@ -28,18 +28,14 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         <property name="dataSource" ref="ServiceHSQLDataSource" />
     </bean-->
     
-    <!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-		<property name="url" value="jdbc:mysql://46.105.16.13:3306/relmng?zeroDateTimeBehavior=convertToNull" />  
-		<property name="username" value="radmin" />  
-		<property name="password" value="Wdjk118*" />  
-	</bean -->
-    
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
 		<property name="url" value="jdbc:mysql://localhost/usersmanagement" />  
 		<property name="username" value="root" />  
 		<property name="password" value="" />  
+		<property name="url" value="XXXXX" />  
+		<property name="username" value="XXXX" />  
+		<property name="password" value="XXXXX" />  
 	</bean>
     
     <bean id="jtemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">  
