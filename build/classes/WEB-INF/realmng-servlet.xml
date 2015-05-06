@@ -16,6 +16,17 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 
 	<mvc:annotation-driven/>
 
+	<!-- Logout interceptor to invalidate the session after logout -->
+	<mvc:interceptors>
+	    <bean id="webContentInterceptor" 
+	          class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+	        <property name="cacheSeconds" value="0"/>
+	        <property name="useExpiresHeader" value="true"/>
+	        <property name="useCacheControlHeader" value="true"/>
+	        <property name="useCacheControlNoStore" value="true"/>
+	    </bean>
+	</mvc:interceptors>
+
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
    	  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
       <property name="prefix" value="/WEB-INF/jsp/" />

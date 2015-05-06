@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="chathuranga-sample-report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca9fda77-efcf-4766-bf38-afb4c3e462c5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="uuid" class="java.lang.String"/>
+	<field name="partita_iva" class="java.lang.String"/>
+	<field name="id_utente" class="java.lang.Integer"/>
+	<field name="data_emissione" class="java.util.Date"/>
+	<field name="descrizione" class="java.lang.String"/>
+	<field name="importo" class="java.lang.String"/>
+	<field name="iva" class="java.lang.String"/>
+	<field name="importo_totale" class="java.lang.String"/>
+	<field name="stato_pagamento" class="java.lang.String"/>
+	<field name="nome_cantiere" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome cantiere di riferimento]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="300" y="41" width="100" height="20" uuid="d92c03b6-5778-4c0f-b363-5fcf61187046"/>
+				<text><![CDATA[data_emissione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20" uuid="74f13c75-d88d-4a71-bcfb-e6e95b2879e6"/>
+				<text><![CDATA[uuid]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="41" width="100" height="20" uuid="7b98f09d-b2e0-40fa-9b79-56750b8abe6c"/>
+				<text><![CDATA[partita_iva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="41" width="100" height="20" uuid="f1c865f7-675d-4e6d-8370-667e40ae1f19"/>
+				<text><![CDATA[id_utente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="41" width="100" height="20" uuid="ed52d275-439d-430e-a2a5-1012f8558f41"/>
+				<text><![CDATA[descrizione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="82" y="2" width="100" height="20" uuid="c5599330-58a5-4c2f-9f1b-44467baa5a9e"/>
+				<text><![CDATA[importo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="182" y="2" width="100" height="20" uuid="5db9ed03-e050-4f2f-952a-b2d5825510bd"/>
+				<text><![CDATA[iva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="2" width="100" height="20" uuid="59bae8c0-261a-4086-9c04-67b097ff1138"/>
+				<text><![CDATA[importo_totale]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="2" width="100" height="20" uuid="c3b4e4e6-1670-4796-89e5-30914775ab01"/>
+				<text><![CDATA[stato_pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="21" width="100" height="20" uuid="bf3ebfd8-0fdc-4fd9-a50a-246b0448200c"/>
+				<text><![CDATA[Nome cantiere di riferimento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="6a835bde-72ec-42b8-86cc-c277935fb07c"/>
+				<textFieldExpression><![CDATA[$F{uuid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="dfeceedf-9c6a-437c-9b98-8527d49b2b68"/>
+				<textFieldExpression><![CDATA[$F{partita_iva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="bee05a05-4aad-4829-be06-6c0764b84cd6"/>
+				<textFieldExpression><![CDATA[$F{id_utente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="5d658299-2b09-40d7-87ce-c47092a7d3c5"/>
+				<textFieldExpression><![CDATA[$F{data_emissione}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="94431c1b-2eb7-41e7-b0bf-9b92023e4cc4"/>
+				<textFieldExpression><![CDATA[$F{descrizione}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="82" y="50" width="100" height="20" uuid="c5f2ee16-7942-4d63-961b-67b560808391"/>
+				<textFieldExpression><![CDATA[$F{importo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="50" width="100" height="20" uuid="4fa07a51-9839-44ca-8bca-bb7c2fdf9ac8"/>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="50" width="100" height="20" uuid="f09ba25a-b152-4ed1-a2ff-0338830b07c9"/>
+				<textFieldExpression><![CDATA[$F{importo_totale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="382" y="50" width="100" height="20" uuid="e5341dd0-98d9-40d5-937b-9012156a497f"/>
+				<textFieldExpression><![CDATA[$F{stato_pagamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="105" width="100" height="20" uuid="75617354-57e9-480e-b5a1-e1a7c3c0c851"/>
+				<textFieldExpression><![CDATA[$F{nome_cantiere}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

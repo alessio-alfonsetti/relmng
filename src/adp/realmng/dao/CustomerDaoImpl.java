@@ -107,6 +107,19 @@ public class CustomerDaoImpl implements CustomerInterface{
 		return uuid;
 	}
 
+	public List<Map<String, Object>> listCustomersForNotification () throws InvalidPropertiesFormatException, FileNotFoundException, IOException
+	{
+		String sql = CONF.getPropertyString("customers.select_for_notifaction");
+		
+		System.out.println("sql: "+sql);
+		
+	    List<Map<String,Object>> customers = template.queryForList(sql);
+		
+		System.out.println("list of customers found: "+customers);
+		
+		return customers;
+	}
+	
 	/**
 	 * This method retrieves all the customers by surname
 	 * @throws IOException 

@@ -38,7 +38,7 @@ public class HomeController {
 	   
 	   System.out.println("home page controller");
 
-		model.addAttribute("message", "Home");
+		model.addAttribute("message", "Notifiche");
 
 		Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
 
@@ -49,7 +49,7 @@ public class HomeController {
 		List<Map<String, Object>> customers = null;
 
 		try {
-			customers = dao.listAllCustomers();
+			customers = dao.listCustomersForNotification();
 		} catch (FileNotFoundException e) {
 
 			System.out.println("1");
@@ -69,7 +69,7 @@ public class HomeController {
 
 		System.out.println("customers: "+customers);
 		
-		model.addAttribute("list_ten_customers_by_surname", customers);
+		model.addAttribute("list_customers_for_notifcation", customers);
 	   
 	   return "home";
    }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+ 
+	<!--http auto-config="true">
+		<intercept-url pattern="/**" access="ROLE_USER" />
+
+		<form-login 
+		    login-page="/login" 
+		    default-target-url="/home" 
+			authentication-failure-url="/loginError" />
+		
+		<logout logout-success-url="/login?logout" />
+	</http-->
+ 
+ 	<http auto-config="true">
+		<intercept-url pattern="/" access="ROLE_USER" />
+		<intercept-url pattern="/client*" access="ROLE_USER" />
+		<intercept-url pattern="/fattur*" access="ROLE_USER" />
+		<intercept-url pattern="/home*" access="ROLE_USER" />
+		<intercept-url pattern="/report/pdf*" access="ROLE_USER" />
+		<intercept-url pattern="/inserisci*" access="ROLE_USER" />
+		
+		<form-login login-page="/login" default-target-url="/"
+		authentication-failure-url="/loginError"/>
+		
+		<logout logout-success-url="/" invalidate-session="true" />
+	</http>
+ 
+	<authentication-manager>
+	  <authentication-provider>
+	    <user-service>
+		<user name="gruppoalessandri" password="gruppoalessandri" authorities="ROLE_USER" />
+		<user name="admin" password="diego" authorities="ROLE_ADMIN" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+ 
+</beans:beans>

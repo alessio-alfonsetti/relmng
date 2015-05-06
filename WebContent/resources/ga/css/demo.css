@@ -114,6 +114,11 @@ a{
 	float: left;
 	display: block;
 }
+.freshdesignweb-top p{
+	font-size: 24px;
+	text-align: center;
+	color: #498ea5;
+}
 .freshdesignweb-demos{
     text-align:center;
 	display: block;
@@ -142,4 +147,34 @@ a{
 .freshdesignweb-demos a.current,
 .freshdesignweb-demos a.current:hover{
 	background: rgba(41,77,95,0.3);
+}
+.freshdesignweb-bottom{
+	line-height: 24px;
+	font-size: 24px;
+	background: rgba(0, 0, 0, 0.05);
+	text-transform: uppercase;
+	z-index: 9999;
+	position: relative;
+	box-shadow: 1px 0px 2px rgba(0,0,0,0.2);
+}
+.freshdesignweb-bottom a{
+	padding: 100px 50px;
+	letter-spacing: 1px;
+	color: #498ea5;
+	font-weight: bold;
+	text-shadow: 0px 1px 1px #fff;
+	display: block;
+	float: left;
+}
+.freshdesignweb-bottom a:hover{
+	background: #fff;
+}
+.freshdesignweb-bottom span.right{
+	float: right;
+	color: #498ea5;
+	padding: 100px -50px;
+}
+.freshdesignweb-bottom span.right a{
+	float: left;
+	display: block;
 }
