@@ -24,12 +24,46 @@ public class HomeController {
 	 * Setting the context to get connection parameters.
 	 * @author Alfonsetti
 	 * */
-	private static final BeanFactory factory = new XmlBeanFactory(new ClassPathResource("../deployerConfigContext.xml"));
+	private static final BeanFactory factory = new XmlBeanFactory(new ClassPathResource("WEB-INF/deployerConfigContext.xml"));
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView getdata() {
  
 		ModelAndView model = new ModelAndView("home");
+		
+		model.addObject("message", "Notifiche");
+		
+		Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
+
+		BeanFactory factory=new XmlBeanFactory(r);
+
+		CustomerDaoImpl dao=(CustomerDaoImpl)factory.getBean("CustomerDao");
+
+		List<Map<String, Object>> customers = null;
+
+		try {
+			customers = dao.listCustomersForNotification();
+		} catch (FileNotFoundException e) {
+
+			System.out.println("1");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			System.out.println("2");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+
+			System.out.println("3");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("customers: "+customers);
+		
+		model.addObject("list_customers_for_notifcation", customers);
+		
 		return model;
 	}
 	

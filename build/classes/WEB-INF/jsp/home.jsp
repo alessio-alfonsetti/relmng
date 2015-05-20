@@ -86,11 +86,18 @@
 	
 		<div class="freshdesignweb-bottom">
 			<a href="fatture">Fatture</a>
+			<a href="cantieri">Cantieri</a>
 			<span class="right">
 				<a href="clienti">
-				<strong>Utenti</strong>
+				<strong>Clienti</strong>
 				</a>
 			</span>
+			<span class="right">
+				<a href="dipendenti">
+				<strong>Dipendenti</strong>
+				</a>
+			</span>
+			
 			<div class="clr"></div>
 		</div>
 	

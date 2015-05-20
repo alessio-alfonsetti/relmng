@@ -38,6 +38,8 @@ public class CustomerDaoImpl implements CustomerInterface{
 	@Override
 	public String insert(Customer customer) throws Exception, FileNotFoundException, IOException{
  
+		//TODO Add check to make sure that at least basic information are available; otherwise the insert doesnt have to happen		
+		
 		String sql = CONF.getPropertyString("customers.insert");
 		System.out.println("sql: "+sql);
 		
@@ -68,6 +70,8 @@ public class CustomerDaoImpl implements CustomerInterface{
 		System.out.println("data_inserimento: "+customer.getData_inserimento());
 		System.out.println("notifica_creazione_incompleta: "+customer.isNotifica_creazione_incompleta());
 		System.out.println("iban: "+customer.getIban());
+		System.out.println("indirizzo: "+customer.getIndirizzo());
+		System.out.println("id_ruolo"+ customer.getId_ruolo());
 				
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 	    parameters.addValue("uuid", uuid);
@@ -81,11 +85,15 @@ public class CustomerDaoImpl implements CustomerInterface{
 	    parameters.addValue("nota", customer.getNota());
 	    parameters.addValue("numero_cellulare", customer.getNumero_cellulare());
 	    parameters.addValue("data_inserimento", customer.getData_inserimento());
+	    parameters.addValue("indirizzo", customer.getIndirizzo());
+	    parameters.addValue("id_ruolo", customer.getId_ruolo());
+	    parameters.addValue("iban", customer.getIban());
+	    
 	    /**
 	     * @notes: notifica_creazione_incompleta é false quando il profilo utente é creato propriamente dall'operatore
 	     */
 	    parameters.addValue("notifica_creazione_incompleta", false);
-	    parameters.addValue("iban", customer.getIban());
+	    
 	    /**
 	     * @notes: enabled é true quando il profilo utente é creato per indicare un cliente attivo. 
 	     * Viene posto a false in fase di cancellazione logica (disabilitazione) 
@@ -93,8 +101,6 @@ public class CustomerDaoImpl implements CustomerInterface{
 	    parameters.addValue("enabled", true);
 	    
 	    //parameters.addValue("password", customer.getPassword());
-	    //parameters.addValue("indirizzo_uuid", "2");
-	    //parameters.addValue("tipo_uuid", "2");
 	    //parameters.addValue("numero_telefono", customer.getNumero_telefono());
 	    //parameters.addValue("numero_fax", customer.getNumero_fax());
 	    
@@ -140,6 +146,27 @@ public class CustomerDaoImpl implements CustomerInterface{
 		return customers;
 	}
  
+	/**
+	 * This method retrieves all the employers ordered by surname
+	 * 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 * @throws InvalidPropertiesFormatException 
+	 */
+	@Override
+	public List<Map<String, Object>> listAllEmployers () throws InvalidPropertiesFormatException, FileNotFoundException, IOException  {
+
+		String sql = CONF.getPropertyString("employers.get_all_by_lastname");
+		
+		System.out.println("sql: "+sql);
+		
+	    List<Map<String,Object>> employers = template.queryForList(sql);
+		
+		System.out.println("list of employers found: "+employers);
+		
+		return employers;
+	}
+	
 	public Customer parseCustomer(Map<String, Object> listEntry_)
 	{
 		Customer customer = new Customer();
@@ -151,9 +178,17 @@ public class CustomerDaoImpl implements CustomerInterface{
 	}
 
 	@Override
-	public void delete(String name) {
-		// TODO Auto-generated method stub
+	public int deleteByUuid(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+
+		String sql = CONF.getPropertyString("customers.deactivate_by_uuid");
+		System.out.println("sql: "+sql);
 		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("uuid", uuid);
+		
+	    int res = template.update(sql, parameters);
+		
+	    return res;
 	}
 
 	/**
@@ -240,7 +275,22 @@ public class CustomerDaoImpl implements CustomerInterface{
 			}
 	    }
 	    
-		return null;
+		return customer;
+	}
+	
+	@Override
+	public List<Map<String,Object>> findDeactivatedCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		String sql = CONF.getPropertyString("customers.get_all_deactivated");
+		
+		System.out.println("sql: "+sql);
+		
+	    List<Map<String,Object>> employers = template.queryForList(sql);
+		
+		System.out.println("list of employers found: "+employers);
+		
+		return employers;
+		
 	}
 	
 	@Override

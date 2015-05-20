@@ -37,34 +37,44 @@
 		<table>
 			 <thead>
 			 <tr>
-			  <th>Codice Cliente</th>
-			  <th>Ragione Sociale</th>
+			  <th>Codice Dipendente</th>
 			  <th>Nome</th>
 			  <th>Cognome</th>
-			  <th>Partita Iva</th>
 			  <th>Codice Fiscale</th>
-			  <th>Numero di Telefono</th>
+			  <th>Indirizzo</th>
+			  <th>Numero di Cellulare</th>
 			  <th>Email</th>
 			  <th>IBAN</th>
-			  <th>Emetti Fattura</th>
+			  <th>Data Creazione Profilo</th>
+			  <th>Disattiva</th>
+			  <th>Gestisci</th>
 			 </tr>
 			 </thead>
-		<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
+			<c:forEach items="${list_employers_by_lastname}" begin="0" end="100" var="employers">
 			 <tbody>
 			  <tr>
-			   <td>${customers.uuid}</td>
-			   <td>${customers.ragione_sociale}</td>
-			   <td>${customers.firstname}</td>
-			   <td>${customers.middlename}</td>
-			   <td>${customers.partita_iva}</td>
-			   <td>${customers.codice_fiscale}</td>
-			   <td>${customers.numero_telefono}</td>
-			   <td>${customers.email}</td>
-			   <td>${customers.iban}</td>
+			   <td>${employers.uuid}</td>
+			   <td>${employers.firstname}</td>
+			   <td>${employers.lastname}</td>
+			   <td>${employers.codice_fiscale}</td>
+			   <td>${employers.indirizzo}</td>
+			   <td>${employers.numero_cellulare}</td>
+			   <td>${employers.email}</td>
+			   <td>${employers.iban}</td>
+			   <td>${employers.data_inserimento}</td>
 			   <td>
 			   	<div class="form">
-			   		<form id="contactform" method="POST" action="fattura?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Genera Fattura" type="submit" tabindex="1">   
+			   		<form id="contactform" method="POST" action="cancella-dipendente" >
+			   			<input type="hidden" name="uuid" value="${employers.uuid}" />
+			   			<input class="button" name="submit" id="submit" value="Disattiva" type="submit" tabindex="1" />   
+			   		</form>
+			   	</div>
+			   </td>
+			   <td>
+			   	<div class="form">
+			   		<form id="contactform" method="POST" action="gestisci-dipendente" >
+			   			<input type="hidden" name="uuid" value="${employers.uuid}" />
+			   			<input class="button" name="submit" id="submit" value="Gestisci" type="submit" tabindex="2" />   
 			   		</form>
 			   	</div>
 			   </td>
@@ -72,24 +82,7 @@
 			 </tbody>
 	 	</c:forEach>
 	</table>
-	
-	<div class="freshdesignweb-bottom">
-		<a href="cliente">Inserisci</a>
-		<a href="#">Modifica</a>
-			<span class="right">
-				<a href="#">
-				<strong>Deattiva</strong>
-				</a>
-			</span>
-			<span class="right">
-				<a href="#">
-				<strong>Esporta</strong>
-				</a>
-			</span>
-			
-			<div class="clr"></div>
-		</div>	
-	
+	   
 	</div>
 </body>
 </html>

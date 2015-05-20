@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>Inserisci nuovo Cliente</title>
+<title>${title}</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
@@ -25,7 +25,7 @@
 		</div><!--/ freshdesignweb top bar -->
 	
 	<header>
-		<h1><span></span> ${message}</h1>
+		<h1><span></span>${message}</h1>
 	</header>
    
    <div  class="form">
@@ -88,13 +88,17 @@
             </select><br><br-->
             
             <p class="contact"><label for="numero_cellulare" tabindex="8">Cellulare</label></p>
-            <input id="numero_cellulare" name="numero_cellulare" placeholder="3342691052" type="text" tabindex="9"> <br>
+            <input id="numero_cellulare" name="numero_cellulare" placeholder="3342691052" type="text" tabindex="9">
             
             <p class="contact"><label for="iban">IBAN</label></p>
 			<input id="iban" name="iban" placeholder="Inserisci IBAN" autocomplete="on" maxlength="250" tabindex="10" type="text">
  
+ 			<p class="contact"><label for="indirizzo">Indirizzo</label></p>
+			<input id="indirizzo" name="indirizzo" placeholder="Inserisci Indirizzo" autocomplete="on" maxlength="250" tabindex="11" type="text">
             
-            <input class="buttom" name="submit" id="submit" value="Inserisci Cliente" type="submit" tabindex="11">   
+            <input type="hidden" name="id_ruolo" value="3">
+            
+            <input class="buttom" name="submit" id="submit" value="Inserisci Cliente" type="submit" tabindex="12">   
    </form>
 </div>
    

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,16 +21,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
+import adp.realmng.constants.Constants;
 import adp.realmng.dao.CustomerDaoImpl;
 import adp.realmng.model.Customer;
 
 @Controller
-//@RequestMapping("/cliente")
 public class CustomerController{
 
 	/* Logger */
@@ -40,12 +42,22 @@ public class CustomerController{
 	BeanFactory factory = new XmlBeanFactory(r);
 	CustomerDaoImpl dao = (CustomerDaoImpl)factory.getBean("CustomerDao");
 	
+	/* ****************************************************************************************** */
+	/* *************************************** CLIENTE ****************************************** */
+	/* ****************************************************************************************** */
+	
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
 	public ModelAndView printHome(ModelMap model) {
-		return new ModelAndView("cliente", "command", new Customer());
+		
+		ModelAndView modelAndView = new ModelAndView("cliente/cliente", "command", new Customer()); 
+		
+		modelAndView.addObject("title", "Inserisci Nuovo Cliente");
+		modelAndView.addObject("message", "Inserisci Nuovo Cliente");
+		
+		return modelAndView;
 	}
 
-	@RequestMapping(value = "/inserisci-cliente", method = RequestMethod.POST)
+	@RequestMapping(value = "/inserisci-cliente", method = {RequestMethod.POST, RequestMethod.GET})
 	public String addCustomer(@ModelAttribute("relationship-management")Customer customer, 
 			ModelMap model) {
 		System.out.println("Spring Inserisco Utente");
@@ -57,6 +69,7 @@ public class CustomerController{
 		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
 		System.out.println("nota: "+customer.getNota());
 		System.out.println("numero_cellulare: "+customer.getNumero_cellulare());
+		System.out.println("indirizzo: "+customer.getIndirizzo());
 		
 		model.addAttribute("ragione_sociale", customer.getRagione_sociale());
 		model.addAttribute("nome", customer.getFirstname());
@@ -68,10 +81,13 @@ public class CustomerController{
 		model.addAttribute("nota", customer.getNota());
 		model.addAttribute("numero_cellulare", customer.getNumero_cellulare());
 		model.addAttribute("iban", customer.getIban());
-	    
+		model.addAttribute("indirizzo", customer.getIndirizzo());
+		
 		try {
 			
 			String uuid = dao.insert(customer);
+			
+			customer.setUuid(uuid);
 			
 			System.out.println("New Customer created with UUID");
 			logger.info("New Customer created with UUID: "+uuid);
@@ -83,6 +99,11 @@ public class CustomerController{
 		} catch (Exception e) {
 			logger.error("Generic Exception found", e);
 		}
+		
+		model.addAttribute("customer", customer);
+		model.addAttribute("title", "Cliente Inserito con successo");
+		model.addAttribute("h2", "Le informazioni del cliente inserito sono:");
+		model.addAttribute("message", "Le informazioni del cliente inserito sono:");		
 		
 		return "result";
 	}
@@ -113,6 +134,9 @@ public class CustomerController{
 		
 		model.addAttribute("result", "OK");
 		model.addAttribute("error", "Clienti trovati con successo");
+		
+		model.addAttribute("message", "Lista Clienti:");
+		model.addAttribute("title", "Lista Clienti");
 		
 		return "cliente/lista-clienti";		
 	}
@@ -201,6 +225,200 @@ public class CustomerController{
         }*/
 		
 		return "result";
+	}
+	
+	/* ****************************************************************************************** */
+	/* *************************************** DIPENDENTE *************************************** */
+	/* ****************************************************************************************** */
+	
+	@RequestMapping(value = "/dipendente", method = RequestMethod.GET)
+	public ModelAndView printHomeEmployee(ModelMap model) {
+		return new ModelAndView("dipendente/dipendente", "command", new Customer());
+	}
+	
+	@RequestMapping(value = "/inserisci-dipendente", method = RequestMethod.POST)
+	public String addEmployee(@ModelAttribute("relationship-management")Customer customer, 
+			ModelMap model) {
+				
+		System.out.println("Spring Inserisco Dipendente");
+		System.out.println("ruolo: "+customer.getId_ruolo());
+		
+		model.addAttribute("ruolo", customer.getId_ruolo());
+		model.addAttribute("nome", customer.getFirstname());
+		model.addAttribute("cognome", customer.getLastname());
+		model.addAttribute("email", customer.getEmail());
+		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
+		model.addAttribute("nota", customer.getNota());
+		model.addAttribute("numero_cellulare", customer.getNumero_cellulare());
+		model.addAttribute("indirizzo", customer.getIndirizzo());
+		model.addAttribute("iban", customer.getIban());
+	    
+		try {
+			
+			String uuid = dao.insert(customer);
+			
+			System.out.println("New Customer created with UUID");
+			logger.info("New Customer created with UUID: "+uuid);
+			
+			model.addAttribute("customer", customer);
+			
+		} catch (FileNotFoundException e) {
+			logger.error("File not found.", e);
+		} catch (IOException e) {
+			logger.error("IOException found", e);
+		} catch (Exception e) {
+			logger.error("Generic Exception found", e);
+		}
+		
+		List<Map<String, Object>> customerCreated = new ArrayList<Map<String, Object>>();
+		
+		Iterator<Map<String, Object>> iter = customerCreated.iterator();
+		
+		while(iter.hasNext())
+		{
+			Map<String, Object> keysvalues = iter.next();
+
+			keysvalues.put(Constants.Customer_IDRUOLO, customer.getId_ruolo());
+			
+			if(customer.getFirstname() != null)
+				keysvalues.put(Constants.Customer_FIRSTNAME, customer.getFirstname());
+			
+			if(customer.getLastname() != null)
+				keysvalues.put(Constants.Customer_LASTNAME, customer.getLastname());
+			
+			if(customer.getEmail() != null)
+				keysvalues.put(Constants.Customer_EMAIL, customer.getEmail());
+
+			if(customer.getCodice_fiscale() != null)
+				keysvalues.put(Constants.Customer_CODICE_FISCALE, customer.getCodice_fiscale());
+			
+			if(customer.getNota() != null)
+				keysvalues.put(Constants.Customer_NOTA, customer.getNota());
+			
+			if(customer.getNumero_cellulare() != null)
+				keysvalues.put(Constants.Customer_NUMERO_CELLULARE, customer.getNumero_cellulare());
+			
+			if(customer.getIndirizzo() != null)
+				keysvalues.put(Constants.Customer_INDIRIZZO, customer.getIndirizzo());
+			
+			if(customer.getIban() != null)
+				keysvalues.put(Constants.Customer_IBAN, customer.getIban());
+			
+			customerCreated.add(keysvalues);
+			
+		}
+		
+		model.addAttribute("title", "Dipendente Inserito con successo");
+		model.addAttribute("h2", "Le informazioni del dipendente inserito sono:");
+		model.addAttribute("utente_creato", "Le informazioni del dipendente inserito sono:");
+		model.addAttribute("message", "Clienti trovati con successo sono:");
+		
+		return "result";
+	}
+	
+	@RequestMapping(value = "/dipendenti", method = RequestMethod.GET)
+	public String listEmployers(ModelMap model) {
+		
+		System.out.println("Lista Dipendenti");
+		
+		List<Map<String, Object>> employers = new ArrayList<Map<String, Object>>();
+		
+		try {
+			
+			employers = dao.listAllEmployers();
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("list_employers_by_lastname", employers);
+		
+		model.addAttribute("result", "OK");
+		model.addAttribute("error", "Error /dipendenti");
+		model.addAttribute("title", "Lista Dipendenti");
+		model.addAttribute("message", "Lista Dipendenti");
+		model.addAttribute("h2", "Lista Dipendenti:");		
+		
+		return "dipendente/lista-dipendenti";		
+	}
+	
+	@RequestMapping(value = "/cancella-dipendente", method = {RequestMethod.POST})
+	public String deleteEmployer(@RequestParam("uuid") String uuid, 
+			ModelMap model) {
+		
+		System.out.println("Cancello Cliente "+ uuid);
+		
+		Customer customer = new Customer();
+		
+		model.addAttribute("message", "Disattivazione Cliente:");
+		model.addAttribute("title", "Disattivazione Cliente:");
+		model.addAttribute("message_detail", "Il profilo cliente é stato disattivato con successo.");
+		
+		try {
+			
+			int res = dao.deleteByUuid(uuid);
+			
+			if (res > 0)
+			{
+				System.out.println("Deattivati "+ res +" utente/i");
+				logger.debug("Deattivati "+res+" utente/i.");
+				
+				customer = dao.findByCustomerUuid(uuid);
+				
+				model.addAttribute("customer", customer);
+			}
+				
+		} catch (InvalidPropertiesFormatException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		} catch (FileNotFoundException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		} catch (IOException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		}
+		
+		return "result";
+	}
+	
+	
+	@RequestMapping(value = "/gestisci-dipendente", method = {RequestMethod.POST})
+	public String dailyEmployerManagement(@RequestParam("uuid") String uuid, 
+			ModelMap model) {
+		
+		System.out.println("Gestisco Utente "+ uuid);
+		
+		Customer customer = new Customer();
+		
+		model.addAttribute("message", "Aggiorna Profilo Dipendente:");
+		model.addAttribute("title", "Aggiorna Profilo Dipendente:");
+		//model.addAttribute("message_detail", "Il profilo cliente é stato disattivato con successo.");
+		
+		try {
+			
+			customer = dao.findByCustomerUuid(uuid);
+			model.addAttribute("customer", customer);
+			
+		} catch (InvalidPropertiesFormatException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		} catch (FileNotFoundException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		} catch (IOException e) {
+			model.addAttribute("error", ("Errore nella deattivazione dell'utente con UUID: "+uuid));
+			logger.error("Errore nella deattivazione dell'utente "+uuid+". Error Description is: "+e.getMessage());
+		}
+		
+		return "dipendente/gestisci-dipendente";
 	}
 	
 }

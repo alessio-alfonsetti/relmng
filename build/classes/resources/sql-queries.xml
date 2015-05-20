@@ -19,9 +19,9 @@
 	</entry-->
 	<entry key="customers.insert">
 		INSERT INTO utente
-		(uuid, username, firstname, lastname, ragione_sociale, email, partita_iva, codice_fiscale, nota, numero_cellulare, data_inserimento, notifica_creazione_incompleta, iban, enabled) 
+		(uuid, username, firstname, lastname, ragione_sociale, email, partita_iva, codice_fiscale, nota, numero_cellulare, data_inserimento, notifica_creazione_incompleta, iban, enabled, indirizzo, id_ruolo) 
 		VALUES 
-		(:uuid,:username,:firstname,:lastname,:ragione_sociale,:email,:partita_iva,:codice_fiscale,:nota,:numero_cellulare,:data_inserimento,:notifica_creazione_incompleta,:iban,:enabled)
+		(:uuid,:username,:firstname,:lastname,:ragione_sociale,:email,:partita_iva,:codice_fiscale,:nota,:numero_cellulare,:data_inserimento,:notifica_creazione_incompleta,:iban,:enabled,:indirizzo,:id_ruolo)
 	</entry>
 	
 	<entry key="customers.insert_incomplete_user_profile">
@@ -54,12 +54,26 @@
 	</entry>
 	
 	<entry key="customers.select_by_uuid">
-	SELECT * FROM utente WHERE uuid = :uuid
+		SELECT * FROM utente WHERE uuid = :uuid
 	</entry>
 	
 	<entry key="customers.select_for_notifaction">
 		SELECT * FROM utente WHERE notifica_creazione_incompleta = 1
 	</entry>
+	
+	<entry key="customers.deactivate_by_uuid">
+		UPDATE utente SET enabled = '0' WHERE uuid = :uuid
+	</entry>
+	
+	<entry key="customers.get_all_deactivated">
+		SELECT * FROM utente WHERE enabled = 0 and id_ruolo = 3
+	</entry>
+	
+	<!-- DIPENDENTI -->
+	<entry key="employers.get_all_by_lastname">
+	SELECT * FROM utente WHERE id_ruolo = '4' order by lastname
+	</entry>
+	
 	
 	<!-- FATTURE -->
 	<!--entry key="invoices.insert">
@@ -89,6 +103,22 @@
 	
 	<entry key="invoices.select_invoice_by_id">
 		SELECT * FROM fattura WHERE id=:id
+	</entry>
+	
+	<!-- CANTIERI -->
+	<entry key="worksites.insert">
+		INSERT INTO cantiere
+		(uuid, nome_cantiere, indirizzo, nota) 
+		VALUES 
+		(:uuid,:nome_cantiere,:indirizzo,:nota)
+	</entry>
+	
+	<entry key="worksites.select_by_uuid">
+		SELECT * FROM cantiere WHERE uuid = :uuid
+	</entry>
+	
+	<entry key="worksites.get_all_by_name">
+		SELECT * FROM cantiere ORDER BY data_fine_cantiere DESC
 	</entry>
 	
 </properties>

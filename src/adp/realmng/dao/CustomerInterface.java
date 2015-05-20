@@ -19,10 +19,14 @@ public interface CustomerInterface {
 	
 	public List<Map<String, Object>> listAllCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
-	public void delete (String name);
-	
 	public void modify (Customer customer);
 
 	public Customer findByCustomerUuid(String custUuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public List<Map<String, Object>> listAllEmployers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public int deleteByUuid(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public List<Map<String, Object>> findDeactivatedCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 
 }

@@ -64,12 +64,32 @@ public class Constants {
 	
 	/** NOTIFICA_CREAZIONE_INCOMPLETA */
 	public static final String Customer_NOTIFICA_CREAZIONE_INCOMPLETA			= "notifica_creazione_incompleta";
+	
+	/** IBAN */
+	public static final String Customer_IBAN									= "iban";
 
 	
 	/********************************************************* INVOICES ************************************************************/
 	
 	public static final String Invoice_stato_pagamento 							= "non_pagato";
 	
+	
+	/********************************************************* WORKSITES ***********************************************************/
+	
+	/** ID */
+	public static final String Worksite_ID 										= "id";
+	
+	/** UUID */
+	public static final String Worksite_UUID 									= "uuid";
+	
+	/** FIRSTNAME */
+	public static final String Worksite_NAME			 						= "nome_cantiere";
+	
+	/** INDIRIZZO */
+	public static final String Worksite_INDIRIZZO								= "indirizzo";
+	
+	/** NOTA */
+	public static final String Worksite_NOTA 									= "nota";
 	
 	/********************************************************* ERROR CODES *********************************************************/
 
