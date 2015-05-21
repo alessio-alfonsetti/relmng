@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ga-template-fattura_v1.0" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5b5244f7-ae7e-4c87-9547-cbbc902646a3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="192"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -46,8 +46,8 @@
 	<subDataset name="Table Dataset 1" uuid="e049a842-c81a-4dcb-bee6-a513edd4e723"/>
 	<subDataset name="New Dataset 1" uuid="fdf255f2-582c-48fc-9412-cadb8d4dd17d"/>
 	<subDataset name="Table Dataset 2" uuid="1ac29aaf-be3b-433a-8c3c-6d404d3c475c"/>
-	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[Nome]]></fieldDescription>
+	<field name="firstname" class="java.lang.String">
+		<fieldDescription><![CDATA[firstname]]></fieldDescription>
 	</field>
 	<field name="indirizzo" class="java.lang.String">
 		<fieldDescription><![CDATA[Indirizzo]]></fieldDescription>
@@ -64,8 +64,8 @@
 	<field name="citta" class="java.lang.String">
 		<fieldDescription><![CDATA[Città]]></fieldDescription>
 	</field>
-	<field name="numero_telefono" class="java.lang.String">
-		<fieldDescription><![CDATA[Numero Telefono]]></fieldDescription>
+	<field name="numero_cellulare" class="java.lang.String">
+		<fieldDescription><![CDATA[numero_cellulare]]></fieldDescription>
 	</field>
 	<field name="provincia" class="java.lang.String">
 		<fieldDescription><![CDATA[Provincia]]></fieldDescription>
@@ -150,7 +150,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{firstname}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="141" y="103" width="100" height="20" uuid="26743f04-075e-4137-8e5b-45f4906efaba"/>
@@ -165,13 +165,6 @@
 					<font fontName="Arial" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cap}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="141" y="143" width="100" height="20" uuid="cecd3df9-3b98-433e-b65e-da04e45fd158"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{numero_telefono}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="141" y="163" width="100" height="20" uuid="d79c5d3f-f5e8-4681-8fcc-14f1536df95b"/>
@@ -235,6 +228,13 @@
 					<font fontName="Arial" size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="143" width="100" height="20" uuid="7a7b43c4-1e5d-4569-a6f1-2bbe2273a5b6"/>
+				<textElement>
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_cellulare}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

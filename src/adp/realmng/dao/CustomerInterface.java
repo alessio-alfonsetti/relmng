@@ -13,9 +13,9 @@ public interface CustomerInterface {
 	// TODO Manage exception. They are all related to an internal error  
 	public String insert(Customer customer) throws Exception, FileNotFoundException, IOException;
 	
-	public Customer findByCustomerId(int custId);
+	public Map<String, Object> findByCustomerId(int custId) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
-	public Customer findByParatitaIva(String partita_iva) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+	public Customer findByPartitaIva(String partita_iva) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 	public List<Map<String, Object>> listAllCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	

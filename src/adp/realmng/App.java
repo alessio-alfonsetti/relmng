@@ -25,8 +25,8 @@ public class App
         Customer customer = new Customer("alessio.alfonsetti@hotmail.it", "Alessio", "000000000001");
         customerDAO.insert(customer);
         System.out.println("customer inserted: ");
-        Customer customer1 = customerDAO.findByCustomerId(000000000001);
-        System.out.println("customer found: "+customer1);
+        //Customer customer1 = customerDAO.findByCustomerId(000000000001);
+        //System.out.println("customer found: "+customer1);
         
     }
 }

@@ -15,5 +15,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/super-csv-2.1.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/DynamicJasper-3.0.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

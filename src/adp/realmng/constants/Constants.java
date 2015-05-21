@@ -95,4 +95,7 @@ public class Constants {
 
 	/** Too many customers for one partita_iva */
 	public static final String ERR_TOO_MANY_CUSTOMERS_FOR_ONE_PARTITA_IVA		= "ERR_1";
+	
+	/** Too many customers for one id_utente */
+	public static final String ERR_TOO_MANY_CUSTOMERS_FOR_ONE_ID_UTENTE			= "ERR_2";
 }

@@ -3,6 +3,7 @@ package adp.realmng.dao;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Iterator;
 import java.util.List;
@@ -294,9 +295,100 @@ public class CustomerDaoImpl implements CustomerInterface{
 	}
 	
 	@Override
-	public Customer findByCustomerId(int custId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Object> findByCustomerId(int custId) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		Map<String, Object> customer = new HashMap<String, Object>();
+		
+		String sql = CONF.getPropertyString("customers.select_by_id");
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("id", custId);
+		
+		List<Map<String, Object>> found = template.queryForList(sql, parameters);
+		System.out.println("users found on the db: "+found.size());
+		Iterator<Map<String, Object>> iter = found.iterator();
+		
+		int counter = 0;
+		while (iter.hasNext())
+		{
+			Map<String, Object> obj = iter.next();
+			System.out.println("customer obj: "+obj);
+			//customer = (Customer) obj;
+			
+			Set keys = obj.keySet();
+			Iterator ikeys = keys.iterator();
+			
+			System.out.println("customer obj: "+obj);
+			
+			while(ikeys.hasNext())
+			{
+				String key = (String) ikeys.next();
+				System.out.println("customer key: "+key);
+				Object value = (Object) obj.get(key);
+				System.out.println("customer value: "+value);
+
+				if(key.equals(Constants.Customer_ID)) 
+					customer.put(Constants.Customer_ID, value);
+				if(key.equals(Constants.Customer_UUID)) 
+					customer.put(Constants.Customer_UUID, value);
+				if(key.equals(Constants.Customer_USERNAME))
+					customer.put(Constants.Customer_USERNAME, value);
+				if(key.equals(Constants.Customer_FIRSTNAME))
+					customer.put(Constants.Customer_FIRSTNAME, value);
+				if(key.equals(Constants.Customer_MIDDLENAME))
+					customer.put(Constants.Customer_MIDDLENAME, value);
+				if(key.equals(Constants.Customer_LASTNAME))
+					customer.put(Constants.Customer_LASTNAME, value);
+				if(key.equals(Constants.Customer_PASSWORD))
+					customer.put(Constants.Customer_PASSWORD, value);
+				if(key.equals(Constants.Customer_RAGIONE_SOCIALE))
+					customer.put(Constants.Customer_RAGIONE_SOCIALE, value);
+				if(key.equals(Constants.Customer_PARTITA_IVA))
+					customer.put(Constants.Customer_PARTITA_IVA, value);
+				if(key.equals(Constants.Customer_CODICE_FISCALE))
+					customer.put(Constants.Customer_CODICE_FISCALE, value);
+				if(key.equals(Constants.Customer_INDIRIZZO))
+					customer.put(Constants.Customer_INDIRIZZO, value);
+				if(key.equals(Constants.Customer_NUMERO_TELEFONO))
+					customer.put(Constants.Customer_NUMERO_TELEFONO, value);
+				if(key.equals(Constants.Customer_NUMERO_CELLULARE))
+					customer.put(Constants.Customer_NUMERO_CELLULARE, value);
+				if(key.equals(Constants.Customer_NUMERO_FAX))
+					customer.put(Constants.Customer_NUMERO_FAX, value);
+				if(key.equals(Constants.Customer_EMAIL))
+					customer.put(Constants.Customer_EMAIL, value);
+				if(key.equals(Constants.Customer_NOTA))
+					customer.put(Constants.Customer_NOTA, value);
+				if(key.equals(Constants.Customer_ENABLED))
+					customer.put(Constants.Customer_ENABLED, value);
+				if(key.equals(Constants.Customer_IDRUOLO))
+					customer.put(Constants.Customer_IDRUOLO, value);
+				if(key.equals(Constants.Customer_DATA_INSERIMENTO))
+					customer.put(Constants.Customer_DATA_INSERIMENTO, value);
+			}
+			
+			counter ++;
+			System.out.println("customer counter: "+counter);
+			System.out.println("customer: "+customer);
+		}
+		
+		System.out.println("customer counter: "+counter);
+		if(counter > 1) {
+			// TODO Ci sono troppi utenti su DB associati alla partita_iva utilizzata
+			
+			try {
+
+				throw new TooManyCustomersException("Too many customers for one id_utente. Error Code: "+Constants.ERR_TOO_MANY_CUSTOMERS_FOR_ONE_ID_UTENTE);
+			
+			} catch (TooManyCustomersException e) {
+				e.printStackTrace();
+			}
+		} else if (counter == 0) {
+			// TODO Non ci sono utenti su DB con la partita iva inserita
+			
+		}
+		
+		return customer;
 	}
 
 	@Override
@@ -312,7 +404,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 	 * inserire a mano i valori sulla fattura.
 	 */
 	@Override
-	public Customer findByParatitaIva(String partita_iva) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+	public Customer findByPartitaIva(String partita_iva) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
 
 		Customer customer = new Customer();
 		
@@ -395,7 +487,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 			
 			try {
 
-				throw new TooManyCustomersException("Too many customers for one partita_iva"+Constants.ERR_TOO_MANY_CUSTOMERS_FOR_ONE_PARTITA_IVA);
+				throw new TooManyCustomersException("Too many customers for one partita_iva. Error Code: "+Constants.ERR_TOO_MANY_CUSTOMERS_FOR_ONE_PARTITA_IVA);
 			
 			} catch (TooManyCustomersException e) {
 				e.printStackTrace();

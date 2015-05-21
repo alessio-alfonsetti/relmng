@@ -59,7 +59,7 @@ public class InvoiceController {
 		try {
 			
 			/* Prendo utente dalla tabella utenti, utilizzando la partita_iva inserita in fase di creazione della fattura */
-			Customer customer = customerdao.findByParatitaIva(invoice.getPartita_iva());
+			Customer customer = customerdao.findByPartitaIva(invoice.getPartita_iva());
 			
 			System.out.println("dopo findByPartitaIva: ");
 			
@@ -171,6 +171,9 @@ public class InvoiceController {
 		
 		model.addAttribute("result", "OK");
 		model.addAttribute("error", "Fattura inserita con successo");
+		model.addAttribute("title", "Lista Fatture");
+		model.addAttribute("message", "Lista Fatture:");
+		
 		
 		return "fattura/lista-fatture";
 

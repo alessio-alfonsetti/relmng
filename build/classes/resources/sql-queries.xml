@@ -57,6 +57,10 @@
 		SELECT * FROM utente WHERE uuid = :uuid
 	</entry>
 	
+	<entry key="customers.select_by_id">
+		SELECT * FROM utente WHERE id = :id
+	</entry>
+	
 	<entry key="customers.select_for_notifaction">
 		SELECT * FROM utente WHERE notifica_creazione_incompleta = 1
 	</entry>

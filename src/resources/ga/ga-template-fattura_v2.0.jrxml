@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ga-template-fattura_v2.0" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="60a845d2-a597-4642-a3e6-8327188f3be7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="421"/>
+	<field name="firstname" class="java.lang.String">
+		<fieldDescription><![CDATA[Nome Cliente]]></fieldDescription>
+	</field>
+	<field name="lastname" class="java.lang.String"/>
+	<field name="numero_cellulare" class="java.lang.String">
+		<fieldDescription><![CDATA[Num. Tel.]]></fieldDescription>
+	</field>
+	<field name="partita_iva" class="java.lang.String">
+		<fieldDescription><![CDATA[C.F./P.IVA]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="185" height="110" uuid="2e86e30b-3696-434d-93a4-39a6a7d0f968"/>
+				<imageExpression><![CDATA["C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\ga\\alma-logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="185" y="89" width="170" height="20" uuid="a8115cca-3754-4844-b20b-6ea2f26fa33c"/>
+				<textElement>
+					<font fontName="Arial" size="14" isBold="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[alma-appalti@virgilio.it]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="70" width="141" height="20" uuid="c1762dcf-9294-4819-9357-940ee0247064"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AL.MA. Appalti sas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="504" splitType="Stretch">
+			<textField>
+				<reportElement x="54" y="20" width="100" height="20" uuid="c321eeb5-663e-43cf-b651-aced4d241ee1"/>
+				<textFieldExpression><![CDATA[$F{firstname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="20" uuid="e184e264-1208-4329-848e-07e9f0c9a845"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="20" width="100" height="20" uuid="d7272166-0f34-4ca8-91fb-6892489df852"/>
+				<textFieldExpression><![CDATA[$F{lastname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="54" height="20" uuid="9b17d749-8419-424d-b885-89846d043945"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="54" height="20" uuid="137d8b72-2141-4507-a3ce-1562e3ddb2d1"/>
+				<text><![CDATA[Indirizzo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="60" width="200" height="20" uuid="d232b23d-dca0-4c2f-b21a-fb4f6e431d40"/>
+				<textFieldExpression><![CDATA[$F{numero_cellulare}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="54" height="20" uuid="e5b69601-185d-42aa-a4fa-ddc836fb4e8e"/>
+				<text><![CDATA[Num. Tel.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="80" width="200" height="20" uuid="ae75b34c-3077-4965-9300-63da7ae4d071"/>
+				<textFieldExpression><![CDATA[$F{partita_iva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="54" height="20" uuid="56e2894e-316b-4aa3-a916-8752da7a8400"/>
+				<text><![CDATA[C.F./P.IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="20" width="54" height="20" uuid="3fc33f7f-19f1-49eb-b18c-b8cd83f8d6f3"/>
+				<text><![CDATA[Fattura n.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="40" width="54" height="20" uuid="f2a98a60-7690-458c-adb7-7f4e35677717"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="0" width="141" height="20" uuid="fac9ed8e-6fa6-4f8d-ac73-1cfed06cb54a"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FATTURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="100" width="90" height="19" uuid="37902aac-0e7c-451c-b3f8-875e2d9b10e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="100" width="170" height="19" uuid="8b27c12c-be9a-47ab-a242-7310063cc0c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIZIONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="100" width="54" height="19" uuid="f2c25e1f-ab0c-41a8-aa25-741a897e2981"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Codice]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="100" width="65" height="19" uuid="e07a0b8f-cb38-406d-8458-5af73ed6d466"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="100" width="76" height="19" uuid="1a0f3610-1af5-48e7-bca2-c3ec1ea26bdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Q.tà]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="100" width="100" height="19" uuid="555c162c-729b-4161-924d-1e100d5137b3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prezzo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="464" width="139" height="19" uuid="7076e6eb-3eb7-4833-9c04-f2348290a082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALE FATTURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="445" width="100" height="19" uuid="6360d79e-b3e1-471f-b297-c4a40b9f3e3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA 22%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="426" width="100" height="19" uuid="c69ddf26-0c44-4ba3-86b6-f924a4b38de1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA 10%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="407" width="100" height="19" uuid="303954cb-82b5-4de7-bea4-a2cf52cc1e21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA 4%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="388" width="157" height="19" uuid="13915bdb-48b5-4c18-8083-918c55925888"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Spese di Spedizione]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="369" width="100" height="19" uuid="adf774ed-614a-4533-be18-fb699fab013a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imponibile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="484" width="141" height="20" uuid="1ded72f7-bcd6-4795-9fd0-0f0efe7613c8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[IBAN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="464" width="141" height="20" uuid="0d710742-9ff8-4084-8992-bdca5283abf7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Banca d`appoggio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="424" width="200" height="20" uuid="8df545eb-49a0-43f0-81aa-db55a6f766f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Modalità di pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="444" width="141" height="20" uuid="956ee8ee-c557-42ad-8936-6b737715eebc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Bonifico bancario a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="484" width="139" height="19" uuid="485ac1f3-ea6b-4edf-b0e4-0c06787ad089"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[(S.E.&O.)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="40" width="555" height="20" uuid="13683c8c-0684-4098-89c1-1fa11afba48a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[Tel./Fax. 0862-681958]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="553a9001-7ee9-4010-a059-e53c0eb3c71f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AL. MA. APPALTI SAS DI ALESSANDRI DIEGO & C.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="555" height="20" uuid="fab013b6-31af-4aa7-9ccc-fbc0e97e500c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<text><![CDATA[VIA GIUSTINO BALDASSARRE, N.10 - 67100 L'AQUILA FRAZIONE PAGANICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="555" height="20" uuid="90cf3541-a89f-4733-aa11-22c91bac3ef8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod.Fisc./P. IVA 01780900666]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="9" splitType="Stretch"/>
+	</summary>
+</jasperReport>

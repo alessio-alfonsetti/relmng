@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import adp.realmng.dao.CustomerDaoImpl;
 import adp.realmng.dao.InvoiceDaoImpl;
+import adp.realmng.model.Customer;
 
 @Controller
 @RequestMapping("/report/")
@@ -40,6 +42,8 @@ public class ReportController {
 	
 	InvoiceDaoImpl invoicedao = (InvoiceDaoImpl)factory.getBean("InvoiceDao");
 	
+	CustomerDaoImpl customerdao = (CustomerDaoImpl)factory.getBean("CustomerDao");
+	
 	/**
 	 * Metodo per la generazione del report di una fattura.
 	 * 
@@ -47,8 +51,8 @@ public class ReportController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/pdf", method = {RequestMethod.GET, RequestMethod.POST}, params = "id")
-    public ModelAndView generatePdfReport(/*@ModelAttribute("relationship-management")Invoice invoice,*/ 
+	//@RequestMapping(value = "/pdf", method = {RequestMethod.GET, RequestMethod.POST}, params = "id")
+    public ModelAndView TESTgeneratePdfReport(/*@ModelAttribute("relationship-management")Invoice invoice,*/ 
     		ModelAndView modelAndView, @RequestParam("id") int id){
  
         logger.debug("--------------generate PDF report----------");
@@ -83,6 +87,82 @@ public class ReportController {
 				invoicecoll.add(invoicemap);
 			}
 
+			Iterator<Map<String, Object>> itercoll = invoicecoll.iterator();
+			
+			while (itercoll.hasNext()) 
+			{
+				
+				System.out.println("iter next: "+itercoll.next());
+			}
+			
+			
+			JRDataSource JRdataSource = new JRBeanCollectionDataSource(invoicecoll);
+			 
+	        System.out.println("Genero PDF Fattura 2");
+	        
+	        parameterMap.put("dataSource", JRdataSource);
+	 
+	        System.out.println("Genero PDF Fattura 3");
+	        
+	        //pdfReport bean has ben declared in the jasper-views.xml file
+	        modelAndView = new ModelAndView("pdfReport", parameterMap);
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        System.out.println("Genero PDF Fattura 4");
+        
+        return modelAndView;
+ 
+    }//generatePdfReport
+	
+	/**
+	 * Metodo per la generazione del report di una fattura.
+	 * 
+	 * @param invoice
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/pdf", method = {RequestMethod.GET, RequestMethod.POST}, params = "id")
+    public ModelAndView generatePdfReport2(ModelAndView modelAndView, @RequestParam("id") int id){
+ 
+        logger.debug("--------------generate PDF report----------");
+ 
+        System.out.println("Genero PDF Fattura 1");
+        
+        Map<String,Object> parameterMap = new HashMap<String,Object>();
+        
+        System.out.println("invoice id: "+id);
+        
+        try {
+        	
+			List<Map<String, Object>> invoices = invoicedao.findById(id);
+			
+			Iterator<Map<String, Object>> iter = invoices.iterator();
+			Collection<Map<String, Object>> invoicecoll = new ArrayList<Map<String, Object>>();
+			
+			while (iter.hasNext())
+			{
+				Map<String, Object> invoicemap = iter.next();
+				System.out.println("iter next: "+invoicemap);
+
+				int id_utente = (Integer) invoicemap.get("id_utente");
+				
+				Map<String, Object> customer = customerdao.findByCustomerId(id_utente);
+				
+				//invoicecoll.add(invoicemap);
+				
+				invoicecoll.add(customer);
+			}
+			
 			Iterator<Map<String, Object>> itercoll = invoicecoll.iterator();
 			
 			while (itercoll.hasNext()) 
