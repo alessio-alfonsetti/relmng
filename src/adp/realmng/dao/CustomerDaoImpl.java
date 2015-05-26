@@ -494,18 +494,22 @@ public class CustomerDaoImpl implements CustomerInterface{
 			}
 		} else if (counter == 0) {
 			// TODO Non ci sono utenti su DB con la partita iva inserita
-			
+			System.out.println("L'utente con partita iva inserita non esiste");
+			//customer = null;
 		}
 		
-		System.out.println("customer found: "+found);
-		System.out.println("customer returned id: "+customer.getId());
-		System.out.println("customer returned uuid: "+customer.getUuid());
-		System.out.println("customer returned cf: "+customer.getCodice_fiscale());
-		System.out.println("customer returned firstname: "+customer.getFirstname());
-		System.out.println("customer returned lastname: "+customer.getLastname());
-		System.out.println("customer returned id_ruolo: "+customer.getId_ruolo());
-		System.out.println("customer returned enabled: "+customer.isEnabled());
-		System.out.println("customer returned data_inserimento: "+customer.getData_inserimento());
+		if(customer != null)
+		{
+			System.out.println("customer found: "+found);
+			System.out.println("customer returned id: "+customer.getId());
+			System.out.println("customer returned uuid: "+customer.getUuid());
+			System.out.println("customer returned cf: "+customer.getCodice_fiscale());
+			System.out.println("customer returned firstname: "+customer.getFirstname());
+			System.out.println("customer returned lastname: "+customer.getLastname());
+			System.out.println("customer returned id_ruolo: "+customer.getId_ruolo());
+			System.out.println("customer returned enabled: "+customer.isEnabled());
+			System.out.println("customer returned data_inserimento: "+customer.getData_inserimento());
+		}
 		
 		return customer;
 	}

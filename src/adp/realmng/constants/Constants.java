@@ -68,8 +68,40 @@ public class Constants {
 	/** IBAN */
 	public static final String Customer_IBAN									= "iban";
 
-	
 	/********************************************************* INVOICES ************************************************************/
+	
+	/** ID */
+	public static final String Invoice_ID 										= "id";
+
+	/** UUID */
+	public static final String Invoice_UUID 									= "uuid";
+	
+	/** PARTITA_IVA */
+	public static final String Invoice_PARTITA_IVA								= "partita_iva";
+	
+	/** ID_UTENTE*/
+	public static final String Invoice_ID_UTENTE								= "id_utente";
+	
+	/** DATA_EMISSIONE */
+	public static final String Invoice_DATA_EMISSIONE							= "data_emissione";
+	
+	/** DESCRIZIONE */
+	public static final String Invoice_DESCRIZIONE								= "descrizione";
+	
+	/** IMPORTO */
+	public static final String Invoice_IMPORTO									= "importo";
+	
+	/** IVA */
+	public static final String Invoice_IVA										= "iva";
+	
+	/** IMPORTO_TOTALE */
+	public static final String Invoice_IMPORTO_TOTALE							= "importo_totale";
+	
+	/** STATO_PAGAMENTO */
+	public static final String Invoice_STATO_PAGAMENTO							= "stato_pagamento";
+	
+	/** NOME_CANTIERE */
+	public static final String Invoice_NOME_CANTIERE							= "nome_cantiere";
 	
 	public static final String Invoice_stato_pagamento 							= "non_pagato";
 	

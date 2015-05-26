@@ -105,6 +105,14 @@
 		SELECT * FROM (SELECT * FROM fattura ORDER BY data_emissione DESC LIMIT 10 ) sub ORDER BY data_emissione DESC
 	</entry>
 	
+	<entry key="invoices.select_invoices_by_customer_id">
+		SELECT * FROM fattura WHERE id_utente = :id_utente ORDER BY data_emissione DESC
+	</entry>
+	
+	<entry key="invoices.select_by_invoice_uuid">
+		SELECT * FROM fattura WHERE uuid = :uuid
+	</entry>
+	
 	<entry key="invoices.select_invoice_by_id">
 		SELECT * FROM fattura WHERE id=:id
 	</entry>

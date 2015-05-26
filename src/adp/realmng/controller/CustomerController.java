@@ -16,6 +16,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,6 +55,10 @@ public class CustomerController{
 		
 		modelAndView.addObject("title", "Inserisci Nuovo Cliente");
 		modelAndView.addObject("message", "Inserisci Nuovo Cliente");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		modelAndView.addObject("username", userDetails.getUsername());
 		
 		return modelAndView;
 	}
@@ -105,6 +111,10 @@ public class CustomerController{
 		model.addAttribute("h2", "Le informazioni del cliente inserito sono:");
 		model.addAttribute("message", "Le informazioni del cliente inserito sono:");		
 		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		return "result";
 	}
 	
@@ -138,6 +148,10 @@ public class CustomerController{
 		model.addAttribute("message", "Lista Clienti:");
 		model.addAttribute("title", "Lista Clienti");
 		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		return "cliente/lista-clienti";		
 	}
 	
@@ -151,6 +165,10 @@ public class CustomerController{
 		System.out.println("cognome: "+customer.getLastname());
 		System.out.println("email: "+customer.getEmail());
 		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
 		
 		return "result";
 	}
@@ -313,6 +331,10 @@ public class CustomerController{
 		model.addAttribute("utente_creato", "Le informazioni del dipendente inserito sono:");
 		model.addAttribute("message", "Clienti trovati con successo sono:");
 		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		return "result";
 	}
 	
@@ -346,6 +368,10 @@ public class CustomerController{
 		model.addAttribute("message", "Lista Dipendenti");
 		model.addAttribute("h2", "Lista Dipendenti:");		
 		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		return "dipendente/lista-dipendenti";		
 	}
 	
@@ -360,6 +386,10 @@ public class CustomerController{
 		model.addAttribute("message", "Disattivazione Cliente:");
 		model.addAttribute("title", "Disattivazione Cliente:");
 		model.addAttribute("message_detail", "Il profilo cliente é stato disattivato con successo.");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
 		
 		try {
 			
@@ -400,6 +430,11 @@ public class CustomerController{
 		
 		model.addAttribute("message", "Aggiorna Profilo Dipendente:");
 		model.addAttribute("title", "Aggiorna Profilo Dipendente:");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		//model.addAttribute("message_detail", "Il profilo cliente é stato disattivato con successo.");
 		
 		try {

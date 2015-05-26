@@ -21,10 +21,10 @@
 	<div class="container">
 		<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
-			<a href="/home">Home</a>
-			<!-- Logout -->	
-			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>
+			<a href="#">Benvenuto<strong> ${username}</strong></a>
+			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
 			<span class="right">
+				<a href="home">Home</a>
 				<a href="http://www.adpnet.it">
 					<strong>Contatta il Supporto</strong>
 				</a>

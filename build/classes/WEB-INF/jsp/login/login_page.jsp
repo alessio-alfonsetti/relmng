@@ -49,14 +49,6 @@
 <body onload='document.loginForm.j_username.focus();'>
 	
 	<h3><img src="resources/ga/images/alma-logo.png" alt="Logo Alma Appalti" style="float:left"></h3>
- 	
-	<%
-	 
-	/*String errorString = (String)request.getAttribute("error");
-	if(errorString != null && errorString.trim().equals("true")){
-		out.println("Username e Password sono sbagliati. Prova a reinserirli.");
-	}*/
-	%>
 
 	<h1>AL. MA. Appalti sas</h1>
  	<h3>alma-appalti@virgilio.it</h3>

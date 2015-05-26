@@ -13,6 +13,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,6 +36,8 @@ public class WorksiteController {
 	/* DAO configuration */
 	Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
 	BeanFactory factory = new XmlBeanFactory(r);
+	
+	/* DAO Object */
 	WorksiteDaoImpl dao = (WorksiteDaoImpl)factory.getBean("WorksiteDao");
 	
 	@RequestMapping(value = "/cantiere", method = RequestMethod.GET)
@@ -42,6 +46,10 @@ public class WorksiteController {
 		ModelAndView modelAndView = new ModelAndView("cantiere/cantiere", "command", new Customer());
 		modelAndView.addObject("title", "Inserisci Nuovo Cantiere");
 		modelAndView.addObject("message", "Il Nuovo Cantiere");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		modelAndView.addObject("username", userDetails.getUsername());
 		
 		return modelAndView; 
 	}
@@ -74,6 +82,10 @@ public class WorksiteController {
 		model.addAttribute("h2", "Le informazioni del cantiere inserito sono:");
 		model.addAttribute("message", "Le informazioni del cantiere inserito sono:");
 		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
 		return "result";
 	}
 	
@@ -94,6 +106,10 @@ public class WorksiteController {
 		Worksite worksite = dao.findByWorksiteUuid(uuid);
 		
 		modelAndView.addObject("cantiere", worksite);
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		modelAndView.addObject("username", userDetails.getUsername());
 		
 		return modelAndView;
 	}
@@ -124,6 +140,10 @@ public class WorksiteController {
 		
 		model.addAttribute("result", "OK");
 		model.addAttribute("error", "I cantieri aperti sono:");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
 		
 		return "cantiere/lista-cantieri";		
 	}

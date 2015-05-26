@@ -13,7 +13,7 @@ public interface InvoiceInterface {
 	// TODO Manage exception. They are all related to an internal error  
 	public String insert(Invoice invoice) throws Exception, FileNotFoundException, IOException;
 		
-	public Invoice findByInvoiceUuid(String invoiceUuid);
+	public Invoice findByInvoiceUuid(String invoiceUuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 	public List<Map<String, Object>> findLatestTenInvoices() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
@@ -28,5 +28,7 @@ public interface InvoiceInterface {
 	public void generateReport(Invoice invoice);
 
 	public List<Map<String, Object>> findById(int id) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public List<Map<String, Object>> findInvoicesByCustomerId(int clientId) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 }

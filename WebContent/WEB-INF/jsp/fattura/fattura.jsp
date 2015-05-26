@@ -2,24 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<%@page import="adp.realmng.dao.CustomerDaoImpl"%>
-<%@page import="adp.realmng.model.Customer"%>
-<%@page import="org.springframework.context.ApplicationContext"%>
-<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>${title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Inserisci una nuova Fattura</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/ga/css/table.css" />" rel="stylesheet">
 
 </head>
 <body>
+
 	<div class="container">
-			<!-- freshdesignweb top bar -->
+		<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
 			<a href="#">Benvenuto<strong> ${username}</strong></a>
 			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
@@ -32,76 +28,41 @@
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
 		
-		<header>
-			<h1><span></span>${message}</h1>
-		</header>
-	
-		<div class="freshdesignweb-bottom">
-			<a href="cliente">Inserisci</a>
-			<a href="#">Modifica</a>
-			<span class="right">
-				<a href="#">
-				<strong>Deattiva</strong>
-				</a>
-			</span>
-			<span class="right">
-				<a href="#">
-				<strong>Esporta</strong>
-				</a>
-			</span>
-			
-			<div class="clr"></div>
+		<h1><span></span> ${message}</h1>
+		
+		<div class="form">
+			<form id="contactform" method="POST" action="/genera-fattura">
+				<input class="buttom" name="submit" id="submit" tabindex="1" value="Genera Fattura" type="submit" tabindex="1">   
+		   	</form>
+		</div>	   
+	   
+		<div class="form">
+			<form id="contactform" method="POST" action="/inserisci-fattura">
+				<p class="contact"><label for="partita_iva">Partita Iva</label></p>
+				<input id="partita_iva" name="partita_iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
+	                
+				<p class="contact"><label for="descrizione">Descrizione</label></p>
+				<input id="descrizione" name="descrizione" placeholder="Descrizione" required="" tabindex="2" type="text">
+	 
+				<p class="contact"><label for="importo">Importo</label></p>
+				<input id="importo" name="importo" placeholder="Importo" required="" tabindex="3" type="text">
+				
+				<p class="contact"><label for="iva">Iva</label></p>
+				<input id="iva" name="iva" placeholder="Iva" required="" tabindex="4" type="text">
+				
+				<p class="contact"><label for="importo_totale">Importo Totale</label></p>
+				<input id="importo_totale" name="importo_totale" placeholder="Importo Totale" required="" tabindex="5" type="text">
+	 
+				<p class="contact"><label for="nome_cantiere">Nome Cantiere</label></p>
+				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="6" type="text">
+		            
+				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Fattura" type="submit" tabindex="7">   
+		   	</form>
 		</div>
-	
-		<table>
-			<thead>
-			 <tr>
-			  <th>Codice Cliente</th>
-			  <th>Ragione Sociale</th>
-			  <th>Nome</th>
-			  <th>Cognome</th>
-			  <th>Partita Iva</th>
-			  <th>Codice Fiscale</th>
-			  <!-- th>Numero di Telefono</th-->
-			  <!-- th>Email</th-->
-			  <!-- th>IBAN</th-->
-			  <th>Emetti</th>
-			  <th>Fatture</th>
-			 </tr>
-			 </thead>
-			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
-			 <tbody>
-			  <tr>
-			   <td>${customers.uuid}</td>
-			   <td>${customers.ragione_sociale}</td>
-			   <td>${customers.firstname}</td>
-			   <td>${customers.middlename}</td>
-			   <td>${customers.partita_iva}</td>
-			   <td>${customers.codice_fiscale}</td>
-			   <!-- td>${customers.numero_telefono}</td-->
-			   <!-- td>${customers.email}</td-->
-			   <!-- td>${customers.iban}</td-->
-			   <td>
-			   	<div class="form">
-			   		<form id="contactform" method="POST" action="emetti-fattura?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Emetti" type="submit" tabindex="1">   
-			   		</form>
-			   	</div>
-			   </td>
-			   <td>
-			   	<div class="form">
-			   		<form id="contactform" method="POST" action="fatture-cliente?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Fatture" type="submit" tabindex="2">   
-			   		</form>
-			   	</div>
-			   </td>
-			  </tr>
-			 </tbody>
-	 		</c:forEach>
-		</table>
+	   
 	</div>
-	
-	<script>
+
+		<script>
 	// Include the UserVoice JavaScript SDK (only needed once on a page)
 	UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/fQJ1QfGiU5yCxP4hK5txmA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 	
@@ -144,6 +105,6 @@
 	// Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
 	UserVoice.push(['autoprompt', {}]);
 	</script>
-	
+
 </body>
 </html>

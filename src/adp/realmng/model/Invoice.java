@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Invoice {
 	
+	private int id;
 	private String uuid;
 	private String partita_iva;
 	private int id_utente;
@@ -15,7 +16,12 @@ public class Invoice {
 	private String stato_pagamento;
 	private String nome_cantiere;
 	
-
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getUuid() {
 		return uuid;
 	}

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Inserisci una nuova Fattura</title>
+<title>${title}</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
@@ -17,50 +17,64 @@
 	<div class="container">
 		<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
-			<a href="/home">Home</a>
-				<span class="right">
-					<a href="http://www.freshdesignweb.com/beautiful-registration-form-with-html5-and-css3.html">
-						<strong>Contatta il Supporto</strong>
-					</a>
-				</span>
+			<a href="#">Benvenuto<strong> ${username}</strong></a>
+			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
+			<span class="right">
+				<a href="home">Home</a>
+				<a href="fatture">Home Fatture</a>
+				<a href="http://www.adpnet.it">
+					<strong>Contatta il Supporto</strong>
+				</a>
+			</span>
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
 		
-		<h1><span></span> ${message}</h1>
+		<header>
+			<h1><span></span>${message}</h1>
+		</header>
 		
+	   <c:if test="${result == 'OK'}">
 		<div class="form">
-			<form id="contactform" method="POST" action="/genera-fattura">
-				<input class="buttom" name="submit" id="submit" tabindex="1" value="Genera Fattura" type="submit" tabindex="1">   
-		   	</form>
-		</div>	   
-	   
-		<div class="form">
-			<form id="contactform" method="POST" action="/inserisci-fattura">
+			<form id="contactform" method="POST" action="/aggiorna-fattura?uuid="${uuid}>
+				
+				<p class="contact"><label for="id">ID</label></p>
+				<input id="id" name="id" tabindex="1" type="text" value="${id}" readonly>
+				
+				<p class="contact"><label for="uuid">UUID</label></p>
+				<input id="uuid" name="uuid" tabindex="2" type="text" value="${uuid}" readonly>
+				
 				<p class="contact"><label for="partita_iva">Partita Iva</label></p>
-				<input id="partita_iva" name="partita_iva" placeholder="Partita Iva" required="" tabindex="1" type="text">
-	                
+				<input id="partita_iva" name="partita_iva" tabindex="3" type="text" value="${partita_iva}" >
+				
 				<p class="contact"><label for="descrizione">Descrizione</label></p>
-				<input id="descrizione" name="descrizione" placeholder="Descrizione" required="" tabindex="2" type="text">
-	 
+				<input id="descrizione" name="descrizione" tabindex="4" type="text" value="${descrizione}" >
+				
 				<p class="contact"><label for="importo">Importo</label></p>
-				<input id="importo" name="importo" placeholder="Importo" required="" tabindex="3" type="text">
+				<input id="importo" name="importo" required="" tabindex="5" type="text" value="${importo}" >
 				
 				<p class="contact"><label for="iva">Iva</label></p>
-				<input id="iva" name="iva" placeholder="Iva" required="" tabindex="4" type="text">
+				<input id="iva" name="iva" placeholder="Iva" required="" tabindex="6" type="text" value="${iva}" >
 				
 				<p class="contact"><label for="importo_totale">Importo Totale</label></p>
-				<input id="importo_totale" name="importo_totale" placeholder="Importo Totale" required="" tabindex="5" type="text">
+				<input id="importo_totale" name="importo_totale" tabindex="7" type="text" value="${importo_totale}" >
 	 
 				<p class="contact"><label for="nome_cantiere">Nome Cantiere</label></p>
-				<input id="nome_cantiere" name="nome_cantiere" placeholder="Nome Cantiere" required="" tabindex="6" type="text">
+				<input id="nome_cantiere" name="nome_cantiere" tabindex="8" type="text" value="${nome_cantiere}" >
 		            
-				<input class="buttom" name="submit" id="submit" tabindex="5" value="Inserisci Fattura" type="submit" tabindex="7">   
+				<input class="buttom" name="submit" id="submit" tabindex="9" value="Modifica Fattura" type="submit" >
 		   	</form>
+		   	
+		   	<p><a href="report/pdf?id=${id}">Stampa Fattura</a></p> 
 		</div>
+	   </c:if>
+	   
+	   <c:if test="${result == 'KO'}">
+	   	<h1><span></span>${message}</h1>
+	   </c:if>
 	   
 	</div>
 
-		<script>
+	<script>
 	// Include the UserVoice JavaScript SDK (only needed once on a page)
 	UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/fQJ1QfGiU5yCxP4hK5txmA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 	

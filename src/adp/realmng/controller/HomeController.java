@@ -9,6 +9,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,20 +24,19 @@ public class HomeController {
 	
 	/**
 	 * Setting the context to get connection parameters.
-	 * @author Alfonsetti
-	 * */
-	private static final BeanFactory factory = new XmlBeanFactory(new ClassPathResource("WEB-INF/deployerConfigContext.xml"));
+	 */
+	Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
+	BeanFactory factory=new XmlBeanFactory(r);
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView getdata() {
  
 		ModelAndView model = new ModelAndView("home");
-		
 		model.addObject("message", "Notifiche");
 		
-		Resource r=new ClassPathResource("WEB-INF/deployerConfigContext.xml");
-
-		BeanFactory factory=new XmlBeanFactory(r);
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addObject("username", userDetails.getUsername());
 
 		CustomerDaoImpl dao=(CustomerDaoImpl)factory.getBean("CustomerDao");
 
@@ -69,8 +70,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String printHome(ModelMap model) {
-	   
-	   System.out.println("home page controller");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		System.out.println("home page controller");
 
 		model.addAttribute("message", "Notifiche");
 

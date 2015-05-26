@@ -15,15 +15,17 @@
    <div class="container">
 		<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
-			<a href="/home">Home</a>
-				<span class="right">
-					<a href="http://www.freshdesignweb.com/beautiful-registration-form-with-html5-and-css3.html">
-						<strong>Contatta il Supporto</strong>
-					</a>
-				</span>
+			<a href="#">Benvenuto<strong> ${username}</strong></a>
+			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
+			<span class="right">
+				<a href="home">Home</a>
+				<a href="http://www.adpnet.it">
+					<strong>Contatta il Supporto</strong>
+				</a>
+			</span>
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
-	
+		
 	<header>
 		<h1><span></span> ${message}</h1>
 	</header>
