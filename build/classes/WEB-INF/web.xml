@@ -39,10 +39,10 @@
       <url-pattern>/dipendente</url-pattern>
    </servlet-mapping>
    
-   <!-- servlet-mapping>
+   <servlet-mapping>
       <servlet-name>realmng</servlet-name>
-      <url-pattern>/dettaglio-cliente</url-pattern>
-   </servlet-mapping-->
+      <url-pattern>/inserisci-trasporto</url-pattern>
+   </servlet-mapping>
    
    <!-- servlet-mapping>
       <servlet-name>realmng</servlet-name>
