@@ -133,4 +133,15 @@
 		SELECT * FROM cantiere ORDER BY data_fine_cantiere DESC
 	</entry>
 	
+	<entry key="transport.insert">
+		INSERT INTO trasporto 
+		(uuid, idmaterialetrasporto, quantita, idaziendaproduttrice, idaziendasmaltitrice, datainiziotrasporto, orainiziotrasporto, datafinetrasporto, orafinetrasporto, note)
+		VALUES
+		(:uuid,:idmaterialetrasporto,:quantita,:idaziendaproduttrice,:idaziendasmaltitrice,:datainiziotrasporto,:orainiziotrasporto,:datafinetrasporto,:orafinetrasporto,:note)
+	</entry>
+	
+	<entry key="transports.get_all_by_id">
+		SELECT * FROM trasporto ORDER BY id DESC LIMIT 10
+	</entry>
+	
 </properties>

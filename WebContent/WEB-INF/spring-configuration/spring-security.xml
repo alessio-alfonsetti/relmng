@@ -25,6 +25,7 @@
 		<intercept-url pattern="/home*" access="ROLE_USER" />
 		<intercept-url pattern="/report/pdf*" access="ROLE_USER" />
 		<intercept-url pattern="/inserisci*" access="ROLE_USER" />
+		<intercept-url pattern="/trasport*" access="ROLE_USER" />
 		
 		<form-login login-page="/login" default-target-url="/"
 		authentication-failure-url="/loginError"/>

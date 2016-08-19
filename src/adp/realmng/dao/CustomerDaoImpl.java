@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import adp.realmng.constants.Constants;
 import adp.realmng.exceptions.TooManyCustomersException;
 import adp.realmng.model.Customer;
+import adp.realmng.utilities.CommonUtilities;
 import adp.realmng.utilities.FileUtilities;
  
 public class CustomerDaoImpl implements CustomerInterface{
@@ -44,7 +45,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 		String sql = CONF.getPropertyString("customers.insert");
 		System.out.println("sql: "+sql);
 		
-		String uuid = generateUuid();
+		String uuid = CommonUtilities.generateUuid();
 		
 		java.util.Date date= new java.util.Date();
 		System.out.println(new Timestamp(date.getTime()));
@@ -197,9 +198,9 @@ public class CustomerDaoImpl implements CustomerInterface{
 	 * 
 	 * @return A UUID represents a 128-bit value
 	 */
-	private String generateUuid () {
-		return (UUID.randomUUID().toString());
-	}
+	//private String generateUuid () {
+	//	return (UUID.randomUUID().toString());
+	//}
 
 	@Override
 	public Customer findByCustomerUuid(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
@@ -519,7 +520,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 		String sql = CONF.getPropertyString("customers.insert_incomplete_user_profile");
 		System.out.println("sql: "+sql);
 		
-		String uuid = generateUuid();
+		String uuid = CommonUtilities.generateUuid();
 		
 		System.out.println("uuid: "+uuid);
 				

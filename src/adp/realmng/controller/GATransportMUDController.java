@@ -2,6 +2,10 @@ package adp.realmng.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.InvalidPropertiesFormatException;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import adp.realmng.dao.GATransportMUDDaoImpl;
-import adp.realmng.model.Customer;
 import adp.realmng.model.GATransportRecordView;
 
+@Controller
 public class GATransportMUDController {
 
 	/* Logger */
@@ -34,7 +39,9 @@ public class GATransportMUDController {
 	@RequestMapping(value = "/trasporti-mud", method = RequestMethod.GET)
 	public ModelAndView printHome(ModelMap model) {
 		
-		ModelAndView modelAndView = new ModelAndView("trasporti-mud/trasporti-mud", "command", new Customer()); 
+		System.out.println("Trasporti Mud");
+		
+		ModelAndView modelAndView = new ModelAndView("trasporti-mud/trasporti-mud");
 		
 		modelAndView.addObject("title", "Sommatoria Trasporti MUD");
 		modelAndView.addObject("message", "Inserisci tracciato trasporto");
@@ -47,47 +54,37 @@ public class GATransportMUDController {
 	}
 	
 	@RequestMapping(value = "/inserisci-trasporto", method = {RequestMethod.POST, RequestMethod.GET})
-	public String addRecordTransport(@ModelAttribute("relationship-management")GATransportRecordView customer, 
+	public String addRecordTransport(@ModelAttribute("relationship-management")GATransportRecordView record, 
 			ModelMap model) {
-//		System.out.println("Spring Inserisco Record Trasporto");
-//		System.out.println("ragione_sociale: "+customer.getRagione_sociale());
-//		System.out.println("nome: "+customer.getFirstname());
-//		System.out.println("cognome: "+customer.getLastname());
-//		System.out.println("email: "+customer.getEmail());
-//		System.out.println("partita_iva: "+customer.getPartita_iva());
-//		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
-//		System.out.println("nota: "+customer.getNota());
-//		System.out.println("numero_cellulare: "+customer.getNumero_cellulare());
-//		System.out.println("indirizzo: "+customer.getIndirizzo());
-//		
-//		model.addAttribute("ragione_sociale", customer.getRagione_sociale());
-//		model.addAttribute("nome", customer.getFirstname());
-//		model.addAttribute("cognome", customer.getLastname());
-//		model.addAttribute("email", customer.getEmail());
-//		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
-//		model.addAttribute("partita_iva", customer.getPartita_iva());
-//		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
-//		model.addAttribute("nota", customer.getNota());
-//		model.addAttribute("numero_cellulare", customer.getNumero_cellulare());
-//		model.addAttribute("iban", customer.getIban());
-//		model.addAttribute("indirizzo", customer.getIndirizzo());
-//		
-//		try {
-//			
-//			String uuid = dao.insert(customer);
-//			
-//			customer.setUuid(uuid);
-//			
-//			System.out.println("New Transport Record created with UUID");
-//			logger.info("New Transport Record created with UUID: "+uuid);
-//			
-//		} catch (FileNotFoundException e) {
-//			logger.error("File not found.", e);
-//		} catch (IOException e) {
-//			logger.error("IOException found", e);
-//		} catch (Exception e) {
-//			logger.error("Generic Exception found", e);
-//		}
+
+		model.addAttribute("codice_materiale", record.getCodice_materiale());
+		model.addAttribute("azienda_destinazione", record.getAzienda_destinazione());
+		model.addAttribute("quantita", record.getQuantita());
+		model.addAttribute("azienda_provenienza", record.getAzienda_provenienza());
+		model.addAttribute("data_inizio", record.getData_inizio());
+		model.addAttribute("ora_inizio", record.getOra_inizio());
+		model.addAttribute("data_fine", record.getData_fine());
+		model.addAttribute("ora_fine", record.getOra_fine());
+		model.addAttribute("nota", record.getNote());
+		
+		try {
+			
+			String uuid = dao.insertTransportRecord(record);
+			
+			record.setUuid(uuid);
+			
+			model.addAttribute("record", record);
+			
+			System.out.println("New Transport Record created with UUID");
+			logger.info("New Transport Record created with UUID: "+uuid);
+			
+		} catch (FileNotFoundException e) {
+			logger.error("File not found.", e);
+		} catch (IOException e) {
+			logger.error("IOException found", e);
+		} catch (Exception e) {
+			logger.error("Generic Exception found", e);
+		}
 		
 		model.addAttribute("title", "Record Trasporto Inserito con successo");
 		model.addAttribute("h2", "Le informazioni inserite sono:");
@@ -100,4 +97,40 @@ public class GATransportMUDController {
 		return "result";
 	}
 	
+	@RequestMapping(value = "/trasporti", method = RequestMethod.GET)
+	public String listTransports(@ModelAttribute("relationship-management") GATransportRecordView record, ModelMap model) {
+		
+		System.out.println("Lista Trasporti Effettuati");
+		
+		 List<Map<String, Object>> transports = new ArrayList<Map<String, Object>>();
+		
+		try {
+			
+			transports = dao.listAllTransports();
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("list_trasports", transports);
+		
+		model.addAttribute("result", "OK");
+		model.addAttribute("error", "Trasporti trovati con successo");
+		
+		model.addAttribute("message", "Lista Trasporti:");
+		model.addAttribute("title", "Lista Trasporti Effettuati");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		return "trasporti-mud/lista-trasporti";
+	}
 }

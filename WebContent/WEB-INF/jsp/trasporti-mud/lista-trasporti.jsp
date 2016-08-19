@@ -3,17 +3,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<%@page import="adp.realmng.dao.CustomerDaoImpl"%>
+<%@page import="adp.realmng.model.Customer"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+
 <html>
 <head>
 <title>${title}</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/ga/css/table.css" />" rel="stylesheet">
 
 </head>
 <body>
-   <div class="container">
-		<!-- freshdesignweb top bar -->
+	<div class="container">
+			<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
 			<a href="#">Benvenuto<strong> ${username}</strong></a>
 			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
@@ -25,47 +31,57 @@
 			</span>
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
+		
+		<header>
+			<h1><span></span>${message}</h1>
+		</header>
 	
-	<header>
-		<h1><span></span>${message}</h1>
-	</header>
-   
-   <div  class="form">
-            <form id="contactform" method="POST" action="/inserisci-trasporto">
-                <p class="contact"><label for="codice_materiale">Codice Materiale Trasportato</label></p>
-                <input id="codice_materiale" name="codice_materiale" placeholder="CER1234567890" tabindex="1" type="text">
-                
-                <p class="contact"><label for="quantita">Quantit&aacute;</label></p>
-                <input id="quantita" name="quantita" placeholder="10" tabindex="2" type="text"> KG
- 
- 				<p class="contact"><label for="azienda_provenienza">Azienda di Provenienza del materiale</label></p>
-                <input id="azienda_provenienza" name="azienda_provenienza" placeholder="Azienda Provenienza" tabindex="3" type="text">
- 
-                <p class="contact"><label for="azienda_destinazione">Azienda Smaltitrice del materiale</label></p>
-                <input id="azienda_destinazione" name="azienda_destinazione" placeholder="Azienda Smaltitrice" tabindex="4" type="text">
-                
-                <p class="contact"><label for="data_inizio">Data di inizio</label></p>
-                <input id="data_inizio" name="data_inizio" placeholder="01/01/2017" tabindex="5" type="date">
-                
-                <p class="contact"><label for="ora_inizio">Ora di inizio</label></p>
-                <input id="ora_inizio" name="ora_inizio" placeholder="16:00" tabindex="6" type="time">
-                
-                <p class="contact"><label for="data_fine">Data di fine</label></p>
-                <input id="data_fine" name="data_fine" placeholder="01/01/2017" tabindex="7" type="date">
- 
- 				<p class="contact"><label for="ora_fine">Ora di fine</label></p>
-                <input id="ora_fine" name="ora_fine" placeholder="17:00" tabindex="8" type="time">
- 
- 				<p class="contact"><label for="nota">Nota</label></p>
-                <input id="nota" name="nota" placeholder="Inserisci una nota" autocomplete="on" maxlength="250" tabindex="9" type="text">
-            
-           		<input class="buttom" name="submit" id="submit" value="Inserisci" type="submit" tabindex="10">   
-   </form>
-</div>
-   
-</div>
- 
- 	<script>
+		<div class="freshdesignweb-bottom">
+			<a href="trasporti-mud">Inserisci Nuovo Trasporto</a>
+			<a href="#">Modifica</a>
+			<span class="right">
+				<a href="#">
+				<strong>Deattiva</strong>
+				</a>
+			</span>
+			<span class="right">
+				<a href="#">
+				<strong>Esporta</strong>
+				</a>
+			</span>
+			
+			<div class="clr"></div>
+		</div>
+	
+		<table>
+			<thead>
+			 <tr>
+			  <th>Codice Viaggio</th>
+			  <th>Codice Materiale</th>
+			  <th>Azienda Produttrice</th>
+			  <th>Azienda Smaltitrice</th>
+			  <th>Data/Ora Inizio</th>
+			  <th>Data/Ora Fine</th>
+			  <th>Note</th>
+			 </tr>
+			 </thead>
+			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="transports">
+			 <tbody>
+			  <tr>
+			   <td>${transports.uuid}</td>
+			   <td>${transports.idmaterialetrasportato}</td>
+			   <td>${transports.idaziendaproduttrice}</td>
+			   <td>${transports.idaziendasmaltitrice}</td>
+			   <td>${transports.datainiziotrasporto}/${transports.orainiziotrasporto}</td>
+			   <td>${transports.datafinetrasporto}/${transports.orafinetrasporto}</td>
+			   <td>${transports.note}</td>
+			  </tr>
+			 </tbody>
+	 		</c:forEach>
+		</table>
+	</div>
+	
+	<script>
 	// Include the UserVoice JavaScript SDK (only needed once on a page)
 	UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/fQJ1QfGiU5yCxP4hK5txmA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
 	
@@ -108,6 +124,6 @@
 	// Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
 	UserVoice.push(['autoprompt', {}]);
 	</script>
- 
+	
 </body>
 </html>

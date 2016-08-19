@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import adp.realmng.constants.Constants;
 import adp.realmng.model.Customer;
 import adp.realmng.model.Worksite;
+import adp.realmng.utilities.CommonUtilities;
 import adp.realmng.utilities.FileUtilities;
 
 public class WorksiteDaoImpl implements WorksiteInterface{
@@ -41,7 +42,7 @@ public class WorksiteDaoImpl implements WorksiteInterface{
 		String sql = CONF.getPropertyString("worksites.insert");
 		System.out.println("sql: "+sql);
 		
-		String uuid = generateUuid();
+		String uuid = CommonUtilities.generateUuid();
 		
 		System.out.println("id: "+worksite.getId());
 		System.out.println("uuid: "+uuid);
@@ -175,8 +176,8 @@ public class WorksiteDaoImpl implements WorksiteInterface{
 	 * 
 	 * @return A UUID represents a 128-bit value
 	 */
-	private String generateUuid () {
-		return (UUID.randomUUID().toString());
-	}
+	//private String generateUuid () {
+	//	return (UUID.randomUUID().toString());
+	//}
 	
 }

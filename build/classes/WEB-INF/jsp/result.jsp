@@ -101,7 +101,36 @@
 	 	
 			</table>
 		</c:if>
-
+		
+		<c:if test="${not empty record}">
+			<table>
+			 <thead>
+			 <tr>
+			  <th>Codice Materiale</th>
+			  <th>Quantita</th>
+			  <th>Azienda Provenienza</th>
+			  <th>Azienda Smaltitrice</th>
+			  <th>Data e Ora Inizio</th>
+			  <th>Data e Ora Fine</th>
+			  <th>Note</th>
+			 </tr>
+			 </thead>
+			
+			 <tbody>
+			  <tr>
+			   <td>${record.codice_materiale}</td>
+			   <td>${record.quantita}</td>
+			   <td>${record.azienda_provenienza}</td>
+			   <td>${record.azienda_destinazione}</td>
+			   <td>${record.data_inizio} ${record.ora_inizio}</td>
+			   <td>${record.data_fine} ${record.ora_fine}</td>
+			   <td>${record.note}</td>
+			  </tr>
+			 </tbody>
+	 	
+			</table>
+		</c:if>
+		
 	</div>
 	
 </body>

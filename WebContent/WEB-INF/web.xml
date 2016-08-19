@@ -41,16 +41,6 @@
    
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
-      <url-pattern>/inserisci-trasporto</url-pattern>
-   </servlet-mapping>
-   
-   <!-- servlet-mapping>
-      <servlet-name>realmng</servlet-name>
-      <url-pattern>/inserisci-cliente</url-pattern>
-   </servlet-mapping-->
-   
-   <servlet-mapping>
-      <servlet-name>realmng</servlet-name>
       <url-pattern>/inserisci-fattura</url-pattern>
    </servlet-mapping>
    
@@ -71,7 +61,17 @@
 
    <servlet-mapping>
       <servlet-name>realmng</servlet-name>
+      <url-pattern>/inserisci-trasporto</url-pattern>
+   </servlet-mapping>
+
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
       <url-pattern>/</url-pattern>
+   </servlet-mapping>
+ 
+   <servlet-mapping>
+      <servlet-name>realmng</servlet-name>
+      <url-pattern>/trasporti</url-pattern>
    </servlet-mapping>
  
   <!-- context-param>

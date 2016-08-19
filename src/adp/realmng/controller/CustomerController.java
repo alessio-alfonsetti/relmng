@@ -66,16 +66,6 @@ public class CustomerController{
 	@RequestMapping(value = "/inserisci-cliente", method = {RequestMethod.POST, RequestMethod.GET})
 	public String addCustomer(@ModelAttribute("relationship-management")Customer customer, 
 			ModelMap model) {
-		System.out.println("Spring Inserisco Utente");
-		System.out.println("ragione_sociale: "+customer.getRagione_sociale());
-		System.out.println("nome: "+customer.getFirstname());
-		System.out.println("cognome: "+customer.getLastname());
-		System.out.println("email: "+customer.getEmail());
-		System.out.println("partita_iva: "+customer.getPartita_iva());
-		System.out.println("codice_fiscale: "+customer.getCodice_fiscale());
-		System.out.println("nota: "+customer.getNota());
-		System.out.println("numero_cellulare: "+customer.getNumero_cellulare());
-		System.out.println("indirizzo: "+customer.getIndirizzo());
 		
 		model.addAttribute("ragione_sociale", customer.getRagione_sociale());
 		model.addAttribute("nome", customer.getFirstname());
