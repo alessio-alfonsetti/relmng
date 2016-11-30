@@ -2,7 +2,9 @@ package adp.realmng.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Map;
@@ -11,12 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +70,7 @@ public class GATransportMUDController {
 		model.addAttribute("ora_inizio", record.getOra_inizio());
 		model.addAttribute("data_fine", record.getData_fine());
 		model.addAttribute("ora_fine", record.getOra_fine());
-		model.addAttribute("nota", record.getNote());
+		model.addAttribute("nota", record.getNota());
 		
 		try {
 			
@@ -89,6 +94,18 @@ public class GATransportMUDController {
 		model.addAttribute("title", "Record Trasporto Inserito con successo");
 		model.addAttribute("h2", "Le informazioni inserite sono:");
 		model.addAttribute("message", "Le informazioni inserite sono:");		
+		
+		System.out.println("AGAIN PRINTING: ");
+		System.out.println("codice_materiale: "+record.getCodice_materiale());
+		System.out.println("azienda di destinazione: "+record.getAzienda_destinazione());
+		System.out.println("quantita: "+record.getQuantita());
+		System.out.println("azienda_provenienza: "+record.getAzienda_provenienza());
+		System.out.println("data_inizio: "+record.getData_inizio());
+		System.out.println("ora_inizio: "+record.getOra_inizio());
+		System.out.println("data_fine: "+record.getData_fine());
+		System.out.println("ora_fine: "+record.getOra_fine());
+		System.out.println("nota: "+record.getNota());
+		
 		
 		/* User Details */
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

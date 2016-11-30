@@ -22,7 +22,7 @@ public class GATransportRecordView {
 	private String ora_inizio;
 	private String data_fine;
 	private String ora_fine;
-	private String note;	
+	private String nota;	
 	
 	public int getId() {
 		return id;
@@ -84,11 +84,11 @@ public class GATransportRecordView {
 	public void setOra_fine(String ora_fine) {
 		this.ora_fine = ora_fine;
 	}
-	public String getNote() {
-		return note;
+	public String getNota() {
+		return nota;
 	}
-	public void setNote(String note) {
-		this.note = note;
+	public void setNota(String nota) {
+		this.nota = nota;
 	}
 	
 }

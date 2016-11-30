@@ -53,7 +53,7 @@ public class GATransportMUDDaoImpl implements GATransportMUDInterface{
 		System.out.println("ora_inizio: "+gaTransportRecord.getOra_inizio());
 		System.out.println("data_fine: "+gaTransportRecord.getData_fine());
 		System.out.println("ora_fine: "+gaTransportRecord.getOra_fine());
-		System.out.println("nota: "+gaTransportRecord.getNote());
+		System.out.println("nota: "+gaTransportRecord.getNota());
 		
 		
 		//java.util.Date date= new java.util.Date();
@@ -81,7 +81,7 @@ public class GATransportMUDDaoImpl implements GATransportMUDInterface{
 	    parameters.addValue("orainiziotrasporto", gaTransportRecord.getOra_inizio());
 	    parameters.addValue("datafinetrasporto", data_fine_trasporto);
 	    parameters.addValue("orafinetrasporto", gaTransportRecord.getOra_fine());
-	    parameters.addValue("note", gaTransportRecord.getNote());
+	    parameters.addValue("note", gaTransportRecord.getNota());
 	    
 	    System.out.println("Inserisco record di trasporto");
 	    

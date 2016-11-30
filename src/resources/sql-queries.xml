@@ -141,7 +141,7 @@
 	</entry>
 	
 	<entry key="transports.get_all_by_id">
-		SELECT * FROM trasporto ORDER BY id DESC LIMIT 10
+		SELECT * FROM trasporto ORDER BY idtrasporto DESC LIMIT 10
 	</entry>
 	
 </properties>
