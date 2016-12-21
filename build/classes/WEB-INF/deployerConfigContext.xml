@@ -86,5 +86,11 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 		<ref bean="jtemplate"/>  
 		</constructor-arg>
 	</bean>
+	
+	<bean id="PricesDao" class="adp.realmng.dao.PricesDaoImpl">  
+		<constructor-arg>  
+		<ref bean="jtemplate"/>  
+		</constructor-arg>
+	</bean>
     
 </beans>

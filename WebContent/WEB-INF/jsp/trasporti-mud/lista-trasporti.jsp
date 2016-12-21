@@ -37,7 +37,7 @@
 		</header>
 	
 		<div class="freshdesignweb-bottom">
-			<a href="trasporti-mud">Inserisci Nuovo Trasporto</a>
+			<a href="trasporti-mud">Inserisci</a>
 			<a href="#">Modifica</a>
 			<span class="right">
 				<a href="#">

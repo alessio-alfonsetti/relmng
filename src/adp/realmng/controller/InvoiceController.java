@@ -54,7 +54,7 @@ public class InvoiceController {
 	}
 	
 	/**
-	 * Controller per la gestione dell'inserimento di una nuova fattura
+	 * Gestione dell'inserimento di una nuova fattura
 	 * 	
 	 * @param invoice
 	 * @param model

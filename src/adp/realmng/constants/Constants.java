@@ -123,6 +123,42 @@ public class Constants {
 	/** NOTA */
 	public static final String Worksite_NOTA 									= "nota";
 	
+	/********************************************************* PRICES *************************************************************/
+	
+	/** ID */
+	public static final String Price_List_ID									= "id";
+	
+	/** UUID */
+	public static final String Price_List_UUID 									= "uuid";
+	
+	/** CER */
+	public static final String Price_List_CER			 						= "cer";
+	
+	/** DESCRIZIONE CER */
+	public static final String Price_List_CER_DESCR								= "cer_descr";
+	
+	/** UUID CLIENTE */
+	public static final String Price_List_UUID_CLIENTE							= "uuid_cliente";
+	
+	/** IMPONIBILE */
+	public static final String Price_List_IMPONIBILE							= "imponibile";
+	
+	/** IVA */
+	public static final String Price_List_IVA									= "iva";
+	
+	/** TOTALE */
+	public static final String Price_List_TOTALE								= "totale";
+	
+	/** LAST UPDATE */
+	public static final String Price_List_LAST_UPDATE							= "last_update";
+	
+	/** NOTA UPDATE */
+	public static final String Price_List_NOTA_UPDATE							= "nota_update";
+	
+	/** Note Attivita' */
+	public static final String Price_DESCR_PRIMA_CREAZIONE							= "Prima creazione del prezzo nel listino";
+	public static final String Price_DESCR_MODIFICA_PREZZO							= "Modifica del prezzo nel listino";
+	
 	/********************************************************* ERROR CODES *********************************************************/
 
 	/** Too many customers for one partita_iva */

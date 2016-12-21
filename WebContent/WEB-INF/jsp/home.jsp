@@ -86,9 +86,10 @@
 	
 		<div class="freshdesignweb-bottom">
 			<a href="fatture">Fatture</a>
-			<a href="cantieri">Cantieri</a>
+			<!-- a href="cantieri">Cantieri</a-->
 			<!--a href="trasporti-mud"><p style="text-align:center">Trasporti</br>MUD</p></a-->
-			<a href="trasporti"><p style="text-align:center">Trasporti</br>MUD</p></a>
+			<a href="trasporti"><p style="text-align:center">Trasporti</p></a>
+			<!--  span class="right"><a href="listino-prezzi"><p style="text-align:center">Listino</p></a></span -->
 			<span class="right">
 				<a href="clienti">
 				<strong>Clienti</strong>

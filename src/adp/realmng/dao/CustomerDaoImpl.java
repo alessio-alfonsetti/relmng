@@ -227,7 +227,6 @@ public class CustomerDaoImpl implements CustomerInterface{
 			
 			System.out.println("customer obj: "+obj);
 			
-			int counter = 0;
 			while(ikeys.hasNext())
 			{
 				String key = (String) ikeys.next();

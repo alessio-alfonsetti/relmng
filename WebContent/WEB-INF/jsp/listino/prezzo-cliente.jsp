@@ -37,7 +37,7 @@
 		</header>
 	
 		<div class="freshdesignweb-bottom">
-			<a href="cliente">Inserisci</a>
+			<a href="trasporti-mud">Inserisci</a>
 			<a href="#">Modifica</a>
 			<span class="right">
 				<a href="#">
@@ -62,12 +62,7 @@
 			  <th>Cognome</th>
 			  <th>Partita Iva</th>
 			  <th>Codice Fiscale</th>
-			  <!-- th>Numero di Telefono</th-->
-			  <!-- th>Email</th-->
-			  <!-- th>IBAN</th-->
-			  <th>Listino Prezzi</th>
-			  <th>Emetti</th>
-			  <th>Fatture</th>
+			  <th> </th>
 			 </tr>
 			 </thead>
 			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
@@ -79,27 +74,10 @@
 			   <td>${customers.middlename}</td>
 			   <td>${customers.partita_iva}</td>
 			   <td>${customers.codice_fiscale}</td>
-			   <!-- td>${customers.numero_telefono}</td-->
-			   <!-- td>${customers.email}</td-->
-			   <!-- td>${customers.iban}</td-->
 			   <td>
 			   	<div class="form">
-					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}">
+			   		<form id="contactform" method="POST" action="gestisci-listino?uuid=${customers.uuid}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
-			   		</form>
-			   	</div>
-			   </td>
-			   <td>
-			   	<div class="form">
-			   		<form id="contactform" method="POST" action="emetti-fattura?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Emetti" type="submit" tabindex="2">   
-			   		</form>
-			   	</div>
-			   </td>
-			   <td>
-			   	<div class="form">
-			   		<form id="contactform" method="POST" action="fatture-cliente?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Fatture" type="submit" tabindex="3">   
 			   		</form>
 			   	</div>
 			   </td>
@@ -107,6 +85,7 @@
 			 </tbody>
 	 		</c:forEach>
 		</table>
+		
 	</div>
 	
 	<script>

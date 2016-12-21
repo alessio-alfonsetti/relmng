@@ -144,4 +144,16 @@
 		SELECT * FROM trasporto ORDER BY idtrasporto DESC LIMIT 10
 	</entry>
 	
+	<!-- LISTINO PREZZI - PRICES -->
+	<entry key="prices.insert">
+		INSERT INTO listino_prezzi 
+		(uuid, uuid_cliente, cer, cer_descr, imponibile, iva, totale, last_update, nota_update)
+		VALUES
+		(:uuid,:uuid_cliente,:cer,:cer_descr,:imponibile,:iva,:totale:last_update,:nota_update)
+	</entry>
+	
+	<entry key="prices.select_by_uuid">
+		SELECT * FROM listino_prezzi WHERE uuid_cliente = :uuid
+	</entry>
+	
 </properties>

@@ -65,6 +65,7 @@
 			  <!-- th>Numero di Telefono</th-->
 			  <!-- th>Email</th-->
 			  <!-- th>IBAN</th-->
+			  <th>Listino Prezzi</th>
 			  <th>Emetti</th>
 			  <th>Fatture</th>
 			 </tr>
@@ -83,15 +84,22 @@
 			   <!-- td>${customers.iban}</td-->
 			   <td>
 			   	<div class="form">
+					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
+			   		</form>
+			   	</div>
+			   </td>
+			   <td>
+			   	<div class="form">
 			   		<form id="contactform" method="POST" action="emetti-fattura?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Emetti" type="submit" tabindex="1">   
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Emetti" type="submit" tabindex="2">   
 			   		</form>
 			   	</div>
 			   </td>
 			   <td>
 			   	<div class="form">
 			   		<form id="contactform" method="POST" action="fatture-cliente?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Fatture" type="submit" tabindex="2">   
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Fatture" type="submit" tabindex="3">   
 			   		</form>
 			   	</div>
 			   </td>

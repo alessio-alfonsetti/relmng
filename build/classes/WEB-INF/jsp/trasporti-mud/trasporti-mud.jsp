@@ -12,6 +12,16 @@
 
 <script type="text/javascript" src="/resources/ga/js/validate.js"></script>
 
+<script type="text/javascript" src="/resources/ga/js/common_utilities.js"></script>
+<script src="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+<link href="http://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="/resources/ga/js/trasporti-form-validation.js"></script>
+
 </head>
 <body>
    <div class="container">
@@ -33,7 +43,7 @@
 	</header>
    
    <div  class="form">
-            <form id="contactform" method="POST" action="/inserisci-trasporto">
+		<form id="contactform" name="contactform" method="POST" action="/inserisci-trasporto">
                 <p class="contact"><label for="codice_materiale">Codice Materiale Trasportato</label></p>
                 <input id="codice_materiale" name="codice_materiale" placeholder="CER1234567890" tabindex="1" type="text">
                 
@@ -52,17 +62,19 @@
                 <p class="contact"><label for="azienda_destinazione">Azienda Smaltitrice del materiale</label></p>
                 <input id="azienda_destinazione" name="azienda_destinazione" placeholder="Azienda Smaltitrice" tabindex="6" type="text">
                 
-                <p class="contact"><label for="data_inizio">Data di inizio</label></p>
-                <input id="data_inizio" name="data_inizio" placeholder="01/01/2017" tabindex="7" type="date">
+                <p class="contact"><label for="data_inizio">Data di inizio (gg/mm/aaaa)</label></p>
+                <input id="data_inizio" name="data_inizio" tabindex="7" type="text" placeholder="01/01/2017" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" />
                 
-                <p class="contact"><label for="ora_inizio">Ora di inizio</label></p>
-                <input id="ora_inizio" name="ora_inizio" placeholder="16:00" tabindex="8" type="time">
+                <p class="contact"><label for="ora_inizio">Ora di inizio (hh:mm)</label></p>
+                <input id="ora_inizio" type="text" placeholder="17:00" tabindex="8" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
+                <!-- input id="ora_inizio" name="ora_inizio" tabindex="8" type="time" /-->
                 
-                <p class="contact"><label for="data_fine">Data di fine</label></p>
-                <input id="data_fine" name="data_fine" placeholder="01/01/2017" tabindex="9" type="date">
+                <p class="contact"><label for="data_fine">Data di fine (gg/mm/aaaa)</label></p>
+                <input id="data_fine" name="data_fine" tabindex="9" type="text" placeholder="01/01/2017" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" />
+                <!-- input id="data_fine" name="data_fine" tabindex="9" type="date" -->
  
- 				<p class="contact"><label for="ora_fine">Ora di fine</label></p>
-                <input id="ora_fine" name="ora_fine" placeholder="17:00" tabindex="10" type="time">
+ 				<p class="contact"><label for="ora_fine">Ora di fine (hh:mm)</label></p>
+                <input id="ora_fine" type="text" placeholder="17:00" name="ora_fine" tabindex="10" pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" />
  
  				<p class="contact"><label for="cup_cig">CUP/CIG</label></p>
                 <input id="cup_cig" name="cup_cig" placeholder="Inserisci CUP/CIG" autocomplete="on" tabindex="11" type="text">
@@ -70,9 +82,9 @@
  				<p class="contact"><label for="nota">Nota</label></p>
                 <input id="nota" name="nota" placeholder="Inserisci una nota" autocomplete="on" maxlength="250" tabindex="12" type="text">
             
-           		<input class="buttom" name="submit" id="submit" value="Inserisci" type="submit" tabindex="13">   
-   </form>
-</div>
+           		<input class="button" name="submit" id="submit" value="Inserisci" type="submit" tabindex="13" />
+   		</form>
+	</div>
    
 </div>
  
@@ -160,6 +172,6 @@
 	    }
 	}); 	
  	</script>
- 
+ 	
 </body>
 </html>
