@@ -35,7 +35,7 @@ public class PricesDaoImpl implements PricesInterface{
 	}
 
 	@Override
-	public String insert(Prices prices) throws Exception, FileNotFoundException, IOException {
+	public Prices insert(Prices prices) throws Exception, FileNotFoundException, IOException {
 
 		String sql = CONF.getPropertyString("prices.insert");
 
@@ -55,10 +55,12 @@ public class PricesDaoImpl implements PricesInterface{
 	    parameters.addValue("last_update", date);
 	    parameters.addValue("nota_update", Constants.Price_DESCR_PRIMA_CREAZIONE);
 	    
+	    prices.setNota_update(Constants.Price_DESCR_PRIMA_CREAZIONE);
+	    
 	    int inserted = template.update(sql, parameters);
 		System.out.println("price inserted successfully: "+inserted);
 		
-		return uuid;
+		return prices;
 	}
 	
 	@Override

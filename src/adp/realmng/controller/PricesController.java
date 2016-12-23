@@ -167,16 +167,21 @@ public class PricesController {
 	public String addInListino(@ModelAttribute("relationship-management")Prices prices, ModelMap model) {
 		
 		model.addAttribute("cer", prices.getCer());
-		model.addAttribute("descr_cer", prices.getCer_descr());
-		model.addAttribute("cliente", prices.getUuid_cliente());
+		model.addAttribute("cer_descr", prices.getCer_descr());
 		model.addAttribute("imponibile", prices.getImponibile());
 		model.addAttribute("iva", prices.getIva());
 		model.addAttribute("totale", prices.getTotale());
-		System.out.println("cliente: "+prices.getUuid_cliente());
+		System.out.println("uuid_cliente: "+prices.getUuid_cliente());
+		
 		try {
-			//customerDao.findByRagSocCogn();
+			String uuid_cliente = customerDao.findByRagSocCogn(prices.getUuid_cliente());
+			model.addAttribute("uuid_cliente", uuid_cliente);
+			prices.setUuid_cliente(uuid_cliente);
 			
 			pricesDao.insert(prices);
+			
+			model.addAttribute("last_update", prices.getLast_update());
+			model.addAttribute("nota_update", prices.getNota_update());
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

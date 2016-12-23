@@ -130,6 +130,37 @@
 	 	
 			</table>
 		</c:if>
+
+		<c:if test="${not empty prices}">
+			<table>
+			 <thead>
+			 <tr>
+			  <th>CER</th>
+			  <th>Descrizione CER</th>
+			  <th>Cliente</th>
+			  <th>Imponibile</th>
+			  <th>IVA</th>
+			  <th>Totale</th>
+			  <th>Data Nota</th>
+			  <th>Note</th>
+			 </tr>
+			 </thead>
+			
+			 <tbody>
+			  <tr>
+			   <td>${prices.cer}</td>
+			   <td>${prices.cer_descr}</td>
+			   <td>${prices.uuid_cliente}</td>
+			   <td>${prices.imponibile}</td>
+			   <td>${prices.iva}</td>
+			   <td>${prices.totale}</td>
+			   <td>${prices.last_update}</td>
+			   <td>${prices.nota_update}</td>
+			  </tr>
+			 </tbody>
+	 	
+			</table>
+		</c:if>
 		
 	</div>
 	

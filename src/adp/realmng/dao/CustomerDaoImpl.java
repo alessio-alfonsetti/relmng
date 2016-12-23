@@ -536,6 +536,44 @@ public class CustomerDaoImpl implements CustomerInterface{
 		return uuid;
 		
 	}
+
+	public String findByRagSocCogn(String ragione_sociale_cognome) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		String uuid = null;
+		
+		Customer customer = new Customer();
+		
+		String sql = CONF.getPropertyString("employers.get_all_by_lastname");
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("ragione_sociale", ragione_sociale_cognome);
+		parameters.addValue("lastname", ragione_sociale_cognome);
+		
+		List<Map<String, Object>> found = template.queryForList(sql, parameters);
+		System.out.println("users found on the db: "+found.size());
+		Iterator<Map<String, Object>> iter = found.iterator();
+		
+		while (iter.hasNext())
+		{
+			Map<String, Object> obj = iter.next();
+			
+			Set keys = obj.keySet();
+			Iterator ikeys = keys.iterator();
+			
+			while(ikeys.hasNext() && (uuid==null))
+			{
+				String key = (String) ikeys.next();
+				System.out.println("customer key: "+key);
+				Object value = (Object) obj.get(key);
+				System.out.println("customer value: "+value);
+
+				if(key.equals(Constants.Customer_UUID)) 
+					uuid = (String) value;
+			}
+		}
+		System.out.println("uuid cliente: "+uuid);;
+		return uuid;
+	}
 	
 	/*public Customer findByCustomerId(int custId){
  

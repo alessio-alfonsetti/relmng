@@ -73,9 +73,13 @@
 		SELECT * FROM utente WHERE enabled = 0 and id_ruolo = 3
 	</entry>
 	
+	<entry key="customers.get_by_surname_company_name">
+		SELECT * FROM utente WHERE enabled = 0 and id_ruolo = 3
+	</entry>
+	
 	<!-- DIPENDENTI -->
 	<entry key="employers.get_all_by_lastname">
-	SELECT * FROM utente WHERE id_ruolo = '4' order by lastname
+	SELECT * FROM utente where ragione_sociale = :ragione_sociale or lastname = :lastname
 	</entry>
 	
 	
@@ -149,7 +153,7 @@
 		INSERT INTO listino_prezzi 
 		(uuid, uuid_cliente, cer, cer_descr, imponibile, iva, totale, last_update, nota_update)
 		VALUES
-		(:uuid,:uuid_cliente,:cer,:cer_descr,:imponibile,:iva,:totale:last_update,:nota_update)
+		(:uuid,:uuid_cliente,:cer,:cer_descr,:imponibile,:iva,:totale,:last_update,:nota_update)
 	</entry>
 	
 	<entry key="prices.select_by_uuid">

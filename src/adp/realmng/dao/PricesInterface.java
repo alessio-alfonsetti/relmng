@@ -10,7 +10,7 @@ import adp.realmng.model.Prices;
 
 public interface PricesInterface {
 
-	public String insert(Prices prices) throws Exception, FileNotFoundException, IOException;
+	public Prices insert(Prices prices) throws Exception, FileNotFoundException, IOException;
 
 	List<Map<String, Object>> findPricesByClientId(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	

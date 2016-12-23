@@ -3,19 +3,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<%@page import="adp.realmng.dao.CustomerDaoImpl"%>
+<%@page import="adp.realmng.model.Customer"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>${title}</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/ga/css/table.css" />" rel="stylesheet">
 
 </head>
 <body>
-
 	<div class="container">
-		<!-- freshdesignweb top bar -->
+			<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
 			<a href="#">Benvenuto<strong> ${username}</strong></a>
 			<a href="<c:url value="j_spring_security_logout" />" >Logout</a>			
@@ -27,38 +31,63 @@
 			</span>
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
-	
+		
 		<header>
 			<h1><span></span>${message}</h1>
 		</header>
 	
-		<div  class="form">
-			<form id="contactform" method="POST" action="/inserisci-listino">
-	        	
-	        	<p class="contact"><label for="cer">CER</label></p>
-				<input id="cer" name="cer" placeholder="CER1234567890" tabindex="1" type="text">
-				
-				<p class="contact"><label for="descr_cer">Descrizione CER</label></p>
-				<input id="descr_cer" name="descr_cer" placeholder="Descrizione CER1234567890" maxlength="250" tabindex="2" type="text">
-				
-				<p class="contact"><label for="uuid_cliente">Ragione Sociale o Cognome</label></p>
-				<input id="uuid_cliente" name="uuid_cliente" placeholder="Ragione Sociale o Cognome" maxlength="250" tabindex="3" type="text">
-				
-				<p class="contact"><label for="imponibile">Imponibile</label></p>
-				<input id="imponibile" name="imponibile" placeholder="imponibile" tabindex="4" type="text"> EURO
-				
-				<p class="contact"><label for="iva">IVA</label></p>
-				<input id="iva" name="iva" placeholder="iva" tabindex="5" type="text"> %
-				
-				<p class="contact"><label for="totale">Totale</label></p>
-				<input id="totale" name="totale" placeholder="totale" tabindex="6" type="text">
-	
-				<input class="button" name="submit" id="submit" value="Inserisci" type="submit" tabindex="7" />
-	        	
-		   </form>
+		<div class="freshdesignweb-bottom">
+			<a href="trasporti-mud">Inserisci</a>
+			<a href="#">Modifica</a>
+			<span class="right">
+				<a href="#">
+				<strong>Deattiva</strong>
+				</a>
+			</span>
+			<span class="right">
+				<a href="#">
+				<strong>Esporta</strong>
+				</a>
+			</span>
+			
+			<div class="clr"></div>
 		</div>
+	
+		<table>
+			<thead>
+			 <tr>
+			  <th>Codice Cliente</th>
+			  <th>Ragione Sociale</th>
+			  <th>Nome</th>
+			  <th>Cognome</th>
+			  <th>Partita Iva</th>
+			  <th>Codice Fiscale</th>
+			  <th> </th>
+			 </tr>
+			 </thead>
+			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
+			 <tbody>
+			  <tr>
+			   <td>${customers.uuid}</td>
+			   <td>${customers.ragione_sociale}</td>
+			   <td>${customers.firstname}</td>
+			   <td>${customers.middlename}</td>
+			   <td>${customers.partita_iva}</td>
+			   <td>${customers.codice_fiscale}</td>
+			   <td>
+			   	<div class="form">
+			   		<form id="contactform" method="POST" action="gestisci-listino?uuid=${customers.uuid}">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
+			   		</form>
+			   	</div>
+			   </td>
+			  </tr>
+			 </tbody>
+	 		</c:forEach>
+		</table>
+		
 	</div>
-
+	
 	<script>
 	// Include the UserVoice JavaScript SDK (only needed once on a page)
 	UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/fQJ1QfGiU5yCxP4hK5txmA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
