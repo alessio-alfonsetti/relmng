@@ -42,16 +42,16 @@
 				<input id="descr_cer" name="descr_cer" placeholder="Descrizione CER1234567890" maxlength="250" tabindex="2" type="text">
 				
 				<p class="contact"><label for="uuid_cliente">Ragione Sociale o Cognome</label></p>
-				<input id="uuid_cliente" name="uuid_cliente" placeholder="Ragione Sociale o Cognome" maxlength="250" tabindex="3" type="text">
+				<input id="uuid_cliente" name="uuid_cliente" placeholder="Ragione Sociale o Cognome" maxlength="250" tabindex="3" type="text" value="${rag_soc_cogn} }" >
 				
 				<p class="contact"><label for="imponibile">Imponibile</label></p>
-				<input id="imponibile" name="imponibile" placeholder="imponibile" tabindex="4" type="text"> EURO
+				<input id="imponibile" name="imponibile" placeholder="imponibile" tabindex="4" type="number"> EURO
 				
 				<p class="contact"><label for="iva">IVA</label></p>
-				<input id="iva" name="iva" placeholder="iva" tabindex="5" type="text"> %
+				<input id="iva" name="iva" placeholder="iva" tabindex="5" type="number"> %
 				
 				<p class="contact"><label for="totale">Totale</label></p>
-				<input id="totale" name="totale" placeholder="totale" tabindex="6" type="text">
+				<input id="totale" name="totale" placeholder="totale" tabindex="6" type="number">
 	
 				<input class="button" name="submit" id="submit" value="Inserisci" type="submit" tabindex="7" />
 	        	

@@ -73,7 +73,7 @@ public class PricesDaoImpl implements PricesInterface{
 	    
 	    List<Map<String,Object>> prices = template.queryForList(sql, parameters);
 		
-	    Iterator iterPrices = prices.iterator();
+	    /*Iterator iterPrices = prices.iterator();
 	    
 	    Prices pricesObj = new Prices();
 	    
@@ -111,9 +111,9 @@ public class PricesDaoImpl implements PricesInterface{
 					pricesObj.setUuid((String)value);
 			}
 	    	
-	    }
+	    }*/
 	    	
-		return null;
+		return prices;
 	}
 	
 }

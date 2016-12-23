@@ -77,6 +77,7 @@
 			   <td>${customers.ragione_sociale}</td>
 			   <td>${customers.firstname}</td>
 			   <td>${customers.middlename}</td>
+			   <td>${customers.lastname}</td>
 			   <td>${customers.partita_iva}</td>
 			   <td>${customers.codice_fiscale}</td>
 			   <!-- td>${customers.numero_telefono}</td-->
@@ -84,7 +85,7 @@
 			   <!-- td>${customers.iban}</td-->
 			   <td>
 			   	<div class="form">
-					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}">
+					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}&${customer.ragione_sociale}&${customer.lastname}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
 			   		</form>
 			   	</div>

@@ -133,18 +133,28 @@ public class PricesController {
 
 	}
 	
-	@RequestMapping(value = "/listino", method = {RequestMethod.GET, RequestMethod.POST}, params = "uuid")
-	public ModelAndView printHome(ModelMap model, @RequestParam("uuid") String uuid) {
+	@RequestMapping(value = "/listino", method = {RequestMethod.GET, RequestMethod.POST}, params = {"uuid", "ragione_sociale", "lastname"})
+	public ModelAndView printHome(ModelMap model, 
+			@RequestParam("uuid") String uuid, @RequestParam("ragione_sociale") String ragione_sociale, @RequestParam("lastname") String lastname) {
 		
 		ModelAndView modelAndView = new ModelAndView("listino/inserisci-listino", "command", new Prices()); 
 		
 		modelAndView.addObject("title", "Inserisci Nuovo Prezzo nel Listino");
 		modelAndView.addObject("message", "Inserisci Nuovo Prezzo nel Listino");
 		
+		if(ragione_sociale != null && ragione_sociale != "")
+			modelAndView.addObject("rag_soc_cogn", ragione_sociale);
+		else
+			modelAndView.addObject("rag_soc_cogn", lastname);
+		
 		System.out.println("client uuid: "+uuid);
 		
 		try {
-			pricesDao.findPricesByClientId(uuid);
+			List<Map<String,Object>> prices = pricesDao.findPricesByClientId(uuid);
+			
+			if(prices != null)
+				modelAndView.addObject("client_prices", prices);
+				
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

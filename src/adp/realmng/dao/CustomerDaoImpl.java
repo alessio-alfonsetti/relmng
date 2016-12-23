@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import adp.realmng.constants.Constants;
+import adp.realmng.exceptions.NoClientException;
 import adp.realmng.exceptions.TooManyCustomersException;
 import adp.realmng.model.Customer;
 import adp.realmng.utilities.CommonUtilities;
@@ -537,7 +538,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 		
 	}
 
-	public String findByRagSocCogn(String ragione_sociale_cognome) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+	public String findByRagSocCogn(String ragione_sociale_cognome) throws InvalidPropertiesFormatException, FileNotFoundException, IOException, NoClientException {
 		
 		String uuid = null;
 		
@@ -571,77 +572,12 @@ public class CustomerDaoImpl implements CustomerInterface{
 					uuid = (String) value;
 			}
 		}
+		
+		if(uuid == null) {
+			throw new NoClientException("Il cliente non esiste. Bisogna creare il cliente prima di concordarci il prezzo di un servizio.");
+		}
+		
 		System.out.println("uuid cliente: "+uuid);;
 		return uuid;
 	}
-	
-	/*public Customer findByCustomerId(int custId){
- 
-		String sql = "SELECT * FROM relmng_t_cliente WHERE email = ?";
- 
-		Connection conn = null;
- 
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, custId);
-			Customer customer = null;
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				customer = new Customer(
-					rs.getString("email"),
-					rs.getString("nome"), 
-					rs.getInt("uuid")
-				);
-			}
-			rs.close();
-			ps.close();
-			
-			System.out.println("customer: "+customer);
-			
-			return customer;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-				conn.close();
-				} catch (SQLException e) {}
-			}
-		}
-	}
-
-	
-	public Customer listAllCustomers() {
-
-		String sql = "SELECT * FROM relmng_t_cliente";
-		 
-		Connection conn = null;
- 
-		try {
-			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
-			Customer customer = null;
-			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				customer = new Customer(
-					rs.getString("nome"), 
-					rs.getString("email"),
-					rs.getInt("uuid")
-				);
-			}
-			rs.close();
-			ps.close();
-			return customer;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (conn != null) {
-				try {
-				conn.close();
-				} catch (SQLException e) {}
-			}
-		}
-		
-	}*/
 }
