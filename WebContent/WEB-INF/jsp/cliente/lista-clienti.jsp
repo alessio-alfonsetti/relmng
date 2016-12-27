@@ -85,7 +85,7 @@
 			   <!-- td>${customers.iban}</td-->
 			   <td>
 			   	<div class="form">
-					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}&${customer.ragione_sociale}&${customer.lastname}">
+					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
 			   		</form>
 			   	</div>
