@@ -12,10 +12,7 @@ public interface PricesInterface {
 
 	public Prices insert(Prices prices) throws Exception, FileNotFoundException, IOException;
 
-	List<Map<String, Object>> findPricesByClientId(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+	List<Map<String, Object>> findPricesByUuid(String uuid)
+			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
-	//public void modify (Prices prices);
-
-	//public int deleteByUuid(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
-
 }

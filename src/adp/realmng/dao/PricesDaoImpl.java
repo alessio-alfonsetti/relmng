@@ -64,12 +64,12 @@ public class PricesDaoImpl implements PricesInterface{
 	}
 	
 	@Override
-	public List<Map<String, Object>> findPricesByClientId(String clientUUID) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+	public List<Map<String, Object>> findPricesByUuid(String uuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
 		
 		String sql = CONF.getPropertyString("prices.select_by_uuid");
 		
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
-	    parameters.addValue("uuid", clientUUID);
+	    parameters.addValue("uuid_cliente", uuid);
 	    
 	    List<Map<String,Object>> prices = template.queryForList(sql, parameters);
 		
@@ -109,6 +109,7 @@ public class PricesDaoImpl implements PricesInterface{
 					pricesObj.setUuid((String)value);
 				if(key.equals(Constants.Price_List_TOTALE))
 					pricesObj.setUuid((String)value);
+				
 			}
 	    	
 	    }*/

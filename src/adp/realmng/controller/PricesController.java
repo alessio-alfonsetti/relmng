@@ -53,6 +53,7 @@ public class PricesController {
 		try {
 			
 			customers = customerDao.listAllCustomers();
+			//prices = pricesDao.findPricesByClientId(clientUUID);
 			
 			
 		} catch (InvalidPropertiesFormatException e) {
@@ -66,7 +67,7 @@ public class PricesController {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("list_customers_by_date_creation", customers);
+		//model.addAttribute("list_prices_by_customer", prices);
 		
 		model.addAttribute("result", "OK");
 		model.addAttribute("error", "Clienti trovati con successo");
@@ -88,7 +89,7 @@ public class PricesController {
 		model.addAttribute("message", "Lista Prezzi per Cliente:");
 		model.addAttribute("title", "Lista Prezzi per Cliente");
 		
-		return "listino/prezzo-cliente";
+		return "listino/prezzi-cliente";
 	}
 	
 	@RequestMapping(value = "gestisci-listino", method = {RequestMethod.GET, RequestMethod.POST}, params = "uuid")
@@ -105,7 +106,7 @@ public class PricesController {
 			
 			customer = customerDao.findByCustomerUuid(uuid);
 			System.out.println("fatture-cliente; Id cliente"+customer.getId());
-			prices = pricesDao.findPricesByClientId(customer.getUuid());
+			prices = pricesDao.findPricesByUuid(customer.getUuid());
 			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
@@ -142,19 +143,25 @@ public class PricesController {
 		modelAndView.addObject("title", "Inserisci Nuovo Prezzo nel Listino");
 		modelAndView.addObject("message", "Inserisci Nuovo Prezzo nel Listino");
 		
-		if(ragione_sociale != null && ragione_sociale != "")
+		String ragSoc_Cogn = null;
+		if(ragione_sociale != null && ragione_sociale != "") {
 			modelAndView.addObject("rag_soc_cogn", ragione_sociale);
-		else
+			ragSoc_Cogn = ragione_sociale;
+		}
+		else {
 			modelAndView.addObject("rag_soc_cogn", lastname);
+			ragSoc_Cogn = lastname;
+		}
 		
 		System.out.println("client uuid: "+uuid);
 		
 		try {
-			List<Map<String,Object>> prices = pricesDao.findPricesByClientId(uuid);
+			List<Map<String,Object>> prices = pricesDao.findPricesByUuid(uuid);
+			System.out.println("Prezzi associati al cliente: "+prices.size());
 			
 			if(prices != null)
 				modelAndView.addObject("client_prices", prices);
-				
+			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

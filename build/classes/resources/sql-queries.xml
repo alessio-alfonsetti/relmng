@@ -76,6 +76,10 @@
 	<entry key="customers.get_by_surname_company_name">
 		SELECT * FROM utente WHERE enabled = 0 and id_ruolo = 3
 	</entry>
+
+	<entry key="customers.select_by_ragSocCogn">
+		SELECT * FROM utente WHERE ragione_sociale = :ragione_sociale OR codice_fiscale = :codice_fiscale
+	</entry>
 	
 	<!-- DIPENDENTI -->
 	<entry key="employers.get_all_by_lastname">
@@ -157,7 +161,7 @@
 	</entry>
 	
 	<entry key="prices.select_by_uuid">
-		SELECT * FROM listino_prezzi WHERE uuid_cliente = :uuid
+		SELECT * FROM listino_prezzi WHERE uuid_cliente = :uuid_cliente
 	</entry>
 	
 </properties>

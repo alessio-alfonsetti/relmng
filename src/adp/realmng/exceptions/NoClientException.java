@@ -12,7 +12,7 @@ public class NoClientException extends Exception{
 		/*TODO Mandare messaggio informativo dell'accaduto all'operatore*/
 	}
 	
-	public NoClientException(String message, TooManyCustomersException ex) {
+	public NoClientException(String message, NoClientException ex) {
 		super(message, ex);
 	}
 	

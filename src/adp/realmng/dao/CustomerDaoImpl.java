@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import adp.realmng.constants.Constants;
 import adp.realmng.exceptions.NoClientException;
 import adp.realmng.exceptions.TooManyCustomersException;
+import adp.realmng.exceptions.UserAlreadyExistsException;
 import adp.realmng.model.Customer;
 import adp.realmng.utilities.CommonUtilities;
 import adp.realmng.utilities.FileUtilities;
@@ -75,7 +76,16 @@ public class CustomerDaoImpl implements CustomerInterface{
 		System.out.println("iban: "+customer.getIban());
 		System.out.println("indirizzo: "+customer.getIndirizzo());
 		System.out.println("id_ruolo"+ customer.getId_ruolo());
-				
+		
+		// Check if user already exists checking Ragione Sociale and Surname
+		MapSqlParameterSource parametersFind = new MapSqlParameterSource();
+		parametersFind.addValue("codice_fiscale", customer.getCodice_fiscale());
+		parametersFind.addValue("ragione_sociale", customer.getRagione_sociale());
+		String sqlFind = CONF.getPropertyString("customers.select_by_ragSocCogn");
+		List<Map<String,Object>> customerExist = template.queryForList(sql, parametersFind);
+		if(customerExist.size()!=0)
+			throw new UserAlreadyExistsException();
+		
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 	    parameters.addValue("uuid", uuid);
 	    parameters.addValue("username", username);
@@ -239,7 +249,6 @@ public class CustomerDaoImpl implements CustomerInterface{
 					customer.setId((Integer)value);
 				if(key.equals(Constants.Customer_UUID)) 
 					customer.setUuid((String)value);
-				//System.out.println("customer uuid: "+customer.getUuid());
 				if(key.equals(Constants.Customer_USERNAME))
 					customer.setUsername((String)value);
 				if(key.equals(Constants.Customer_FIRSTNAME))

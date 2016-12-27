@@ -31,24 +31,26 @@
 	</header>
    
    <div  class="form">
+   		<p style="font-size:10px;text-align:center" >I campi contrassegnato con il simbolo * sono obbligaori</p><br /><br />
+   		
             <form id="contactform" method="POST" action="/inserisci-cliente">
-                <p class="contact"><label for="ragione_sociale">Ragione Sociale</label></p>
-                <input id="ragione_sociale" name="ragione_sociale" placeholder="Gruppo Alessandri" tabindex="1" type="text">
+                <p class="contact"><label for="ragione_sociale">Ragione Sociale *</label></p>
+                <input id="ragione_sociale" name="ragione_sociale" placeholder="Gruppo Alessandri" tabindex="1" type="text" required />
                 
-                <p class="contact"><label for="firstname">Nome</label></p>
-                <input id="firstname" name="firstname" placeholder="Nome" tabindex="2" type="text">
+                <p class="contact"><label for="firstname">Nome *</label></p>
+                <input id="firstname" name="firstname" placeholder="Nome" tabindex="2" type="text" required />
  
- 				<p class="contact"><label for="lastname">Cognome</label></p>
-                <input id="lastname" name="lastname" placeholder="Cognome" tabindex="3" type="text">
+ 				<p class="contact"><label for="lastname">Cognome *</label></p>
+                <input id="lastname" name="lastname" placeholder="Cognome" tabindex="3" type="text" required />
  
                 <p class="contact"><label for="email">Email</label></p>
                 <input id="email" name="email" placeholder="example@domain.com" tabindex="4" type="email">
                 
-                <p class="contact"><label for="partita_iva">Partita Iva</label></p>
-                <input id="partita_iva" name="partita_iva" placeholder="1234567890" tabindex="5" type="text">
+                <p class="contact"><label for="partita_iva">Partita Iva *</label></p>
+                <input id="partita_iva" name="partita_iva" placeholder="1234567890" tabindex="5" type="text" required />
                 
-                <p class="contact"><label for="codice_fiscale">Codice Fiscale</label></p>
-                <input id="codice_fiscale" name="codice_fiscale" placeholder="LFNLSS82D16A345I" tabindex="6" type="text">
+                <p class="contact"><label for="codice_fiscale">Codice Fiscale *</label></p>
+                <input id="codice_fiscale" name="codice_fiscale" placeholder="LFNLSS82D16A345I" tabindex="6" type="text" required />
  
  				<p class="contact"><label for="nota">Nota</label></p>
                 <input id="nota" name="nota" placeholder="Inserisci una nota" autocomplete="on" maxlength="250" tabindex="7" type="text">
