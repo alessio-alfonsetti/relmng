@@ -32,6 +32,7 @@ import org.supercsv.prefs.CsvPreference;
 import adp.realmng.constants.Constants;
 import adp.realmng.dao.CustomerDaoImpl;
 import adp.realmng.model.Customer;
+import adp.realmng.model.Prices;
 
 @Controller
 public class CustomerController{
@@ -252,14 +253,14 @@ public class CustomerController{
 		System.out.println("ruolo: "+customer.getId_ruolo());
 		
 		model.addAttribute("ruolo", customer.getId_ruolo());
-		model.addAttribute("nome", customer.getFirstname());
-		model.addAttribute("cognome", customer.getLastname());
+		model.addAttribute("nome", customer.getFirstname().trim().toUpperCase());
+		model.addAttribute("cognome", customer.getLastname().trim().toUpperCase());
 		model.addAttribute("email", customer.getEmail());
-		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
-		model.addAttribute("nota", customer.getNota());
+		model.addAttribute("codice_fiscale", customer.getCodice_fiscale().trim().toUpperCase());
+		model.addAttribute("nota", customer.getNota().trim().toUpperCase());
 		model.addAttribute("numero_cellulare", customer.getNumero_cellulare());
-		model.addAttribute("indirizzo", customer.getIndirizzo());
-		model.addAttribute("iban", customer.getIban());
+		model.addAttribute("indirizzo", customer.getIndirizzo().trim().toUpperCase());
+		model.addAttribute("iban", customer.getIban().trim().toUpperCase());
 	    
 		try {
 			
@@ -409,7 +410,6 @@ public class CustomerController{
 		return "result";
 	}
 	
-	
 	@RequestMapping(value = "/gestisci-dipendente", method = {RequestMethod.POST})
 	public String dailyEmployerManagement(@RequestParam("uuid") String uuid, 
 			ModelMap model) {
@@ -446,4 +446,33 @@ public class CustomerController{
 		return "dipendente/gestisci-dipendente";
 	}
 	
+	@RequestMapping(value = "/trova-cliente", method = {RequestMethod.POST, RequestMethod.GET}, params = {"ragSocCogn"})
+	public String searchCustomer(ModelMap model, @RequestParam("ragSocCogn") String ragSocCogn){
+		
+		Customer customer = new Customer();
+		
+		model.addAttribute("message", "Profilo ricercato");
+		model.addAttribute("title", "Profilo ricercato");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		try {
+			customer = dao.findByCustomerSurnameCompanyName(ragSocCogn);
+			model.addAttribute("searched_customer", customer);
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "result";
+	}
 }

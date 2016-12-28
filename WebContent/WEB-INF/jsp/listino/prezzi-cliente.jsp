@@ -33,11 +33,11 @@
 		</div><!--/ freshdesignweb top bar -->
 		
 		<header>
-			<h1><span></span>${message}</h1>
+			<h1><span>${message} <b>${nome_cliente}</b></span></h1>
 		</header>
 	
 		<div class="freshdesignweb-bottom">
-			<a href="trasporti-mud">Inserisci</a>
+			<a href="trasporti-mud">Inserisci Nuovo Prezzo</a>
 			<a href="#">Modifica</a>
 			<span class="right">
 				<a href="#">
@@ -56,31 +56,29 @@
 		<table>
 			<thead>
 			 <tr>
+			  <th>Codice Prezzo</th>
 			  <th>Codice Cliente</th>
-			  <th>Ragione Sociale</th>
-			  <th>Nome</th>
-			  <th>Cognome</th>
-			  <th>Partita Iva</th>
-			  <th>Codice Fiscale</th>
-			  <th> </th>
+			  <th>CER</th>
+			  <th>Descrizione CER</th>
+			  <th>Imponibile</th>
+			  <th>IVA</th>
+			  <th>Totale</th>
+			  <th>Data Aggiornamento</th>
+			  <th>Nota Aggiornamento</th>
 			 </tr>
 			 </thead>
-			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
+			<c:forEach items="${list_prices_by_customer}" begin="0" end="10" var="prices">
 			 <tbody>
 			  <tr>
-			   <td>${customers.uuid}</td>
-			   <td>${customers.ragione_sociale}</td>
-			   <td>${customers.firstname}</td>
-			   <td>${customers.middlename}</td>
-			   <td>${customers.partita_iva}</td>
-			   <td>${customers.codice_fiscale}</td>
-			   <td>
-			   	<div class="form">
-			   		<form id="contactform" method="POST" action="gestisci-listino?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
-			   		</form>
-			   	</div>
-			   </td>
+			   <td>${prices.uuid}</td>
+			   <td>${prices.uuid_cliente}</td>
+			   <td>${prices.cer}</td>
+			   <td>${prices.cer_descr}</td>
+			   <td>${prices.imponibile}</td>
+			   <td>${prices.iva}</td>
+			   <td>${prices.totale}</td>
+			   <td>${prices.last_update}</td>
+			   <td>${prices.nota_update}</td>
 			  </tr>
 			 </tbody>
 	 		</c:forEach>

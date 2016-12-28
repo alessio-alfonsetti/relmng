@@ -29,4 +29,7 @@ public interface CustomerInterface {
 
 	public List<Map<String, Object>> findDeactivatedCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 
+	public Customer findByCustomerSurnameCompanyName(String ragSocCogn)
+			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
 }

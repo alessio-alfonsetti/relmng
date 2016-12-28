@@ -43,18 +43,16 @@ public class PricesController {
 	PricesDaoImpl pricesDao = (PricesDaoImpl)factory.getBean("PricesDao");
 	CustomerDaoImpl customerDao = (CustomerDaoImpl)factory.getBean("CustomerDao");
 	
-	@RequestMapping(value = "/listino-prezzi", method = RequestMethod.GET)
-	public String listPrices(@ModelAttribute("relationship-management") Prices record, ModelMap model) {
+	@RequestMapping(value = "/listino-prezzi", method = {RequestMethod.GET, RequestMethod.POST}, params = {"uuid", "ragione_sociale", "lastname", "firstname"})
+	public String listPrices(@ModelAttribute("relationship-management") Prices record, ModelMap model, @RequestParam("uuid") String clientUUID,
+			@RequestParam("ragione_sociale") String ragSoc, @RequestParam("lastname") String lastname, @RequestParam("firstname") String firstname) {
 		
-		System.out.println("Lista Prezzi");
-		
-		List<Map<String, Object>> customers = new ArrayList<Map<String, Object>>();
+		System.out.println("Lista Prezzi per cliente");
+		List<Map<String, Object>> prices = new ArrayList<Map<String, Object>>();
 		
 		try {
 			
-			customers = customerDao.listAllCustomers();
-			//prices = pricesDao.findPricesByClientId(clientUUID);
-			
+			prices = pricesDao.findPricesByClientUuid(clientUUID);
 			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
@@ -67,19 +65,21 @@ public class PricesController {
 			e.printStackTrace();
 		}
 		
-		//model.addAttribute("list_prices_by_customer", prices);
+		model.addAttribute("list_prices_by_customer", prices);
+		if(ragSoc==null || ragSoc.length()==0) {
+			model.addAttribute("nome_cliente", firstname.toUpperCase()+" "+lastname.toUpperCase());
+		} else {
+			model.addAttribute("nome_cliente", ragSoc.toUpperCase());
+		}
 		
 		model.addAttribute("result", "OK");
-		model.addAttribute("error", "Clienti trovati con successo");
 		
-		model.addAttribute("message", "Lista Clienti:");
-		model.addAttribute("title", "Lista Clienti");
+		model.addAttribute("message", "Gestisci Listino prezzi per il Cliente ");
+		model.addAttribute("title", "Listino Prezzi Cliente");
 		
-		
-		
-		 /* User Details */
-			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			model.addAttribute("username", userDetails.getUsername());
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
 		 
 		//model.addAttribute("list_trasports", transports);
 		
@@ -106,7 +106,7 @@ public class PricesController {
 			
 			customer = customerDao.findByCustomerUuid(uuid);
 			System.out.println("fatture-cliente; Id cliente"+customer.getId());
-			prices = pricesDao.findPricesByUuid(customer.getUuid());
+			prices = pricesDao.findPricesByClientUuid(customer.getUuid());
 			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +156,7 @@ public class PricesController {
 		System.out.println("client uuid: "+uuid);
 		
 		try {
-			List<Map<String,Object>> prices = pricesDao.findPricesByUuid(uuid);
+			List<Map<String,Object>> prices = pricesDao.findPricesByClientUuid(uuid);
 			System.out.println("Prezzi associati al cliente: "+prices.size());
 			
 			if(prices != null)

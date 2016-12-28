@@ -62,7 +62,7 @@
 	</entry>
 	
 	<entry key="customers.select_for_notifaction">
-		SELECT * FROM utente WHERE notifica_creazione_incompleta = 1
+		SELECT * FROM utente WHERE notifica_creazione_incompleta = 1 ORDER BY data_inserimento DESC
 	</entry>
 	
 	<entry key="customers.deactivate_by_uuid">
@@ -79,6 +79,10 @@
 
 	<entry key="customers.select_by_ragSocCogn">
 		SELECT * FROM utente WHERE ragione_sociale = :ragione_sociale OR codice_fiscale = :codice_fiscale
+	</entry>
+	
+	<entry key="customers.select_by_ragSoc_lastname">
+		SELECT * FROM utente WHERE ragione_sociale = :ragione_sociale OR lastname = :lastname
 	</entry>
 	
 	<!-- DIPENDENTI -->
@@ -160,7 +164,7 @@
 		(:uuid,:uuid_cliente,:cer,:cer_descr,:imponibile,:iva,:totale,:last_update,:nota_update)
 	</entry>
 	
-	<entry key="prices.select_by_uuid">
+	<entry key="prices.select_by_client_uuid">
 		SELECT * FROM listino_prezzi WHERE uuid_cliente = :uuid_cliente
 	</entry>
 	

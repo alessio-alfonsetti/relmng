@@ -589,4 +589,81 @@ public class CustomerDaoImpl implements CustomerInterface{
 		System.out.println("uuid cliente: "+uuid);;
 		return uuid;
 	}
+	
+	@Override
+	public Customer findByCustomerSurnameCompanyName(String ragSocCogn) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+
+		Customer customer = new Customer();
+		
+		String sql = CONF.getPropertyString("customers.select_by_ragSoc_lastname");
+		
+		System.out.println("sql: "+sql);
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("ragione_sociale", ragSocCogn);
+	    parameters.addValue("lastname", ragSocCogn);
+		
+	    List<Map<String,Object>> customers = template.queryForList(sql, parameters);
+	    
+	    Iterator iterCustomers = customers.iterator();
+	    
+	    while(iterCustomers.hasNext())
+	    {
+	    	Map<String, Object> obj = (Map<String, Object>) iterCustomers.next();
+	    	
+	    	Set keys = obj.keySet();
+			Iterator ikeys = keys.iterator();
+			
+			System.out.println("customer obj: "+obj);
+			
+			while(ikeys.hasNext())
+			{
+				String key = (String) ikeys.next();
+				System.out.println("customer key: "+key);
+				Object value = (Object) obj.get(key);
+				System.out.println("customer value: "+value);
+
+				if(key.equals(Constants.Customer_ID)) 
+					customer.setId((Integer)value);
+				if(key.equals(Constants.Customer_UUID)) 
+					customer.setUuid((String)value);
+				if(key.equals(Constants.Customer_USERNAME))
+					customer.setUsername((String)value);
+				if(key.equals(Constants.Customer_FIRSTNAME))
+					customer.setFirstname((String)value);
+				if(key.equals(Constants.Customer_MIDDLENAME))
+					customer.setMiddlename((String)value);
+				if(key.equals(Constants.Customer_LASTNAME))
+					customer.setLastname((String)value);
+				if(key.equals(Constants.Customer_PASSWORD))
+					customer.setPassword((String)value);
+				if(key.equals(Constants.Customer_RAGIONE_SOCIALE))
+					customer.setRagione_sociale((String)value);
+				if(key.equals(Constants.Customer_PARTITA_IVA))
+					customer.setPartita_iva((String)value);
+				if(key.equals(Constants.Customer_CODICE_FISCALE))
+					customer.setCodice_fiscale ((String)value);
+				if(key.equals(Constants.Customer_INDIRIZZO))
+					customer.setIndirizzo((String)value);
+				if(key.equals(Constants.Customer_NUMERO_TELEFONO))
+					customer.setNumero_telefono((String)value);
+				if(key.equals(Constants.Customer_NUMERO_CELLULARE))
+					customer.setNumero_cellulare((String)value);
+				if(key.equals(Constants.Customer_NUMERO_FAX))
+					customer.setNumero_fax((String)value);
+				if(key.equals(Constants.Customer_EMAIL))
+					customer.setEmail((String)value);
+				if(key.equals(Constants.Customer_NOTA))
+					customer.setNota((String)value);
+				if(key.equals(Constants.Customer_ENABLED))
+					customer.setEnabled((Boolean)value);
+				if(key.equals(Constants.Customer_IDRUOLO))
+					customer.setId_ruolo((Integer)value);
+				if(key.equals(Constants.Customer_DATA_INSERIMENTO))
+					customer.setData_inserimento((Timestamp)value);
+			}
+	    }
+	    
+		return customer;
+	}
 }

@@ -35,7 +35,16 @@
 		<header>
 			<h1><span></span>${message}</h1>
 		</header>
-	
+		
+		<!-- HTML for SEARCH BAR -->
+		<div class="freshdesignweb-bottom" style="align:center;padding-left:5%">
+			<form id="search" method="get" action="trova-cliente">
+			        <input type="text" name="ragSocCogn" class="button" size="50" maxlength="250">
+			        <input type="submit" value="search" class="button">
+			</form>
+			<div class="clr"></div>
+		</div>
+			
 		<div class="freshdesignweb-bottom">
 			<a href="cliente">Inserisci</a>
 			<a href="#">Modifica</a>
@@ -87,6 +96,13 @@
 			   	<div class="form">
 					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
+			   		</form>
+			   	</div>
+			   </td>
+			   <td>
+			   	<div class="form">
+					<form id="contactform" method="POST" action="listino-prezzi?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}&firstname=${customers.firstname}">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi Nuovo" type="submit" tabindex="1">
 			   		</form>
 			   	</div>
 			   </td>
