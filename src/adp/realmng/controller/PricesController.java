@@ -49,10 +49,39 @@ public class PricesController {
 		
 		System.out.println("Lista Prezzi per cliente");
 		List<Map<String, Object>> prices = new ArrayList<Map<String, Object>>();
+		String toBeReturned = "listino/prezzi-cliente";
+
+		model.addAttribute("result", "OK");
+		
+		model.addAttribute("message", "Gestisci Listino prezzi per il Cliente ");
+		model.addAttribute("title", "Listino Prezzi Cliente");
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+
+		if(ragSoc==null || ragSoc.length()==0) {
+			model.addAttribute("nome_cliente", firstname.toUpperCase()+" "+lastname.toUpperCase());
+			model.addAttribute("rag_soc_cogn", firstname.toUpperCase()+" "+lastname.toUpperCase());
+		} else {
+			model.addAttribute("nome_cliente", ragSoc.toUpperCase());
+			model.addAttribute("rag_soc_cogn", ragSoc.toUpperCase());
+		}
+
+		model.addAttribute("result", "OK");
+		model.addAttribute("error", "Prezzi trovati con successo");
+		
+		model.addAttribute("message", "Lista Prezzi per Cliente:");
+		model.addAttribute("title", "Lista Prezzi per Cliente");
 		
 		try {
 			
 			prices = pricesDao.findPricesByClientUuid(clientUUID);
+			
+			if(prices.size()==0){
+				System.out.println("L'utente non ha un listino prezzi. Crearne uno.");
+				toBeReturned = "listino/inserisci-listino";
+			}
 			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
@@ -66,30 +95,8 @@ public class PricesController {
 		}
 		
 		model.addAttribute("list_prices_by_customer", prices);
-		if(ragSoc==null || ragSoc.length()==0) {
-			model.addAttribute("nome_cliente", firstname.toUpperCase()+" "+lastname.toUpperCase());
-		} else {
-			model.addAttribute("nome_cliente", ragSoc.toUpperCase());
-		}
 		
-		model.addAttribute("result", "OK");
-		
-		model.addAttribute("message", "Gestisci Listino prezzi per il Cliente ");
-		model.addAttribute("title", "Listino Prezzi Cliente");
-		
-		/* User Details */
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("username", userDetails.getUsername());
-		 
-		//model.addAttribute("list_trasports", transports);
-		
-		model.addAttribute("result", "OK");
-		model.addAttribute("error", "Prezzi trovati con successo");
-		
-		model.addAttribute("message", "Lista Prezzi per Cliente:");
-		model.addAttribute("title", "Lista Prezzi per Cliente");
-		
-		return "listino/prezzi-cliente";
+		return toBeReturned;
 	}
 	
 	@RequestMapping(value = "gestisci-listino", method = {RequestMethod.GET, RequestMethod.POST}, params = "uuid")

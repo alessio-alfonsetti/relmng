@@ -73,11 +73,11 @@ public class PricesDaoImpl implements PricesInterface{
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 	    parameters.addValue("uuid_cliente", uuid);
 	    
-	    List<Map<String,Object>> prices = template.queryForList(sql, parameters);
+	    List<Map<String, Object>> prices = template.queryForList(sql, parameters);
 		
-	    /*Iterator iterPrices = prices.iterator();
+	    System.out.println("Clienti trovati: "+prices.size());
 	    
-	    Prices pricesObj = new Prices();
+	    Iterator iterPrices = prices.iterator();
 	    
 	    while (iterPrices.hasNext()) {
 	    	
@@ -95,7 +95,7 @@ public class PricesDaoImpl implements PricesInterface{
 				Object value = (Object) obj.get(key);
 				System.out.println("customer value: "+value);
 				
-				if(key.equals(Constants.Price_List_ID)) 
+				/*if(key.equals(Constants.Price_List_ID)) 
 					pricesObj.setId((Integer)value);
 				if(key.equals(Constants.Price_List_UUID))
 					pricesObj.setUuid((String)value);
@@ -110,13 +110,12 @@ public class PricesDaoImpl implements PricesInterface{
 				if(key.equals(Constants.Price_List_IVA))
 					pricesObj.setUuid((String)value);
 				if(key.equals(Constants.Price_List_TOTALE))
-					pricesObj.setUuid((String)value);
-				
+					pricesObj.setUuid((String)value);*/
 			}
 	    	
-	    }*/
-	    	
-		return prices;
+	    }
+
+	    return prices;
 	}
 	
 }

@@ -11,17 +11,11 @@
 	<comment>This file contains sql queries for the management of Gruppo Alessandri workspace</comment>
 
 	<!-- CLIENTI -->
-	<!--entry key="customers.insert">
-		INSERT INTO relmng_t_cliente
-		(uuid, email, password, nome, cognome, indirizzo_uuid, tipo_uuid, note, pi, cf, num_tel, num_fax, num_cell) 
-		VALUES 
-		(:uuid,:email,:password,:nome,:cognome,:indirizzo_uuid,:tipo_uuid,:note,:pi,:cf, :num_tel, :num_fax, :num_cell)
-	</entry-->
 	<entry key="customers.insert">
 		INSERT INTO utente
-		(uuid, username, firstname, lastname, ragione_sociale, email, partita_iva, codice_fiscale, nota, numero_cellulare, data_inserimento, notifica_creazione_incompleta, iban, enabled, indirizzo, id_ruolo) 
+		(uuid, username, firstname, lastname, ragione_sociale, email, partita_iva, codice_fiscale, nota, numero_cellulare, data_inserimento, indirizzo, id_ruolo, iban, notifica_creazione_incompleta, enabled) 
 		VALUES 
-		(:uuid,:username,:firstname,:lastname,:ragione_sociale,:email,:partita_iva,:codice_fiscale,:nota,:numero_cellulare,:data_inserimento,:notifica_creazione_incompleta,:iban,:enabled,:indirizzo,:id_ruolo)
+		(:uuid,:username,:firstname,:lastname,:ragione_sociale,:email,:partita_iva,:codice_fiscale,:nota,:numero_cellulare,:data_inserimento,:indirizzo,:id_ruolo,:iban,:notifica_creazione_incompleta,:enabled)
 	</entry>
 	
 	<entry key="customers.insert_incomplete_user_profile">

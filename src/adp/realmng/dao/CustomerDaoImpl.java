@@ -75,16 +75,19 @@ public class CustomerDaoImpl implements CustomerInterface{
 		System.out.println("notifica_creazione_incompleta: "+customer.isNotifica_creazione_incompleta());
 		System.out.println("iban: "+customer.getIban());
 		System.out.println("indirizzo: "+customer.getIndirizzo());
-		System.out.println("id_ruolo"+ customer.getId_ruolo());
+		System.out.println("id_ruolo: "+ customer.getId_ruolo());
 		
 		// Check if user already exists checking Ragione Sociale and Surname
 		MapSqlParameterSource parametersFind = new MapSqlParameterSource();
 		parametersFind.addValue("codice_fiscale", customer.getCodice_fiscale());
 		parametersFind.addValue("ragione_sociale", customer.getRagione_sociale());
 		String sqlFind = CONF.getPropertyString("customers.select_by_ragSocCogn");
-		List<Map<String,Object>> customerExist = template.queryForList(sql, parametersFind);
-		if(customerExist.size()!=0)
+		System.out.println("check if user exists: "+ sqlFind);
+		List<Map<String,Object>> customerExist = template.queryForList(sqlFind, parametersFind);
+		if(customerExist.size()!=0){
+			System.out.println("Users Exists");
 			throw new UserAlreadyExistsException();
+		}
 		
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 	    parameters.addValue("uuid", uuid);
@@ -117,8 +120,8 @@ public class CustomerDaoImpl implements CustomerInterface{
 	    //parameters.addValue("numero_telefono", customer.getNumero_telefono());
 	    //parameters.addValue("numero_fax", customer.getNumero_fax());
 	    
-	    System.out.println("parameters: "+parameters);
-		
+	    System.out.println("insert ended: ");
+	    
 	    int inserted = template.update(sql, parameters);
 		
 		System.out.println("insert ended: "+inserted);

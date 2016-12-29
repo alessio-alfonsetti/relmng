@@ -38,10 +38,11 @@
 		
 		<!-- HTML for SEARCH BAR -->
 		<div class="freshdesignweb-bottom" style="align:center;padding-left:5%">
+			<p style="font-size:12px;font-weight: bold" >Ricerca il cliente, utilizzando il Cognome o la Ragione sociale</p>
 			<form id="search" method="get" action="trova-cliente">
 			        <input type="text" name="ragSocCogn" class="button" size="50" maxlength="250">
-			        <input type="submit" value="search" class="button">
-			</form>
+			        <input type="submit" value="Cerca" class="button">
+			</form><br /><br />
 			<div class="clr"></div>
 		</div>
 			
@@ -75,6 +76,8 @@
 			  <!-- th>Email</th-->
 			  <!-- th>IBAN</th-->
 			  <th>Listino Prezzi</th>
+			  <th>Listino Prezzi Old</th>
+			  <th>Listino Prezzi New</th>
 			  <th>Emetti</th>
 			  <th>Fatture</th>
 			 </tr>
