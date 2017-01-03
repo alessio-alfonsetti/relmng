@@ -462,6 +462,9 @@ public class CustomerController{
 			customer = dao.findByCustomerSurnameCompanyName(ragSocCogn);
 			model.addAttribute("searched_customer", customer);
 			
+			if(customer.getId()==0)
+				System.out.println("Il cliente non e' stato trovato");
+			
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

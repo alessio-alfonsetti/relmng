@@ -147,7 +147,7 @@
 	</entry>
 	
 	<entry key="transports.get_all_by_id">
-		SELECT * FROM trasporto ORDER BY idtrasporto DESC LIMIT 10
+		SELECT * FROM trasporto ORDER BY idtrasporto DESC LIMIT 30
 	</entry>
 	
 	<!-- LISTINO PREZZI - PRICES -->
@@ -158,8 +158,18 @@
 		(:uuid,:uuid_cliente,:cer,:cer_descr,:imponibile,:iva,:totale,:last_update,:nota_update)
 	</entry>
 	
+	<entry key="prices.modify">
+		UPDATE listino_prezzi 
+		SET uuid_cliente=:uuid_cliente, cer=:cer, cer_descr=:cer_descr, imponibile=:imponibile, iva=:iva, totale=:totale, last_update=:last_update, nota_update=:nota_update
+		WHERE uuid=:uuid
+	</entry>
+	
 	<entry key="prices.select_by_client_uuid">
 		SELECT * FROM listino_prezzi WHERE uuid_cliente = :uuid_cliente
+	</entry>
+	
+	<entry key="prices.select_by_last_update">
+		SELECT * FROM listino_prezzi ORDER BY last_update DESC LIMIT 30
 	</entry>
 	
 </properties>

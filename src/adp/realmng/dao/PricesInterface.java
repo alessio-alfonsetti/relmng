@@ -14,5 +14,10 @@ public interface PricesInterface {
 
 	public List<Map<String, Object>> findPricesByClientUuid(String uuid)
 			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public List<Map<String, Object>> findPricesOrderedByNewest()
+			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public int modify(Prices prices) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
 }

@@ -74,6 +74,11 @@
 	        	
 		   </form>
 		</div>
+		
+		<header>
+			<h1><a style="margin-left:-50%;color:#498ea5" href="modifica-listino">Modifica</a> <a style="margin-left:10%;color:#498ea5" href="#">Delete</a></h1>
+		</header>
+		
 	</div>
 
 	<script>

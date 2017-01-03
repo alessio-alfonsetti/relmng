@@ -3,34 +3,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<%@page import="adp.realmng.dao.CustomerDaoImpl"%>
+<%@page import="adp.realmng.model.Customer"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+<%@page import="org.springframework.context.support.ClassPathXmlApplicationContext"%>
+
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>${title}</title>
+<title>Home</title>
 
 <link href="<c:url value="/resources/ga/css/style.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/ga/css/demo.css" />" rel="stylesheet">
-
-<script type="text/javascript">
-    function doIVA()
-    {
-        // Capture the entered values of two input boxes
-        var imponibile = document.getElementById('imponibile').value;
-        var iva = document.getElementById('iva').value;
-
-        var iva2 = (imponibile/100)*iva;
-        
-        // Add them together and display
-        var sum = parseInt(imponibile) + parseInt(iva2);
-        //document.write(sum);
-        document.getElementById("totale").value = sum;
-        //console.log(sum);
-    }
-</script>
+<link href="<c:url value="/resources/ga/css/table.css" />" rel="stylesheet">
 
 </head>
 <body>
-
 	<div class="container">
 		<!-- freshdesignweb top bar -->
 		<div class="freshdesignweb-top">
@@ -44,39 +31,9 @@
 			</span>
 			<div class="clr"></div>
 		</div><!--/ freshdesignweb top bar -->
-	
-		<header>
-			<h1><span></span>${message}</h1>
-		</header>
-	
-		<div  class="form">
-			<form id="contactform" method="POST" action="/inserisci-listino">
-	        	
-	        	<p class="contact"><label for="cer">CER</label></p>
-				<input id="cer" name="cer" placeholder="CER1234567890" tabindex="1" type="text">
-				
-				<p class="contact"><label for="cer_descr">Descrizione CER</label></p>
-				<input id="cer_descr" name="cer_descr" placeholder="Descrizione CER1234567890" maxlength="250" tabindex="2" type="text">
-				
-				<p class="contact"><label for="uuid_cliente">Ragione Sociale o Cognome</label></p>
-				<input id="uuid_cliente" name="uuid_cliente" placeholder="Ragione Sociale o Cognome" maxlength="250" tabindex="3" type="text" value="${rag_soc_cogn}" >
-				
-				<p class="contact"><label for="imponibile">Imponibile</label></p>
-				<input id="imponibile" name="imponibile" placeholder="imponibile" tabindex="4" type="number"> EURO
-				
-				<p class="contact"><label for="iva">IVA</label></p>
-				<input id="iva" name="iva" placeholder="iva" tabindex="5" type="number" > %
-				
-				<p class="contact"><label for="totale">Totale</label></p>
-				<input id="totale" name="totale" placeholder="totale" tabindex="6" type="number" value="" onfocus="doIVA();" > EURO
-	
-				<input class="button" name="submit" id="submit" value="Inserisci" type="submit" tabindex="7" />
-	        	
-		   </form>
-		</div>
 		
 		<header>
-			<h1><a style="margin-left:-50%;color:#498ea5" href="modifica-listino">Modifica</a> <a style="margin-left:10%;color:#498ea5" href="#">Delete</a></h1>
+			<h1><span></span> ${message}</h1>
 		</header>
 		
 	</div>

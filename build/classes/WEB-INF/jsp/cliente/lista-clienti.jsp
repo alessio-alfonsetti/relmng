@@ -40,7 +40,7 @@
 		<div class="freshdesignweb-bottom" style="align:center;padding-left:5%">
 			<p style="font-size:12px;font-weight: bold" >Ricerca il cliente, utilizzando il Cognome o la Ragione sociale</p>
 			<form id="search" method="get" action="trova-cliente">
-			        <input type="text" name="ragSocCogn" class="button" size="50" maxlength="250">
+			        <input type="text" name="ragSocCogn" class="button" size="50" maxlength="250" required>
 			        <input type="submit" value="Cerca" class="button">
 			</form><br /><br />
 			<div class="clr"></div>
@@ -75,8 +75,7 @@
 			  <!-- th>Numero di Telefono</th-->
 			  <!-- th>Email</th-->
 			  <!-- th>IBAN</th-->
-			  <th>Listino Prezzi</th>
-			  <th>Listino Prezzi Old</th>
+			  <!--  th>Listino Prezzi Old</th-->
 			  <th>Listino Prezzi New</th>
 			  <th>Emetti</th>
 			  <th>Fatture</th>
@@ -87,25 +86,24 @@
 			  <tr>
 			   <td>${customers.uuid}</td>
 			   <td>${customers.ragione_sociale}</td>
-			   <td>${customers.firstname}</td>
-			   <td>${customers.middlename}</td>
+			   <td>${customers.firstname} ${customers.middlename}</td>
 			   <td>${customers.lastname}</td>
 			   <td>${customers.partita_iva}</td>
 			   <td>${customers.codice_fiscale}</td>
 			   <!-- td>${customers.numero_telefono}</td-->
 			   <!-- td>${customers.email}</td-->
 			   <!-- td>${customers.iban}</td-->
-			   <td>
+			   <!--td>
 			   	<div class="form">
 					<form id="contactform" method="POST" action="listino?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
 			   		</form>
 			   	</div>
-			   </td>
+			   </td-->
 			   <td>
 			   	<div class="form">
 					<form id="contactform" method="POST" action="listino-prezzi?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}&firstname=${customers.firstname}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi Nuovo" type="submit" tabindex="1">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
 			   		</form>
 			   	</div>
 			   </td>

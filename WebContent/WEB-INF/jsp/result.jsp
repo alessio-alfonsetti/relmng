@@ -163,50 +163,61 @@
 		</c:if>
 		
 		<c:if test="${not empty searched_customer}">
-			<table>
-			 <thead>
-			 <tr>
-			  <th>ID</th>
-			  <th>UUID</th>
-			  <th>Nome</th>
-			  <th>Cognome</th>
-			  <th>Ragione Sociale</th>
-			  <th>Email</th>
-			  <th>Codice Fiscale</th>
-			  <th>Indirizzo</th>
-			  <th>Numero Cellulare</th>
-			  <th>Data Inserimento</th>
-			  <th>Iban</th>
-			  <th>Nota</th>
-			  <th></th>
-			 </tr>
-			 </thead>
+			<c:choose>
+				<c:when test="${searched_customer.id == '0'}">
+				  <p style="font-size:30px;font-weight: bold;margin-left:10%;margin-top:10%">Il Listino Prezzi e' vuoto.</p>
+				</c:when>
+				
+				<c:otherwise>
+					
+				<table>
+				 <thead>
+				 <tr>
+				  <th>ID</th>
+				  <th>UUID</th>
+				  <th>Nome</th>
+				  <th>Cognome</th>
+				  <th>Ragione Sociale</th>
+				  <th>Email</th>
+				  <th>Codice Fiscale</th>
+				  <th>Indirizzo</th>
+				  <th>Numero Cellulare</th>
+				  <th>Data Inserimento</th>
+				  <th>Iban</th>
+				  <th>Nota</th>
+				  <th></th>
+				 </tr>
+				 </thead>
+				
+				 <tbody>
+				  <tr>
+				   <td>${searched_customer.id}</td>
+				   <td>${searched_customer.uuid}</td>
+				   <td>${searched_customer.firstname}</td>
+				   <td>${searched_customer.lastname}</td>
+				   <td>${searched_customer.ragione_sociale}</td>
+				   <td>${searched_customer.email}</td>
+				   <td>${searched_customer.codice_fiscale}</td>
+				   <td>${searched_customer.indirizzo}</td>
+				   <td>${searched_customer.numero_cellulare}</td>
+				   <td>${searched_customer.data_inserimento}</td>
+				   <td>${searched_customer.iban}</td>
+				   <td>${searched_customer.nota}</td>
+				   <td>
+				   	<div class="form">
+						<form id="contactform" method="POST" action="listino-prezzi?uuid=${searched_customer.uuid}&ragione_sociale=${searched_customer.ragione_sociale}&lastname=${searched_customer.lastname}&firstname=${searched_customer.firstname}">
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi Nuovo" type="submit" tabindex="1">
+				   		</form>
+				   	</div>
+				   </td>
+				  </tr>
+				 </tbody>
+		 	
+				</table>
+					
+				</c:otherwise>
+			</c:choose>
 			
-			 <tbody>
-			  <tr>
-			   <td>${searched_customer.id}</td>
-			   <td>${searched_customer.uuid}</td>
-			   <td>${searched_customer.firstname}</td>
-			   <td>${searched_customer.lastname}</td>
-			   <td>${searched_customer.ragione_sociale}</td>
-			   <td>${searched_customer.email}</td>
-			   <td>${searched_customer.codice_fiscale}</td>
-			   <td>${searched_customer.indirizzo}</td>
-			   <td>${searched_customer.numero_cellulare}</td>
-			   <td>${searched_customer.data_inserimento}</td>
-			   <td>${searched_customer.iban}</td>
-			   <td>${searched_customer.nota}</td>
-			   <td>
-			   	<div class="form">
-					<form id="contactform" method="POST" action="listino-prezzi?uuid=${searched_customer.uuid}&ragione_sociale=${searched_customer.ragione_sociale}&lastname=${searched_customer.lastname}&firstname=${searched_customer.firstname}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi Nuovo" type="submit" tabindex="1">
-			   		</form>
-			   	</div>
-			   </td>
-			  </tr>
-			 </tbody>
-	 	
-			</table>
 		</c:if>
 		
 	</div>

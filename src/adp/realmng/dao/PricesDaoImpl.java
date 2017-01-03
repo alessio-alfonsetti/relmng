@@ -118,4 +118,39 @@ public class PricesDaoImpl implements PricesInterface{
 	    return prices;
 	}
 	
+	@Override
+	public List<Map<String, Object>> findPricesOrderedByNewest() throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		String sql = CONF.getPropertyString("prices.select_by_last_update");
+		
+		List<Map<String,Object>> prices = template.queryForList(sql);
+		
+	    return prices;
+	}
+
+	@Override
+	public int modify(Prices prices) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		String sql = CONF.getPropertyString("prices.modify");
+
+		java.util.Date date = new java.util.Date();
+		prices.setLast_update(new Timestamp(date.getTime()));
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("uuid", prices.getUuid());	    
+		parameters.addValue("uuid_cliente", prices.getUuid_cliente());
+	    parameters.addValue("cer", prices.getCer());
+	    parameters.addValue("cer_descr", prices.getCer_descr());
+	    parameters.addValue("imponibile", prices.getImponibile());
+	    parameters.addValue("iva", prices.getIva());
+	    parameters.addValue("totale", prices.getTotale());
+	    parameters.addValue("last_update", date);
+	    parameters.addValue("nota_update", prices.getNota_update());
+	    
+	    int inserted = template.update(sql, parameters);
+		System.out.println("price inserted successfully: "+inserted);
+		
+		return inserted;
+		
+	}
 }

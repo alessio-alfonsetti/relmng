@@ -141,44 +141,13 @@ public class PricesController {
 
 	}
 	
-	@RequestMapping(value = "/listino", method = {RequestMethod.GET, RequestMethod.POST}, params = {"uuid", "ragione_sociale", "lastname"})
-	public ModelAndView printHome(ModelMap model, 
-			@RequestParam("uuid") String uuid, @RequestParam("ragione_sociale") String ragione_sociale, @RequestParam("lastname") String lastname) {
+	@RequestMapping(value = "/listino-prezzi", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView printHome(ModelMap model) {
 		
 		ModelAndView modelAndView = new ModelAndView("listino/inserisci-listino", "command", new Prices()); 
 		
 		modelAndView.addObject("title", "Inserisci Nuovo Prezzo nel Listino");
 		modelAndView.addObject("message", "Inserisci Nuovo Prezzo nel Listino");
-		
-		String ragSoc_Cogn = null;
-		if(ragione_sociale != null && ragione_sociale != "") {
-			modelAndView.addObject("rag_soc_cogn", ragione_sociale);
-			ragSoc_Cogn = ragione_sociale;
-		}
-		else {
-			modelAndView.addObject("rag_soc_cogn", lastname);
-			ragSoc_Cogn = lastname;
-		}
-		
-		System.out.println("client uuid: "+uuid);
-		
-		try {
-			List<Map<String,Object>> prices = pricesDao.findPricesByClientUuid(uuid);
-			System.out.println("Prezzi associati al cliente: "+prices.size());
-			
-			if(prices != null)
-				modelAndView.addObject("client_prices", prices);
-			
-		} catch (InvalidPropertiesFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		/* User Details */
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -230,4 +199,134 @@ public class PricesController {
 		return "result";
 	}
 	
+	@RequestMapping(value = "/modifica-listino", method = {RequestMethod.POST, RequestMethod.GET})
+	public String upgradeListino(@ModelAttribute("relationship-management") Prices record, ModelMap model){
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		System.out.println("Listino Prezzi in ordine Decrescente");
+		List<Map<String, Object>> prices = new ArrayList<Map<String, Object>>();
+		String toBeReturned = "listino/modifica-prezzo";
+
+		model.addAttribute("result", "OK");
+		
+		model.addAttribute("message", "Modifica Listino Prezzi");
+		model.addAttribute("title", "Modifica Listino Prezzi");
+		
+		try {
+			
+			prices = pricesDao.findPricesOrderedByNewest();
+			model.addAttribute("latest_prices", prices);
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return toBeReturned;
+	}
+
+	/**
+	 * @params:
+	 * 	u  = uuid
+	 *  uc = uuid_cliente
+	 *  c  = cer
+	 *  cd = cer_descrizione
+	 *  im = imponibile
+	 *  iv = iva
+	 *  t  = totale
+	 *  lu = last_update
+	 *  nu = not_update
+	 */
+	@RequestMapping(value = "/modifica-listino", method = {RequestMethod.POST, RequestMethod.GET}, params = {"u", "uc", "c", "cd", "im", "iv", "t", "lu", "nu"} )
+	public String upgradeListino(@ModelAttribute("relationship-management") Prices record, ModelMap model, 
+			String u, String uc, String c, String cd, String im, String iv, String t, String lu, String nu){
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		System.out.println("Listino Prezzi Cliente UUID: "+uc);
+		String toBeReturned = "listino/modifica-prezzo";
+		
+		model.addAttribute("latest_prices", "modificare");
+		model.addAttribute("u", u);
+		model.addAttribute("uc", uc);
+		model.addAttribute("c", c);
+		model.addAttribute("cd", cd);
+		model.addAttribute("im", im);
+		model.addAttribute("iv", iv);
+		model.addAttribute("t", t);
+		model.addAttribute("lu", lu);
+		model.addAttribute("nu", nu);
+		
+		model.addAttribute("latest_prices", "modificare");
+		
+		model.addAttribute("message", "Modifica Prezzo");
+		model.addAttribute("title", "Modifica Prezzo");
+		
+		return toBeReturned;
+	}
+	
+	@RequestMapping(value = "/modifica-prezzo", method = {RequestMethod.POST, RequestMethod.GET})
+	public String updatePrice(@ModelAttribute("relationship-management") Prices prices, ModelMap model) {
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		model.addAttribute("title", "Modifica Prezzo");
+		
+		model.addAttribute("uuid", prices.getUuid());
+		model.addAttribute("uuid_cliente", prices.getUuid_cliente());
+		model.addAttribute("cer", prices.getCer());
+		model.addAttribute("cer_descr", prices.getCer_descr());
+		model.addAttribute("imponibile", prices.getImponibile());
+		model.addAttribute("iva", prices.getIva());
+		model.addAttribute("totale", prices.getTotale());
+		model.addAttribute("nota_update", prices.getNota_update());
+		model.addAttribute("last_update", prices.getTotale());
+		
+		System.out.println("uuid: "+prices.getUuid());
+		System.out.println("uuid_cliente: "+prices.getUuid_cliente());
+		System.out.println("cer: "+prices.getCer());
+		System.out.println("cer_descr: "+prices.getCer_descr());
+		System.out.println("imponibile: "+prices.getImponibile());
+		System.out.println("iva: "+prices.getIva());
+		System.out.println("totale: "+prices.getTotale());
+		System.out.println("nota_update: "+prices.getNota_update());
+		System.out.println("last_update: "+prices.getTotale());
+		
+		int modified = 0;
+		try {
+			modified = pricesDao.modify(prices);
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if(modified == 0) {
+			System.out.println("Si e' verificato un errore in fase di modifica del prezzo");
+			model.addAttribute("message", "Si e' verificato un errore in fase di modifica del prezzo");
+			
+			return "error";
+		}
+		
+		model.addAttribute("message", "Il prezzo e' stato modificato con successo");
+		System.out.println("Il prezzo e' stato modificato con successo");
+		return "result";
+	}
 }
