@@ -406,7 +406,7 @@ public class CustomerDaoImpl implements CustomerInterface{
 
 	@Override
 	public void modify(Customer customer) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

@@ -294,16 +294,6 @@ public class PricesController {
 		model.addAttribute("nota_update", prices.getNota_update());
 		model.addAttribute("last_update", prices.getTotale());
 		
-		System.out.println("uuid: "+prices.getUuid());
-		System.out.println("uuid_cliente: "+prices.getUuid_cliente());
-		System.out.println("cer: "+prices.getCer());
-		System.out.println("cer_descr: "+prices.getCer_descr());
-		System.out.println("imponibile: "+prices.getImponibile());
-		System.out.println("iva: "+prices.getIva());
-		System.out.println("totale: "+prices.getTotale());
-		System.out.println("nota_update: "+prices.getNota_update());
-		System.out.println("last_update: "+prices.getTotale());
-		
 		int modified = 0;
 		try {
 			modified = pricesDao.modify(prices);

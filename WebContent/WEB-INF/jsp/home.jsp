@@ -74,9 +74,13 @@
 			   <td>${customer_for_notification.iban}</td>
 			   <td>
 			   	<div class="form">
-			   		<form id="contactform" method="POST" action="completa-profilo?uuid=${customer_for_notification.uuid}">
+			   		<!--form id="contactform" method="POST" action="completa-profilo?uuid=${customer_for_notification.uuid}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Completa" type="submit" tabindex="1">   
-			   		</form>
+			   		</form-->
+			   		<form id="contactform" method="POST" action="completa-profilo">
+				   			<input type="hidden" name="uuid" value="${customer_for_notification.uuid}" />
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Completa" type="submit" tabindex="1" />
+				   		</form>
 			   	</div>
 			   </td>
 			  </tr>
@@ -96,7 +100,8 @@
 				</a>
 			</span>
 			<span class="right">
-				<a href="dipendenti">
+				<!-- a href="dipendenti"-->
+				<a href="#">
 				<strong>Dipendenti</strong>
 				</a>
 			</span>

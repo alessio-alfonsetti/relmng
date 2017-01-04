@@ -478,4 +478,54 @@ public class CustomerController{
 		
 		return "result";
 	}
+	
+	/**
+	 * ragione_sociale
+	 * firstname
+	 * lastname
+	 * email
+	 * partita_iva
+	 * codice_fiscale
+	 * nota
+	 * password
+	 * numero_cellulare
+	 * iban
+	 * indirizzo
+	 * id_ruolo
+	 * 
+	 * @param model
+	 * @param uuid
+	 * @return
+	 */
+	@RequestMapping(value="/completa-profilo", method = RequestMethod.POST, params = "uuid")
+	public String upgradeProfile (ModelMap model, @RequestParam("uuid") String uuid){
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		model.addAttribute("title", "Completa Profilo del Cliente");
+		
+		System.out.println("UUID: "+uuid);
+		Customer customer;
+		
+		try {
+			
+			customer = dao.findByCustomerUuid(uuid);
+			if(customer == null)
+				model.addAttribute("message", "Il Cliente cercato non esiste");
+						
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

@@ -125,8 +125,20 @@
 				   <td>${prices.nota_update}</td>
 				   <td>
 				   	<div class="form">
-						<form id="contactform" method="POST" action="modifica-listino?u=${prices.uuid}&uc=${prices.uuid_cliente}&c=${prices.cer}&cd=${prices.cer_descr}&im=${prices.imponibile}&iv=${prices.iva}&t=${prices.totale}&lu=${prices.last_update}&nu=${prices.nota_update}">
+						<!-- form id="contactform" method="POST" action="modifica-listino?u=${prices.uuid}&uc=${prices.uuid_cliente}&c=${prices.cer}&cd=${prices.cer_descr}&im=${prices.imponibile}&iv=${prices.iva}&t=${prices.totale}&lu=${prices.last_update}&nu=${prices.nota_update}">
 				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1">
+				   		</form-->
+				   		<form id="contactform" method="POST" action="modifica-listino">
+				   			<input type="hidden" name="u" value="${prices.uuid}" />
+				   			<input type="hidden" name="uc" value="${prices.uuid_cliente}" />
+				   			<input type="hidden" name="c" value="${prices.cer}" />
+				   			<input type="hidden" name="cd" value="${prices.cer_descr}" />
+				   			<input type="hidden" name="im" value="${prices.imponibile}" />
+				   			<input type="hidden" name="iv" value="${prices.iva}" />
+				   			<input type="hidden" name="t" value="${prices.totale}" />
+				   			<input type="hidden" name="lu" value="${prices.last_update}" />
+				   			<input type="hidden" name="nu" value="${prices.nota_update}" />
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1" />
 				   		</form>
 				   	</div>
 				   </td>
