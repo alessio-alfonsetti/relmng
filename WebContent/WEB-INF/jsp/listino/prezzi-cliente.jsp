@@ -37,19 +37,8 @@
 		</header>
 	
 		<div class="freshdesignweb-bottom">
-			<a href="trasporti-mud">Inserisci Nuovo Prezzo</a>
-			<a href="#">Modifica</a>
-			<span class="right">
-				<a href="#">
-				<strong>Deattiva</strong>
-				</a>
-			</span>
-			<span class="right">
-				<a href="#">
-				<strong>Esporta</strong>
-				</a>
-			</span>
-			
+			<a href="listino-prezzi">Inserisci Nuovo Prezzo</a>
+						
 			<div class="clr"></div>
 		</div>
 	
@@ -65,6 +54,7 @@
 			  <th>Totale</th>
 			  <th>Data Aggiornamento</th>
 			  <th>Nota Aggiornamento</th>
+			  <th></th>
 			 </tr>
 			 </thead>
 			<c:forEach items="${list_prices_by_customer}" begin="0" end="10" var="prices">
@@ -79,6 +69,25 @@
 			   <td>${prices.totale}</td>
 			   <td>${prices.last_update}</td>
 			   <td>${prices.nota_update}</td>
+			   <td>
+				   	<div class="form">
+						<!-- form id="contactform" method="POST" action="modifica-listino?u=${prices.uuid}&uc=${prices.uuid_cliente}&c=${prices.cer}&cd=${prices.cer_descr}&im=${prices.imponibile}&iv=${prices.iva}&t=${prices.totale}&lu=${prices.last_update}&nu=${prices.nota_update}">
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1">
+				   		</form-->
+				   		<form id="contactform" method="POST" action="modifica-listino">
+				   			<input type="hidden" name="u" value="${prices.uuid}" />
+				   			<input type="hidden" name="uc" value="${prices.uuid_cliente}" />
+				   			<input type="hidden" name="c" value="${prices.cer}" />
+				   			<input type="hidden" name="cd" value="${prices.cer_descr}" />
+				   			<input type="hidden" name="im" value="${prices.imponibile}" />
+				   			<input type="hidden" name="iv" value="${prices.iva}" />
+				   			<input type="hidden" name="t" value="${prices.totale}" />
+				   			<input type="hidden" name="lu" value="${prices.last_update}" />
+				   			<input type="hidden" name="nu" value="${prices.nota_update}" />
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1" />
+				   		</form>
+				   	</div>
+				   </td>
 			  </tr>
 			 </tbody>
 	 		</c:forEach>

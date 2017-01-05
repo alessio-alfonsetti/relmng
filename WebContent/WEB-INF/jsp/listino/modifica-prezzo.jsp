@@ -59,7 +59,6 @@
 			</c:when>
 			
 			<c:when test="${latest_prices == 'modificare'}">
-			  <p style="font-size:30px;font-weight: bold;margin-left:10%;margin-top:10%">Porco Zio.</p>
 			  		  
 			  <div  class="form">
 				<form id="contactform" method="POST" action="/modifica-prezzo">
@@ -89,7 +88,6 @@
 					<input id="nota_update" name="nota_update" tabindex="8" type="text" value="${nu}" >		
 		
 					<input class="button" name="submit" id="submit" value="Modifica" type="submit" tabindex="9" />
-		        	
 			   </form>
 			</div>
 			  

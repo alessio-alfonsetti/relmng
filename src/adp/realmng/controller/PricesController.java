@@ -26,8 +26,6 @@ import org.springframework.web.servlet.ModelAndView;
 import adp.realmng.dao.CustomerDaoImpl;
 import adp.realmng.dao.PricesDaoImpl;
 import adp.realmng.model.Customer;
-import adp.realmng.model.GATransportRecordView;
-import adp.realmng.model.Invoice;
 import adp.realmng.model.Prices;
 
 @Controller
@@ -79,7 +77,8 @@ public class PricesController {
 			prices = pricesDao.findPricesByClientUuid(clientUUID);
 			
 			if(prices.size()==0){
-				System.out.println("L'utente non ha un listino prezzi. Crearne uno.");
+				System.out.println("L'utente non ha un listino prezzi. Creane uno");
+				model.addAttribute("message", "L'utente non ha un listino prezzi. Creane uno");
 				toBeReturned = "listino/inserisci-listino";
 			}
 			
@@ -219,7 +218,7 @@ public class PricesController {
 			
 			prices = pricesDao.findPricesOrderedByNewest();
 			model.addAttribute("latest_prices", prices);
-			
+
 		} catch (InvalidPropertiesFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -319,4 +318,5 @@ public class PricesController {
 		System.out.println("Il prezzo e' stato modificato con successo");
 		return "result";
 	}
+	
 }
