@@ -76,7 +76,7 @@
 			  <!-- th>Email</th-->
 			  <!-- th>IBAN</th-->
 			  <!--  th>Listino Prezzi Old</th-->
-			  <th>Listino Prezzi New</th>
+			  <th>Listino Prezzi</th>
 			  <th>Emetti</th>
 			  <th>Fatture</th>
 			 </tr>
@@ -102,9 +102,16 @@
 			   </td-->
 			   <td>
 			   	<div class="form">
-					<form id="contactform" method="POST" action="listino-prezzi?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}&firstname=${customers.firstname}">
+					<!--form id="contactform" method="POST" action="listino-prezzi?uuid=${customers.uuid}&ragione_sociale=${customers.ragione_sociale}&lastname=${customers.lastname}&firstname=${customers.firstname}">
 			   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1">
-			   		</form>
+			   		</form-->
+			   		<form id="contactform" method="POST" action="listino-prezzi">
+				   			<input type="hidden" name="uuid" value="${customers.uuid}" />
+				   			<input type="hidden" name="ragione_sociale" value="${customers.ragione_sociale}" />
+				   			<input type="hidden" name="lastname" value="${customers.lastname}" />
+				   			<input type="hidden" name="firstname" value="${customers.firstname}" />
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Listino Prezzi" type="submit" tabindex="1" />
+				   		</form>
 			   	</div>
 			   </td>
 			   <td>
