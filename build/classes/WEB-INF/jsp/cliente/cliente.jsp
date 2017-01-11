@@ -29,7 +29,8 @@
 	<header>
 		<h1><span></span>${message}</h1>
 	</header>
-   
+	
+   <h2 style="margin-left:30%;font-weight:bold">${title2}</h2>
    <div  class="form">
    		<p style="font-size:10px;text-align:center" >I campi contrassegnato con il simbolo * sono obbligaori</p><br /><br />
    		

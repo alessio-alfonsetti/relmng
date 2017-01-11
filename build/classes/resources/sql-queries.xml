@@ -172,4 +172,12 @@
 		SELECT * FROM listino_prezzi ORDER BY last_update DESC LIMIT 30
 	</entry>
 	
+	<entry key="prices.select_by_cer">
+		SELECT * FROM listino_prezzi WHERE cer = :cer
+	</entry>
+	
+	<entry key="prices.delete_by_cer">
+		DELETE FROM listino_prezzi WHERE  cer = :cer
+	</entry>
+	
 </properties>

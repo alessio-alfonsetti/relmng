@@ -153,4 +153,41 @@ public class PricesDaoImpl implements PricesInterface{
 		return inserted;
 		
 	}
+	
+	/**
+	 * The values expected are 0 (no products listed) or 1 (only one price can be available for a specific customer). 
+	 * Any other values should not be accepted and handled as an exception.
+	 */
+	@Override
+	public List<Map<String, Object>> findPricesByCer(String cer) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
+		
+		String sql = CONF.getPropertyString("prices.select_by_cer");
+		System.out.println("product cer: "+cer);
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("cer", cer);
+	    
+	    List<Map<String, Object>> prices = template.queryForList(sql, parameters);
+	    
+	    return prices;
+	}
+
+	@Override
+	public int delete(String cer) throws IOException, FileNotFoundException, IOException {
+		System.out.println("delete by cer: "+cer);
+		int res = 0;
+		
+		String sql = CONF.getPropertyString("prices.delete_by_cer");
+				
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("cer", cer);
+	    
+	    res = template.update(sql, parameters);
+		
+	    if(res==1)
+	    	System.out.println("Record cancellato con successo: "+res);
+	    else System.out.println("Record NON cancellato: "+res);
+	    
+		return res;
+	}
 }

@@ -36,12 +36,6 @@
 			<h1><span>${message} <b>${nome_cliente}</b></span></h1>
 		</header>
 		<h2 style="margin-left:30%;font-weight:bold">${title2}</h2>
-		<div class="freshdesignweb-bottom">
-			<a href="listino-prezzi">Inserisci Nuovo Prezzo</a>
-						
-			<div class="clr"></div>
-		</div>
-	
 		<table>
 			<thead>
 			 <tr>
@@ -55,9 +49,10 @@
 			  <th>Data Aggiornamento</th>
 			  <th>Nota Aggiornamento</th>
 			  <th></th>
+			  <th></th>
 			 </tr>
 			 </thead>
-			<c:forEach items="${list_prices_by_customer}" begin="0" end="10" var="prices">
+			<c:forEach items="${prices}" begin="0" end="10" var="prices">
 			 <tbody>
 			  <tr>
 			   <td>${prices.uuid}</td>
@@ -85,6 +80,18 @@
 				   			<input type="hidden" name="lu" value="${prices.last_update}" />
 				   			<input type="hidden" name="nu" value="${prices.nota_update}" />
 				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1" />
+				   		</form>
+				   	</div>
+				   </td>
+			  </tr>
+			  <td>
+				   	<div class="form">
+						<!-- form id="contactform" method="POST" action="modifica-listino?u=${prices.uuid}&uc=${prices.uuid_cliente}&c=${prices.cer}&cd=${prices.cer_descr}&im=${prices.imponibile}&iv=${prices.iva}&t=${prices.totale}&lu=${prices.last_update}&nu=${prices.nota_update}">
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="1">
+				   		</form-->
+				   		<form id="contactform" method="POST" action="cancella-prezzo">
+				   			<input type="hidden" name="cer" value="${prices.cer}" />
+				   			<input class="button" name="submit" id="submit" tabindex="1" value="Cancella" type="submit" tabindex="1" />
 				   		</form>
 				   	</div>
 				   </td>

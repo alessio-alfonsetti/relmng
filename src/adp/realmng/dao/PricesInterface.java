@@ -19,5 +19,10 @@ public interface PricesInterface {
 			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 
 	public int modify(Prices prices) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public List<Map<String, Object>> findPricesByCer(String cer)
+			throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
+
+	public int delete(String cer) throws IOException, FileNotFoundException, IOException;
 	
 }

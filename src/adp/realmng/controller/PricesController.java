@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import adp.realmng.dao.CustomerDaoImpl;
 import adp.realmng.dao.PricesDaoImpl;
+import adp.realmng.exceptions.NoClientException;
 import adp.realmng.model.Customer;
 import adp.realmng.model.Prices;
 
@@ -41,6 +42,14 @@ public class PricesController {
 	PricesDaoImpl pricesDao = (PricesDaoImpl)factory.getBean("PricesDao");
 	CustomerDaoImpl customerDao = (CustomerDaoImpl)factory.getBean("CustomerDao");
 	
+	/**
+	 * Inserimento prezzo per cliente, passando le info del cliente stesso: 
+	 * @param clientUUID
+	 * @param ragSoc
+	 * @param lastname
+	 * @param firstname
+	 * @return
+	 */
 	@RequestMapping(value = "/listino-prezzi", method = {RequestMethod.GET, RequestMethod.POST}, params = {"uuid", "ragione_sociale", "lastname", "firstname"})
 	public String listPrices(@ModelAttribute("relationship-management") Prices record, ModelMap model, @RequestParam("uuid") String clientUUID,
 			@RequestParam("ragione_sociale") String ragSoc, @RequestParam("lastname") String lastname, @RequestParam("firstname") String firstname) {
@@ -140,6 +149,12 @@ public class PricesController {
 
 	}
 	
+	/**
+	 * Inserimento prezzi per cliente.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/listino-prezzi", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView printHome(ModelMap model) {
 		
@@ -158,6 +173,8 @@ public class PricesController {
 	@RequestMapping(value = "/inserisci-listino", method = {RequestMethod.POST, RequestMethod.GET})
 	public String addInListino(@ModelAttribute("relationship-management")Prices prices, ModelMap model) {
 		
+		String resultURL = "result";
+		
 		model.addAttribute("cer", prices.getCer());
 		model.addAttribute("cer_descr", prices.getCer_descr());
 		model.addAttribute("imponibile", prices.getImponibile());
@@ -166,14 +183,43 @@ public class PricesController {
 		System.out.println("uuid_cliente: "+prices.getUuid_cliente());
 		
 		try {
+			
+			/* User Details */
+			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("username", userDetails.getUsername());
+			
 			String uuid_cliente = customerDao.findByRagSocCogn(prices.getUuid_cliente());
 			model.addAttribute("uuid_cliente", uuid_cliente);
 			prices.setUuid_cliente(uuid_cliente);
 			
-			pricesDao.insert(prices);
-			
 			model.addAttribute("last_update", prices.getLast_update());
 			model.addAttribute("nota_update", prices.getNota_update());
+			
+			List<Map<String, Object>> pricesFound = pricesDao.findPricesByCer(prices.getCer());
+			
+			if(pricesFound.size() == 0) {
+				System.out.println("Inserimento corretto per il CER");
+				// non ci sono prezzi per il prodotto considerato. Inserisci normalmente
+				model.addAttribute("prices", prices);
+				model.addAttribute("title", "Prezzo aggiunto con successo nel Listino");
+				model.addAttribute("title2", "Le informazioni inserite sono:");
+				model.addAttribute("message", "Le informazioni inserite sono:");
+				
+				pricesDao.insert(prices);
+				
+			} else {
+				System.out.println("E' stato trovato un prezzo con il CER usato. Modifica il precedente.");
+				// se prezzo = 1, vuol dire che il prodotto ha gia' un prezzo e non si deve permettere un altro inserimento. Si restituisce all'operatore
+				// il prezzo esistente per la modifica.
+				// se prezzo > 1 redirigi alla pagina di modifica del prezzo gia' esistente per questo CER
+				model.addAttribute("prices", pricesFound);
+				model.addAttribute("title", "Prezzi Trovati");
+				model.addAttribute("title2", "Ecco i prezzi trovati per il CER inserito: ");
+				model.addAttribute("message", "Un solo prezzo e' permesso per il CER. Cancella i prezzi, mantenendone solo uno.");
+				
+				resultURL = "listino/prezzi-duplicati";
+				
+			} 
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -181,21 +227,22 @@ public class PricesController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NoClientException e ) {
+
+			// redirigi alla pagina per la creazione del cliente
+			System.out.println("Error: "+e.getMessage());
+			model.addAttribute("title2", "Il cliente non esiste. Bisogna creare il cliente prima di concordarci il prezzo di un servizio.");
+			model.addAttribute("message", "Inserisci Nuovo Cliente");
+			
+			resultURL = "cliente/cliente";
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
+		System.out.println("Reindirizza a: "+resultURL);
 		
-		model.addAttribute("prices", prices);
-		model.addAttribute("title", "Prezzo aggiungo con successo nel Listino");
-		model.addAttribute("h2", "Le informazioni inserite sono:");
-		model.addAttribute("message", "Le informazioni inserite sono:");		
-		
-		/* User Details */
-		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("username", userDetails.getUsername());
-		
-		return "result";
+		return resultURL;
 	}
 	
 	@RequestMapping(value = "/modifica-listino", method = {RequestMethod.POST, RequestMethod.GET})
@@ -319,4 +366,34 @@ public class PricesController {
 		return "result";
 	}
 	
+	/**
+	 * Delete price by CER
+	 * 
+	 * @param prices
+	 * @param model
+	 * @param uuid
+	 */
+	@RequestMapping(value = "/cancella-prezzo", method = {RequestMethod.POST, RequestMethod.GET}, params = "cer")
+	public String deletePrice(@ModelAttribute("relationship-management") Prices prices, ModelMap model, @RequestParam String cer) {
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		model.addAttribute("title", "Cancella Prezzo");
+		
+		try {
+			pricesDao.delete(cer);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("message", "Il prezzo e' stato cancellato con successo");
+		System.out.println("Il prezzo e' stato cancellato con successo");
+		
+		return "result";
+	}
 }

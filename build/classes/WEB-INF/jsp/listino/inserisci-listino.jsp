@@ -48,7 +48,7 @@
 		<header>
 			<h1><span></span>${message}</h1>
 		</header>
-	
+		<h2 style="margin-left:30%;font-weight:bold">${title2}</h2>
 		<div  class="form">
 			<form id="contactform" method="POST" action="/inserisci-listino">
 	        	
@@ -58,7 +58,7 @@
 				<p class="contact"><label for="cer_descr">Descrizione CER</label></p>
 				<input id="cer_descr" name="cer_descr" placeholder="Descrizione CER1234567890" maxlength="250" tabindex="2" type="text">
 				
-				<p class="contact"><label for="uuid_cliente">Ragione Sociale o Cognome</label></p>
+				<p class="contact"><label for="uuid_cliente">Ragione Sociale o Cognome </label><label style="font-size:8px">(deve corrispondere ad un cliente esistente)</label></p>
 				<input id="uuid_cliente" name="uuid_cliente" placeholder="Ragione Sociale o Cognome" maxlength="250" tabindex="3" type="text" value="${rag_soc_cogn}" >
 				
 				<p class="contact"><label for="imponibile">Imponibile</label></p>
