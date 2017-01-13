@@ -187,7 +187,7 @@
 		<band height="167" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="185" height="110" uuid="605f2957-1b68-4864-b4a7-4e3f2929f8df"/>
-				<imageExpression><![CDATA["C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\ga\\alma-logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["resources/ga/alma-logo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="121" width="126" height="20" uuid="0523a25e-302e-443c-9e5e-2623bca6f5be"/>

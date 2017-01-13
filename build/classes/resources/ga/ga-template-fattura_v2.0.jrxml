@@ -19,8 +19,8 @@
 	<title>
 		<band height="110" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="185" height="110" uuid="2e86e30b-3696-434d-93a4-39a6a7d0f968"/>
-				<imageExpression><![CDATA["C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\ga\\alma-logo.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="185" height="75" uuid="2e86e30b-3696-434d-93a4-39a6a7d0f968"/>
+				<imageExpression><![CDATA["resources/ga/alma-logo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="185" y="89" width="170" height="20" uuid="a8115cca-3754-4844-b20b-6ea2f26fa33c"/>
