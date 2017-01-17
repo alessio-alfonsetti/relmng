@@ -37,9 +37,9 @@
 	<authentication-manager>
 	  <authentication-provider>
 	    <user-service>
-		<user name="gruppoalessandri" password="gruppoalessandri" authorities="ROLE_USER" />
-		<user name="elena" password="ElenaGA2017" authorities="ROLE_USER" />
-		<user name="admin" password="diegoalessandri" authorities="ROLE_ADMIN" />
+		<user name="xxxxx" password="xxxxx" authorities="ROLE_USER" />
+		<user name="xxxxx" password="xxxxx" authorities="ROLE_USER" />
+		<user name="xxxxx" password="xxxxx" authorities="ROLE_ADMIN" />
 	    </user-service>
 	  </authentication-provider>
 	</authentication-manager>
