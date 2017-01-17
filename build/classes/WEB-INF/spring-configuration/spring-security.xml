@@ -19,6 +19,7 @@
 	</http-->
  
  	<http auto-config="true">
+ 		<intercept-url pattern="/" access="ROLE_ADMIN" />
 		<intercept-url pattern="/" access="ROLE_USER" />
 		<intercept-url pattern="/client*" access="ROLE_USER" />
 		<intercept-url pattern="/fattur*" access="ROLE_USER" />

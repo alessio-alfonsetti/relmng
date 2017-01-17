@@ -38,22 +38,21 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
 		<property name="password" value="XXXXX" />  
 	</bean-->
 	
-	<!-- DB TEST --> 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+	<!-- DB LOCAL --> 
+	<!-- bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
 		<property name="url" value="jdbc:mysql://localhost:3306/usersmanagement" />  
 		<property name="username" value="root" />  
 		<property name="password" value="" />  
-	</bean>
+	</bean-->
 
-	<!-- DB PROD 
+	<!-- DB PROD -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
-		<property name="url" value="jdbc:mysql://XXXXXX/XXXXXX" />  
-		<property name="username" value="XXXXX" />  
-		<property name="password" value="XXXXXX" />  
-	</bean>
-    -->
+                <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://invappdb.cl2fkjvmwqkh.eu-west-1.rds.amazonaws.com:3306/usersmanagement" />  
+                <property name="username" value="inv_app_adm" />  
+                <property name="password" value="u1ToTT1H" />  
+        </bean>
     
     <bean id="jtemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">  
 		<constructor-arg ref="dataSource"></constructor-arg>  

@@ -82,10 +82,12 @@ public class StandardInvoiceReport {
         TableModelData(invoice);
         
         try {
-            JasperCompileManager.compileReportToFile("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jrxml");
+            //JasperCompileManager.compileReportToFile("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jrxml");
+        	JasperCompileManager.compileReportToFile("resources/sample-report.jrxml");
         	//OutputStream file = new FileOutputStream(new File("/resources/sample-report.jrxml"));
         	
-            jasperPrint = JasperFillManager.fillReport("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jasper", new HashMap(),
+            //jasperPrint = JasperFillManager.fillReport("C:\\Users\\alfonsetti\\git\\relmng\\src\\resources\\sample-report.jasper", new HashMap(),
+        	jasperPrint = JasperFillManager.fillReport("resources/sample-report.jasper", new HashMap(),
                     new JRTableModelDataSource(tableModel));
             JasperViewer jasperViewer = new JasperViewer(jasperPrint);
             jasperViewer.setVisible(true);
