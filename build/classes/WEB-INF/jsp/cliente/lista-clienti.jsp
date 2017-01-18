@@ -48,17 +48,17 @@
 			
 		<div class="freshdesignweb-bottom">
 			<a href="cliente">Inserisci</a>
-			<a href="#">Modifica</a>
-			<span class="right">
+			<!-- a href="#">Modifica</a-->
+			<!--span class="right">
 				<a href="#">
-				<strong>Deattiva</strong>
+				<strong>Cancella</strong>
 				</a>
 			</span>
 			<span class="right">
 				<a href="#">
 				<strong>Esporta</strong>
 				</a>
-			</span>
+			</span-->
 			
 			<div class="clr"></div>
 		</div>
@@ -77,8 +77,10 @@
 			  <!-- th>IBAN</th-->
 			  <!--  th>Listino Prezzi Old</th-->
 			  <th>Listino Prezzi</th>
-			  <th>Emetti</th>
+			  <th>Emetti Fattura</th>
 			  <th>Fatture</th>
+			  <th>Modifica</th>
+			  <th>Cancella</th>
 			 </tr>
 			 </thead>
 			<c:forEach items="${list_customers_by_date_creation}" begin="0" end="10" var="customers">
@@ -124,7 +126,21 @@
 			   <td>
 			   	<div class="form">
 			   		<form id="contactform" method="POST" action="fatture-cliente?uuid=${customers.uuid}">
-			   			<input class="button" name="submit" id="submit" tabindex="1" value="Fatture" type="submit" tabindex="3">   
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Visualizza" type="submit" tabindex="3">   
+			   		</form>
+			   	</div>
+			   </td>
+			   <td>
+			   	<div class="form">
+			   		<form id="contactform" method="POST" action="modifica-cliente?uuid=${customers.uuid}">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Modifica" type="submit" tabindex="3">   
+			   		</form>
+			   	</div>
+			   </td>
+			   <td>
+			   	<div class="form">
+			   		<form id="contactform" method="POST" action="cancella-cliente?uuid=${customers.uuid}">
+			   			<input class="button" name="submit" id="submit" tabindex="1" value="Cancella" type="submit" tabindex="3">   
 			   		</form>
 			   	</div>
 			   </td>

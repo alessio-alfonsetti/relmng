@@ -528,4 +528,40 @@ public class CustomerController{
 		
 		return null;
 	}
+	
+	@RequestMapping(value="modifica-cliente", method = RequestMethod.POST, params = "uuid")
+	public String updateCustomer (ModelMap model, @RequestParam("uuid") String uuid) {
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		model.addAttribute("title", "Completa Profilo del Cliente");
+		
+		System.out.println("UUID: "+uuid);
+		Customer customer;
+		
+		try {
+			
+			customer = dao.findByCustomerUuid(uuid);
+			model.addAttribute("customer", customer);
+			
+			if(customer == null) 
+				model.addAttribute("message", "Il Cliente cercato non esiste");
+			else model.addAttribute("message", "Il Cliente da modificare e':");
+						
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "cliente/modifica-cliente";
+	}
+	
 }
