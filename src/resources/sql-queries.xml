@@ -79,6 +79,12 @@
 		SELECT * FROM utente WHERE ragione_sociale = :ragione_sociale OR lastname = :lastname
 	</entry>
 	
+	<entry key="customers.modify"></entry>
+		UPDATE utente 
+		SET uuid=:uuid, username=:username, firstname=:firstname, lastname=:lastname, ragione_sociale=:ragione_sociale, partita_iva=:partita_iva, codice_fiscale=:codice_fiscale, indirizzo=:indirizzo, numero_cellulare=:numero_cellulare, email=:email, nota=:nota, data_inserimento=:data_inserimento, iban=:iban
+		WHERE uuid=:uuid
+	</entry>
+	
 	<!-- DIPENDENTI -->
 	<entry key="employers.get_all_by_lastname">
 	SELECT * FROM utente where ragione_sociale = :ragione_sociale or lastname = :lastname

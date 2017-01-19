@@ -564,4 +564,53 @@ public class CustomerController{
 		return "cliente/modifica-cliente";
 	}
 	
+	@RequestMapping(value="modifica-cliente", method = {RequestMethod.POST, RequestMethod.GET})
+	public String updateCustomer (ModelMap model, @ModelAttribute("relationship-management") Customer customer) {
+		
+		/* User Details */
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("username", userDetails.getUsername());
+		
+		model.addAttribute("title", "Completa Profilo del Cliente");
+		
+		model.addAttribute("uuid", customer.getUuid());
+		model.addAttribute("codice_fiscale", customer.getCodice_fiscale());
+		model.addAttribute("nome", customer.getFirstname());
+		model.addAttribute("cognome", customer.getLastname());
+		model.addAttribute("email", customer.getEmail());
+		model.addAttribute("indirizzo", customer.getIndirizzo());
+		model.addAttribute("cell", customer.getNumero_cellulare());
+		model.addAttribute("iban", customer.getIban());
+		model.addAttribute("nota", customer.getNota());
+		
+		Customer cust_modified = null;
+		try {
+			cust_modified = dao.modify(customer);
+			model.addAttribute("last_update", customer.getData_inserimento());
+			
+		} catch (InvalidPropertiesFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if(cust_modified == null) {
+			System.out.println("Si e' verificato un errore in fase di modifica del profilo cliente");
+			model.addAttribute("message", "Si e' verificato un errore in fase di modifica del profilo cliente");
+			
+			return "error";
+		}
+		
+		model.addAttribute("message", "Il prezzo e' stato modificato con successo");
+		System.out.println("Il prezzo e' stato modificato con successo");
+
+		return "result";
+		
+	}
+	
 }

@@ -405,9 +405,35 @@ public class CustomerDaoImpl implements CustomerInterface{
 	}
 
 	@Override
-	public void modify(Customer customer) {
+	public Customer modify(Customer customer) throws InvalidPropertiesFormatException, FileNotFoundException, IOException {
 		
+		String sql = CONF.getPropertyString("customers.modify");
 		
+		java.util.Date date= new java.util.Date();
+		System.out.println(new Timestamp(date.getTime()));
+		customer.setData_inserimento(new Timestamp(date.getTime()));
+		
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+	    parameters.addValue("uuid", customer.getUuid());
+	    parameters.addValue("username", customer.getUsername());
+	    parameters.addValue("firstname", customer.getFirstname());
+	    parameters.addValue("lastname", customer.getLastname());
+	    parameters.addValue("ragione_sociale", customer.getRagione_sociale());
+	    parameters.addValue("email", customer.getEmail());
+	    parameters.addValue("partita_iva", customer.getPartita_iva());
+	    parameters.addValue("codice_fiscale", customer.getCodice_fiscale());
+	    parameters.addValue("nota", customer.getNota());
+	    parameters.addValue("numero_cellulare", customer.getNumero_cellulare());
+	    parameters.addValue("data_inserimento", customer.getData_inserimento());
+	    parameters.addValue("indirizzo", customer.getIndirizzo());
+	    parameters.addValue("id_ruolo", customer.getId_ruolo());
+	    parameters.addValue("iban", customer.getIban());
+	    
+	    int inserted = template.update(sql, parameters);
+		
+		System.out.println("insert ended: "+inserted);
+		
+		return customer;
 	}
 	
 	/**

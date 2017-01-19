@@ -19,7 +19,7 @@ public interface CustomerInterface {
 	
 	public List<Map<String, Object>> listAllCustomers() throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 	
-	public void modify (Customer customer);
+	public Customer modify (Customer customer) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 
 	public Customer findByCustomerUuid(String custUuid) throws InvalidPropertiesFormatException, FileNotFoundException, IOException;
 

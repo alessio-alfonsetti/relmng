@@ -53,25 +53,6 @@
 			<h1><span>${message} <b>${nome_cliente}</b></span></h1>
 		</header>
 		
-		
-		
-			
-			   <td>${customer.id}</td>
-			   <td>${customer.uuid}</td>
-			   <td>${customer.firstname}</td>
-			   <td>${customer.lastname}</td>
-			   <td>${customer.email}</td>
-			   <td>${customer.codice_fiscale}</td>
-			   <td>${customer.indirizzo}</td>
-			   <td>${customer.numero_cellulare}</td>
-			   <td>${customer.data_inserimento}</td>
-			   <td>${customer.iban}</td>
-			   <td>${customer.nota}</td>
-		
-		
-		
-		
-			  		  
 	    <div  class="form">
 		  <form id="contactform" method="POST" action="/modifica-prezzo">
 		        	
