@@ -10,6 +10,22 @@
 <properties>
 	<comment>This file contains sql queries for the management of Gruppo Alessandri workspace</comment>
 
+	<!-- MATERIALE -->
+	<entry key="materiale.insert">
+		INSERT INTO materiale
+		(uuid, nome, numero, id_categoria, nota) 
+		VALUES 
+		(:uuid,:nome,:numero,:id_categoria,:nota)
+	</entry>
+	
+	<!-- CATEGORIA -->
+	<entry key="categoria.insert">
+		INSERT INTO categoria
+		(uuid, nome, nota) 
+		VALUES 
+		(:uuid,:nome,:nota)
+	</entry>
+
 	<!-- CLIENTI -->
 	<entry key="customers.insert">
 		INSERT INTO utente
@@ -79,7 +95,7 @@
 		SELECT * FROM utente WHERE ragione_sociale = :ragione_sociale OR lastname = :lastname
 	</entry>
 	
-	<entry key="customers.modify"></entry>
+	<entry key="customers.modify">
 		UPDATE utente 
 		SET uuid=:uuid, username=:username, firstname=:firstname, lastname=:lastname, ragione_sociale=:ragione_sociale, partita_iva=:partita_iva, codice_fiscale=:codice_fiscale, indirizzo=:indirizzo, numero_cellulare=:numero_cellulare, email=:email, nota=:nota, data_inserimento=:data_inserimento, iban=:iban
 		WHERE uuid=:uuid
